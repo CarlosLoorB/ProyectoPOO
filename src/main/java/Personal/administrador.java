@@ -5,10 +5,22 @@
  */
 package Personal;
 
+import Datos.planEnergia;
+import Datos.registro;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author kevaalci
  */
 public class administrador extends personal{
-    
+
+    public administrador(String cedula,String usuario,String contrasena){
+        super(cedula,usuario,contrasena);
+    }
+    // adentro del metodo se pediran las provincias 
+    public void registrarPlan(String nombrePlan, double costoKw, double cargoBase, LocalDateTime horaPico){
+      planEnergia nuevoPlan = new planEnergia(nombrePlan, costoKw, cargoBase, horaPico);
+      //if(registro.getPlanes())       
+    }
 }

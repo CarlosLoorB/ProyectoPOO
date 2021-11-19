@@ -33,7 +33,8 @@ public class Main {
                 switch(opc){
                     case 1:
                         System.out.println("Bienvenido al Sistema");
-                        personal user = new personal();
+                        //esto no va, como vas a crear un nuevo usuario 
+                        //personal user = new personal();
                         System.out.println("Ingrese su usuario: ");
                         //user.usuario= sc.nextLine();
                         System.out.print("Ingrese la contrasea");

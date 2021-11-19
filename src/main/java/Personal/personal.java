@@ -11,7 +11,11 @@ package Personal;
 public class personal {
     private String cedula;
     private String usuario;
-    private String contraseña;
+    private String contrasena;
     
-    
+    public personal(String cedula,String usuario,String contrasena){
+        this.cedula=cedula;
+        this.usuario=usuario;
+        this.contrasena=contrasena;
+    }
 }
