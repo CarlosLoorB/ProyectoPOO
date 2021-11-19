@@ -21,6 +21,6 @@ public class administrador extends personal{
     // adentro del metodo se pediran las provincias 
     public void registrarPlan(String nombrePlan, double costoKw, double cargoBase, LocalDateTime horaPico){
       planEnergia nuevoPlan = new planEnergia(nombrePlan, costoKw, cargoBase, horaPico);
-      //if(registro.getPlanes())       
+      //if(.getPlanes())    
     }
 }

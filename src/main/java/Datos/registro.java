@@ -28,7 +28,7 @@ public class registro {
         planes= new ArrayList<>();
         abonados= new ArrayList<>();
     }
-    
+ /*   
     public void addAdmin(administrador admin){
         administradores.add(admin);
     }
@@ -59,5 +59,5 @@ public class registro {
         
     public ArrayList<planEnergia> getPlanes(){
         return planes;
-    }
+    }*/
 }
