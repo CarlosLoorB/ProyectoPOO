@@ -28,10 +28,10 @@ public class registro {
         planes= new ArrayList<>();
         abonados= new ArrayList<>();
     }
- /*   
+  
     public void addAdmin(administrador admin){
         administradores.add(admin);
-    }
+    } // Este metodo debe ser llamado en la opcion 1 (iniciar sesion)
     
     public void addOperario(operario operario){
         operarios.add(operario);
@@ -59,5 +59,5 @@ public class registro {
         
     public ArrayList<planEnergia> getPlanes(){
         return planes;
-    }*/
+    }
 }
