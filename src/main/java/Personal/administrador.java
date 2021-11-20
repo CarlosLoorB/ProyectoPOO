@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  *
  * @author kevaalci
  */
-public class administrador extends personal{
+public class administrador extends user{
 
     public administrador(String cedula,String usuario,String contrasena){
         super(cedula,usuario,contrasena);

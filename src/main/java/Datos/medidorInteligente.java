@@ -8,6 +8,6 @@ package Datos;
  *
  * @author CAELOS JR 2018
  */
-public class medidorInteligente extends Medidor {
+public class medidorInteligente extends medidor {
     
 }

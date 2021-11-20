@@ -1,7 +1,9 @@
 package Datos;
 
+
 import Personal.administrador;
 import Personal.operario;
+import Personal.user;
 import java.util.ArrayList;
 
 
@@ -11,24 +13,62 @@ import java.util.ArrayList;
  */
 public class registro {
 
-    private ArrayList<administrador> administradores;
-    private ArrayList<operario> operarios;
-    private ArrayList<medidorInteligente> medidorInteligentes;
-    private ArrayList<medidorAnalogico> medidorAnalogicos;
+    private ArrayList<user> usuarios;
+    private ArrayList<medidor> medidores;
     private ArrayList<factura> facturas;
     private ArrayList<planEnergia> planes;
-    private ArrayList<abonado> abonados;
     
     public registro(){
-        administradores= new ArrayList<>();
-        operarios= new ArrayList<>();
-        medidorInteligentes= new ArrayList<>();
-        medidorAnalogicos= new ArrayList<>();
+        usuarios= new ArrayList<>();
+        medidores= new ArrayList<>();
         facturas= new ArrayList<>();
         planes= new ArrayList<>();
-        abonados= new ArrayList<>();
     }
-  
+        
+    public ArrayList<planEnergia> getPlanes(){
+        return planes;
+    } 
+    
+    public ArrayList<user> getUsuarios(){
+        return usuarios;
+    } 
+    
+    public ArrayList<factura> getFacturas(){
+        return facturas;
+    } 
+    
+    public ArrayList<medidor> getMedidores(){
+        return medidores;
+    } 
+    
+    public void setPlanes(ArrayList<planEnergia> a){
+        this.planes= a;
+    } 
+    
+    public void setUsuarios(ArrayList<user> a){
+        this.usuarios= a;
+    }
+    
+    public void setFacturas(ArrayList<factura> a){
+        this.facturas= a;
+    } 
+    
+    public void setMedidores(ArrayList<medidor> a){
+        this.medidores= a;
+    } 
+    
+    public int tipoUsuario(int pos){
+        user revision = usuarios.get(pos);
+        if(revision instanceof administrador)
+            return 1;
+        else if (revision instanceof operario)
+            return 2;
+        else if (revision instanceof administrador)
+            return 3;
+        else 
+            return 4;
+    }
+    /*
     public void addAdmin(administrador admin){
         administradores.add(admin);
     } // Este metodo debe ser llamado en la opcion 1 (iniciar sesion)
@@ -55,9 +95,5 @@ public class registro {
     
     public void addAbonado(abonado abonado){
         abonados.add(abonado);
-    }
-        
-    public ArrayList<planEnergia> getPlanes(){
-        return planes;
-    }
+    }*/
 }

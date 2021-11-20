@@ -1,5 +1,5 @@
 
-import Personal.personal;
+import Personal.user;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -33,10 +33,10 @@ public class Main {
                 switch(opc){
                     case 1:
                         System.out.println("Bienvenido al Sistema");
-                        //esto no va, como vas a crear un nuevo usuario 
-                        //personal user = new personal();
+                        //esto no va, como vas a crear un nuevo user 
+                        //personal user = new user();
                         System.out.println("Ingrese su usuario: ");
-                        //user.usuario= sc.nextLine();
+                        //user.user= sc.nextLine();
                         System.out.print("Ingrese la contrasea");
                 }
                 

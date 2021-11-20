@@ -8,7 +8,7 @@ package Personal;
  *
  * @author gabri
  */
-public class operario extends personal{
+public class operario extends user{
     
     public operario(String cedula,String usuario,String contrasena){
         super(cedula,usuario,contrasena);
