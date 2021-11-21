@@ -24,12 +24,20 @@ public class user {
         this.contrasena=contrasena;
     }
     
+    public user(String cedula){
+        this.cedula=cedula;
+    }
+    
+    @Override
     public boolean equals(Object obj){
         if (obj instanceof user){
             user a = (user)obj;
-            if ( contrasena.equals(a.contrasena) && usuario.equals(a.usuario)){
+            if(contrasena.equals(a.contrasena) && usuario.equals(a.usuario)){
                 return true;
             }
+            else if(cedula.equals(a.cedula))
+                return true;
+            
             else{
                 return false;
             }

@@ -22,6 +22,11 @@ public class planEnergia {
         
     }
     
+    public planEnergia(String nombrePlan){
+        this.nombrePlan= nombrePlan;
+       
+    }
+    
     public String getNombrePlan(){
         return nombrePlan;
     }
@@ -44,4 +49,18 @@ public class planEnergia {
         this.horas= horas;
     }
     
+    @Override
+    public boolean equals(Object obj){
+        if (obj instanceof planEnergia){
+            planEnergia a = (planEnergia)obj;
+            if (nombrePlan.equals(a.nombrePlan)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else
+            return false;
+    }
 }

@@ -27,4 +27,12 @@ public class abonado extends user{
     medidores= new ArrayList<>();
     medidores.add(medidorP);
     }
+    
+    public ArrayList<medidor> getMedidores(){
+        return medidores;
+    } 
+    
+    public void setMedidores(ArrayList<medidor> a){
+        this.medidores= a;
+    } 
 }

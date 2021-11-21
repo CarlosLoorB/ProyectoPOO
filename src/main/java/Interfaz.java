@@ -1,7 +1,9 @@
 import Datos.registro;
+import Personal.administrador;
 import java.util.Scanner;
-import Personal.*;
+import Personal.user;
 import java.time.LocalDateTime;
+import resultadosConjuntos.MedidoresUsuarios;
 /**
  *
  * @author gabri
@@ -33,16 +35,23 @@ public class Interfaz {
                 String contra = sc.nextLine();
                 user log = new user(nombre,contra);
                 int posicion = dataBase.getUsuarios().indexOf(log);
-                if(posicion != 1){
+                if(posicion != -1){
                     int tipo= dataBase.tipoUsuario(posicion);
                     switch(tipo){
                         case 1:
-                            iniciarSesionAdmin();
-                            break;
+                            iniciarSesionAdmin(posicion);
+                        break;
+                        case 2:
+                            iniciarSesionOper(posicion); // Aun hay que crearlo
+                        break;
+                        case 3:
+                            iniciarSesionAbon(posicion); //Aun hay que crearlos 
+                        break;      
                     }
-                ) else{
-                   se crea el nuevo usuario y cotrasena
-                   iniciarSesion();
+                }
+                else{
+                   //se crea el nuevo usuario y cotrasena
+                   //iniciarSesion();
                 }
             
                 break;
@@ -54,37 +63,34 @@ public class Interfaz {
                break;
             } 
         }
-    }    
+        
     
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
     public void iniciarSesionAdmin(int posicion){
         int index = posicion;
         user nuevo = dataBase.getUsuarios().get(index);
-        administrador admin = (administrador)user;
+        administrador admin = (administrador)nuevo;
             //while(!op.equals("5")){
                 int op = admin.menuOpc();
                 switch(op){
                     case 1:
-                        System.out.println("Ingrese el nombre del plan");
-                        String nombre = sc.nextLine();
-                        System.out.println("Ingrese el costo KwH");
-                        double costo = sc.nextDouble();
-                        sc.nextLine();
-                        System.out.println("Ingrese el nombre de las provincias");
-                        
-                        System.out.println("Ingrese el cargo base");
-                        double base = sc.nextDouble();
-                        LocalDateTime pico = LocalDateTime.of(2018, 10, 10, 11, 25);
-
-                      
+                        dataBase.setPlanes(admin.registrarPlan(dataBase.getPlanes(), admin));
                         break;
-                    case "2":
+                    case 2 :
+                        MedidoresUsuarios medidorcreado = admin.registrarMedidor(dataBase.getMedidores(), admin,dataBase.getUsuarios(), dataBase.getPlanes());
+                        if (medidorcreado != null){
+                        dataBase.setMedidores(medidorcreado.getMedidores());
+                        dataBase.setUsuarios(medidorcreado.getUsuarios());
+                        }
+                        else{
+                           System.out.println("Opcion no valida"); 
+                        }
                         break;
-                    case "3":
+                    case 3 :
                         break;
-                    case "4":
+                    case 4:
                         break;
-                    case "5":
+                    case 5 :
                         break;
                     default:
                         System.out.println("Opcion invalida");
@@ -92,4 +98,4 @@ public class Interfaz {
                 }
             }
     }  
-}
+

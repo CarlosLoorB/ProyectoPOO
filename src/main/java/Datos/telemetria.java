@@ -4,12 +4,14 @@
  */
 package Datos;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author CAELOS JR 2018
  */
 public class telemetria {
     private String codigo;
-    //private Datetime fecha;
+    private LocalDateTime fecha;
     private double consumo;
 }

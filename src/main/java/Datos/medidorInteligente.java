@@ -4,10 +4,19 @@
  */
 package Datos;
 
+import Personal.abonado;
+import java.util.ArrayList;
+
 /**
  *
  * @author CAELOS JR 2018
  */
-public class medidorInteligente extends medidor {
+public class medidorInteligente extends medidor{
+    private ArrayList<telemetria> telemetrias;
+    
+    public medidorInteligente(String codigo, String direccion, planEnergia plan, abonado abonado){
+        super(codigo,direccion,plan,abonado);
+        telemetrias = new ArrayList<>();
+    }
     
 }

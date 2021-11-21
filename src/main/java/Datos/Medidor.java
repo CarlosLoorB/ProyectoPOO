@@ -4,6 +4,7 @@
  */
 package Datos;
 import Personal.abonado;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 /**
  *
@@ -12,9 +13,34 @@ import java.time.LocalDateTime;
 public class medidor {
     private String codigo;
     private String direccion;
-    private String tipoPlan;
+    private planEnergia plan;
     private abonado abonado;
     private double consumo;
+    private double ultValor;
+    private LocalDate ultMedida;
     
+  public medidor(String codigo, String direccion, planEnergia plan, abonado abonado){
+        this.codigo= codigo;
+        this.direccion= direccion;
+        this.plan= plan;
+        this.abonado= abonado;
+        this.consumo= 0;
+        this.ultValor= 0;
+        this.ultMedida= LocalDate.now();
+    }
   
+  @Override
+    public boolean equals(Object obj){
+        if (obj instanceof medidor){
+            medidor a = (medidor)obj;
+            if (codigo.equals(a.codigo)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else
+            return false;
+    }
 }
