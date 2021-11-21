@@ -8,13 +8,14 @@ package Personal;
 import Datos.planEnergia;
 import Datos.registro;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 /**
  *
  * @author kevaalci
  */
 public class administrador extends user{
-
+private Scanner sc;
     public administrador(String cedula,String usuario,String contrasena){
         super(cedula,usuario,contrasena);
     }
@@ -23,4 +24,16 @@ public class administrador extends user{
       planEnergia nuevoPlan = new planEnergia(nombrePlan, costoKw, cargoBase, horaPico);
       //if(.getPlanes())    
     }
+    
+    public int menuOpc(){
+        System.out.println("1. Registrar plan");
+        System.out.println("2. Registra medidor");
+        System.out.println("3. Simular mediciones");
+        System.out.println("4. Realizar facturacion");
+        System.out.println("5. Salir");
+        int op = sc.nextInt();
+        return op;
+    }
+    
+    
 }

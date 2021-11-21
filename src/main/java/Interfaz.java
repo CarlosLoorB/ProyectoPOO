@@ -34,7 +34,7 @@ public class Interfaz {
                 user log = new user(nombre,contra);
                 int posicion = dataBase.getUsuarios().indexOf(log);
                 if(posicion != 1){
-                    int tipo= database.tipoUsuario(posicion);
+                    int tipo= dataBase.tipoUsuario(posicion);
                     switch(tipo){
                         case 1:
                             iniciarSesionAdmin();
@@ -59,16 +59,12 @@ public class Interfaz {
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
     public void iniciarSesionAdmin(int posicion){
         int index = posicion;
-        String op = "";
+        user nuevo = dataBase.getUsuarios().get(index);
+        administrador admin = (administrador)user;
             //while(!op.equals("5")){
-                System.out.println("1. Registrar plan");
-                System.out.println("2. Registra medidor");
-                System.out.println("3. Simular mediciones");
-                System.out.println("4. Realizar facturacion");
-                System.out.println("5. Salir");
-                op = sc.nextLine();
+                int op = admin.menuOpc();
                 switch(op){
-                    case "1":
+                    case 1:
                         System.out.println("Ingrese el nombre del plan");
                         String nombre = sc.nextLine();
                         System.out.println("Ingrese el costo KwH");
