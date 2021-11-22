@@ -10,6 +10,7 @@ import Datos.Medidor;
 import Datos.medidorAnalogico;
 import Datos.medidorInteligente;
 import Datos.planEnergia;
+import Datos.registro;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ private Scanner sc;
                 if(posicionAbon != -1){
                    user clienteUser =abonados.get(posicionAbon);
                    abonado cliente = (abonado)clienteUser;
-                   System.out.println("Ingrese la dreccion:");
+                   System.out.println("Ingrese la direccion:");
                    String direccion = sc.nextLine();
                    System.out.println("Ingrese el plan:");
                    String nombrePlan = sc.nextLine();
@@ -170,8 +171,8 @@ private Scanner sc;
    public void simularMedicion(LocalDateTime inicio, LocalDateTime fin){
        System.out.println("Fecha inicio:" + inicio);
        System.out.println("Fecha fin:" + fin);
-       ArrayList<Medidor> medidores = dataBase.getMedidores();  
-       for(Medidor m: medidores){
+       ArrayList<Medidor> med = ui.getDataBase();  
+       for(Medidor m: med){
            if(m instanceof medidorInteligente){
               System.out.println("Lecturas para medidor con codigo" + m.getCodigo() + "con valor actual" + m.getValor() );
               System.out.println(m.getCodigo() + "," + inicio + "," + m.getValor());

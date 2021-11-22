@@ -16,9 +16,12 @@ public class Interfaz {
     
     public Interfaz(){
         sc = new Scanner(System.in);
+        dataBase = new registro();
     }
     
-
+    public registro getDataBase(){
+        return dataBase;
+    }
     
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
     public void menu() {
@@ -44,7 +47,7 @@ public class Interfaz {
                             iniciarSesionAdmin(posicion);
                         break;
                         case 2:
-                            iniciarSesionOpfer(posicion); // Aun hay que crearlo
+                            iniciarSesionOper(posicion); // Aun hay que crearlo
                         break;
                         case 3:
                             iniciarSesionAbon(posicion); //Aun hay que crearlos 
@@ -101,6 +104,11 @@ public class Interfaz {
                         System.out.println("Opcion invalida");
                         break;        
                 }
-            }
-    }  
+    }
+    
+    public void iniciarSesionOper(int posicion){
+        
+    }
+    
+}  
 

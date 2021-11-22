@@ -1,6 +1,7 @@
 package Datos;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,13 +13,13 @@ public class planEnergia {
     private String nombrePlan;
     private double costoKW;
     private double cargo;
-    private LocalDateTime horas;
+    private ArrayList<LocalDateTime> horasPico;
     
-    public planEnergia(String nombrePlan, double costoKw, double cargoBase, LocalDateTime horaPico){
+    public planEnergia(String nombrePlan, double costoKw, double cargoBase, ArrayList<LocalDateTime> horasPico){
         this.nombrePlan= nombrePlan;
         this.cargo= cargoBase;
         this.costoKW= costoKw;
-        this.horas= horaPico;
+        this.horasPico= horasPico;
         
     }
     

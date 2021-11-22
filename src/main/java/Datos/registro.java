@@ -1,6 +1,7 @@
 package Datos;
 
 
+import Personal.abonado;
 import Personal.administrador;
 import Personal.operario;
 import Personal.user;
@@ -23,6 +24,16 @@ public class registro {
         medidores= new ArrayList<>();
         facturas= new ArrayList<>();
         planes= new ArrayList<>();
+        inicializarDatos();
+    }
+    
+    public void inicializarDatos(){
+        usuarios.add(new administrador("1302545984", "admin", "superadmin"));
+        usuarios.add(new operario("0978451295", "joselitoOp", "jose123"));
+        usuarios.add(new operario("0965221487", "juanor", "juajua34"));
+        usuarios.add(new abonado("1307069874", "penelope", "pe45", "penelope@gmail.com"));
+        usuarios.add(new abonado("1485622369", "gabriel09", "gablu23", "gabrielclucio14@gmail.com"));
+        
     }
         
     public ArrayList<planEnergia> getPlanes(){

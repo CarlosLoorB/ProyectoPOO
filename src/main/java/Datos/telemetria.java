@@ -14,4 +14,11 @@ public class telemetria {
     private String codigo;
     private LocalDateTime fecha;
     private double consumo;
+    
+    public telemetria(String codigo, LocalDateTime fecha, double consumo){
+        this.codigo = codigo;
+        this.fecha = fecha;
+        this.consumo = consumo;
+    }
+    
 }

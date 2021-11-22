@@ -5,6 +5,8 @@
 package Datos;
 
 import Personal.abonado;
+import Personal.operario;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -19,4 +21,8 @@ public class medidorInteligente extends Medidor{
         telemetrias = new ArrayList<>();
     }
     
+    public void registrarTelemetria(LocalDateTime fecha, String codigo, double consumo){
+        telemetria t = new telemetria(codigo, fecha, consumo);
+        telemetrias.add(t);
+    }
 }
