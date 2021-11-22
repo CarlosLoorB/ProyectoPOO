@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class registro {
 
     private ArrayList<user> usuarios;
-    private ArrayList<medidor> medidores;
+    private ArrayList<Medidor> medidores;
     private ArrayList<factura> facturas;
     private ArrayList<planEnergia> planes;
     
@@ -37,7 +37,7 @@ public class registro {
         return facturas;
     } 
     
-    public ArrayList<medidor> getMedidores(){
+    public ArrayList<Medidor> getMedidores(){
         return medidores;
     } 
     
@@ -53,7 +53,7 @@ public class registro {
         this.facturas= a;
     } 
     
-    public void setMedidores(ArrayList<medidor> a){
+    public void setMedidores(ArrayList<Medidor> a){
         this.medidores= a;
     } 
     

@@ -4,7 +4,7 @@
  */
 package resultadosConjuntos;
 
-import Datos.medidor;
+import Datos.Medidor;
 import Personal.user;
 import java.util.ArrayList;
 
@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 public class MedidoresUsuarios {
     private ArrayList<user> usuarios;
-    private ArrayList<medidor> medidores;
+    private ArrayList<Medidor> medidores;
     
-    public MedidoresUsuarios(ArrayList<user> usuarios,ArrayList<medidor> medidores){
+    public MedidoresUsuarios(ArrayList<user> usuarios,ArrayList<Medidor> medidores){
         this.medidores=medidores;
         this.usuarios=usuarios;
     }
@@ -25,7 +25,7 @@ public class MedidoresUsuarios {
         return usuarios;
     } 
     
-     public ArrayList<medidor> getMedidores(){
+     public ArrayList<Medidor> getMedidores(){
         return medidores;
     } 
 }

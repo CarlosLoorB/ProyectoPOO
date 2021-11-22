@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author CAELOS JR 2018
  */
-public class medidorInteligente extends medidor{
+public class medidorInteligente extends Medidor{
     private ArrayList<telemetria> telemetrias;
     
     public medidorInteligente(String codigo, String direccion, planEnergia plan, abonado abonado){

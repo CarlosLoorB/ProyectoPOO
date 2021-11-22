@@ -5,22 +5,20 @@
  */
 package Personal;
 
-import Datos.medidor;
+import interfaz.Interfaz;
+import Datos.Medidor;
 import Datos.medidorAnalogico;
 import Datos.medidorInteligente;
 import Datos.planEnergia;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import resultadosConjuntos.MedidoresUsuarios;
 import org.apache.commons.lang3.RandomStringUtils;
 //import Personal.abonado;
 
-/**
- *
- * @author kevaalci
- */
 public class administrador extends user{
 private Scanner sc;
     public administrador(String cedula,String usuario,String contrasena){
@@ -67,7 +65,7 @@ private Scanner sc;
         return op;
     }
     
-   public MedidoresUsuarios registrarMedidor(ArrayList<medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){
+   public MedidoresUsuarios registrarMedidor(ArrayList<Medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){
         String repetir;
         System.out.println("Ingrese el numero de cedula del abonado");
         String numCedula = sc.nextLine();
@@ -90,7 +88,7 @@ private Scanner sc;
                            //GENERA UN NUMERO ALEATORIO Y REVISA QUE YA NO ESTE EN LA LSITA DE MEDIDORES,PONLE DE NOMBRE codigo
                            String codigo = RandomStringUtils.randomAlphanumeric(6);
                            medidorAnalogico medidorCreado= new medidorAnalogico(codigo,direccion,planAdd,cliente);
-                           ArrayList<medidor> listaCliente= cliente.getMedidores();
+                           ArrayList<Medidor> listaCliente= cliente.getMedidores();
                            medidoresReg.add(medidorCreado);
                            listaCliente.add(medidorCreado);
                            cliente.setMedidores(listaCliente);
@@ -103,7 +101,7 @@ private Scanner sc;
                            //GENERA UN NUMERO ALEATORIO Y REVISA QUE YA NO ESTE EN LA LSITA DE MEDIDORES,PONLE DE NOMBRE codigo
                            String codigo = RandomStringUtils.randomAlphanumeric(6);
                            medidorInteligente medidorCreado= new medidorInteligente(codigo,direccion,planAdd,cliente);
-                           ArrayList<medidor> listaCliente= cliente.getMedidores();
+                           ArrayList<Medidor> listaCliente= cliente.getMedidores();
                            medidoresReg.add(medidorCreado);
                            listaCliente.add(medidorCreado);
                            cliente.setMedidores(listaCliente);
@@ -139,7 +137,7 @@ private Scanner sc;
                            //GENERA UN NUMERO ALEATORIO Y REVISA QUE YA NO ESTE EN LA LSITA DE MEDIDORES,PONLE DE NOMBRE codigo
                            String codigo = RandomStringUtils.randomAlphanumeric(6);
                            medidorAnalogico medidorCreado= new medidorAnalogico(codigo,direccion,planAdd,cliente);
-                           ArrayList<medidor> listaCliente= cliente.getMedidores();
+                           ArrayList<Medidor> listaCliente= cliente.getMedidores();
                            medidoresReg.add(medidorCreado);
                            listaCliente.add(medidorCreado);
                            cliente.setMedidores(listaCliente);
@@ -152,7 +150,7 @@ private Scanner sc;
                            //GENERA UN NUMERO ALEATORIO Y REVISA QUE YA NO ESTE EN LA LSITA DE MEDIDORES,PONLE DE NOMBRE codigo
                            String codigo = RandomStringUtils.randomAlphanumeric(6);
                            medidorInteligente medidorCreado= new medidorInteligente(codigo,direccion,planAdd,cliente);
-                           ArrayList<medidor> listaCliente= cliente.getMedidores();
+                           ArrayList<Medidor> listaCliente= cliente.getMedidores();
                            medidoresReg.add(medidorCreado);
                            listaCliente.add(medidorCreado);
                            cliente.setMedidores(listaCliente);
@@ -168,4 +166,27 @@ private Scanner sc;
                 }
           return null;
         }
+   
+   public void simularMedicion(LocalDateTime inicio, LocalDateTime fin){
+       System.out.println("Fecha inicio:" + inicio);
+       System.out.println("Fecha fin:" + fin);
+       ArrayList<Medidor> medidores = dataBase.getMedidores();  
+       for(Medidor m: medidores){
+           if(m instanceof medidorInteligente){
+              System.out.println("Lecturas para medidor con codigo" + m.getCodigo() + "con valor actual" + m.getValor() );
+              System.out.println(m.getCodigo() + "," + inicio + "," + m.getValor());
+              while(inicio != fin){
+                  inicio = inicio.plusMinutes(10);
+                  System.out.println(m.getCodigo() + "," + inicio + "," + m.calcularValor().getValor());
+              }     
+           }   
+       }
+   }
+   
+   public void realizarFacturacion(){
+       for(Medidor m: dataBase.getMedidor())
+           if(m instanceof medidorAnalogico){
+               double totalPago = m.
+           }
+   }
 }

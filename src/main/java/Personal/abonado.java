@@ -4,7 +4,7 @@
  */
 package Personal;
 
-import Datos.medidor;
+import Datos.Medidor;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author CAELOS JR 2018
  */
 public class abonado extends user{
-    private ArrayList<medidor> medidores;
+    private ArrayList<Medidor> medidores;
     private String correo;
     
     public abonado(String cedula,String usuario,String contrasena,String correo){
@@ -21,18 +21,18 @@ public class abonado extends user{
     medidores= new ArrayList<>();
     }
     
-    public abonado(String cedula,String usuario,String contrasena,String correo,medidor medidorP){
+    public abonado(String cedula,String usuario,String contrasena,String correo,Medidor medidorP){
     super(cedula,usuario,contrasena);
     this.correo= correo;
     medidores= new ArrayList<>();
     medidores.add(medidorP);
     }
     
-    public ArrayList<medidor> getMedidores(){
+    public ArrayList<Medidor> getMedidores(){
         return medidores;
     } 
     
-    public void setMedidores(ArrayList<medidor> a){
+    public void setMedidores(ArrayList<Medidor> a){
         this.medidores= a;
     } 
 }

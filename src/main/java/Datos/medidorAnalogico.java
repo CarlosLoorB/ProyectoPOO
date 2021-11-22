@@ -10,7 +10,7 @@ import Personal.abonado;
  *
  * @author CAELOS JR 2018
  */
-public class medidorAnalogico extends medidor {
+public class medidorAnalogico extends Medidor {
     
     public medidorAnalogico(String codigo, String direccion, planEnergia plan, abonado abonado){
         super(codigo,direccion,plan,abonado);

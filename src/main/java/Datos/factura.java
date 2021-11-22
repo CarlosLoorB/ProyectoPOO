@@ -12,7 +12,7 @@ public class factura {
     private Date fechsEmi;
     private Date fecLecturaAct;
     private int numDiasFact;
-    private medidor Medidor;
+    private Medidor Medidor;
     private planEnergia planEnergia;
      
     

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author CAELOS JR 2018
  */
-public class medidor {
+public class Medidor {
     private String codigo;
     private String direccion;
     private planEnergia plan;
@@ -19,7 +19,7 @@ public class medidor {
     private double ultValor;
     private LocalDate ultMedida;
     
-  public medidor(String codigo, String direccion, planEnergia plan, abonado abonado){
+  public Medidor(String codigo, String direccion, planEnergia plan, abonado abonado){
         this.codigo= codigo;
         this.direccion= direccion;
         this.plan= plan;
@@ -29,10 +29,10 @@ public class medidor {
         this.ultMedida= LocalDate.now();
     }
   
-  @Override
+
     public boolean equals(Object obj){
-        if (obj instanceof medidor){
-            medidor a = (medidor)obj;
+        if (obj instanceof Medidor){
+            Medidor a = (Medidor)obj;
             if (codigo.equals(a.codigo)){
                 return true;
             }
@@ -42,5 +42,14 @@ public class medidor {
         }
         else
             return false;
+    }
+    
+    public String getCodigo(){
+        return codigo;
+    }
+    
+
+    public double getValor() {
+        return ultValor;
     }
 }
