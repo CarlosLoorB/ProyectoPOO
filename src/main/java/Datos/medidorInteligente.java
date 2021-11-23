@@ -25,4 +25,8 @@ public class medidorInteligente extends Medidor{
         telemetria t = new telemetria(codigo, fecha, consumo);
         telemetrias.add(t);
     }
+    
+    public ArrayList<telemetria> getTelemetria(){
+        return telemetrias;
+    }
 }

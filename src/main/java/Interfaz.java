@@ -16,13 +16,15 @@ public class Interfaz {
         sc = new Scanner(System.in);
     }
     
-
+    public registro getRegistro(){
+        return dataBase;
+    }
     
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
     public void menu() {
         System.out.println("Hola, bienvenido.");
         String op = "";
-        //while(!op.equals("2")){
+        while(!op.equals("2")){
         System.out.println("Ingrese su opcion");
         System.out.println("1: Iniciar sesion");
         System.out.println("2: Salir");
@@ -63,6 +65,7 @@ public class Interfaz {
                break;
             } 
         }
+    }
         
     
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
@@ -70,8 +73,8 @@ public class Interfaz {
         int index = posicion;
         user nuevo = dataBase.getUsuarios().get(index);
         administrador admin = (administrador)nuevo;
-            //while(!op.equals("5")){
-                int op = admin.menuOpc();
+        int op = admin.menuOpc();
+            while(op != 5){
                 switch(op){
                     case 1:
                         dataBase.setPlanes(admin.registrarPlan(dataBase.getPlanes(), admin));
@@ -87,6 +90,7 @@ public class Interfaz {
                         }
                         break;
                     case 3 :
+                        
                         break;
                     case 4:
                         break;
@@ -97,5 +101,6 @@ public class Interfaz {
                         break;        
                 }
             }
-    }  
+    }
+}
 

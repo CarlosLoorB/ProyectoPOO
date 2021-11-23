@@ -52,4 +52,5 @@ public class Medidor {
     public double getValor() {
         return ultValor;
     }
+    
 }

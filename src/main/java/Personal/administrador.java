@@ -11,6 +11,7 @@ import Datos.medidorAnalogico;
 import Datos.medidorInteligente;
 import Datos.planEnergia;
 import Datos.registro;
+import Datos.telemetria;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -168,26 +169,36 @@ private Scanner sc;
           return null;
         }
    
-   public void simularMedicion(LocalDateTime inicio, LocalDateTime fin){
+   public ArrayList<telemetria> simularMedicion(LocalDateTime inicio, LocalDateTime fin, registro ui){
+       ArrayList<telemetria> telem= new ArrayList<>();
        System.out.println("Fecha inicio:" + inicio);
        System.out.println("Fecha fin:" + fin);
-       ArrayList<Medidor> med = ui.getDataBase();  
-       for(Medidor m: med){
-           if(m instanceof medidorInteligente){
+       ArrayList<Medidor> med = ui.getMedidores();  
+       for(Medidor n: med){
+           if(n instanceof medidorInteligente){
+              medidorInteligente m = (medidorInteligente)n;
               System.out.println("Lecturas para medidor con codigo" + m.getCodigo() + "con valor actual" + m.getValor() );
               System.out.println(m.getCodigo() + "," + inicio + "," + m.getValor());
+              telem = m.getTelemetria();
               while(inicio != fin){
                   inicio = inicio.plusMinutes(10);
-                  System.out.println(m.getCodigo() + "," + inicio + "," + m.calcularValor().getValor());
+                  int tamano = telem.size();
+                  telemetria elemento = telem.get(tamano - 1);
+                  double valorInicial = elemento.getconsumo();
+                  double consumoInventado = valorInicial + Math.random()*10;
+                  telemetria telemNew = new telemetria(m.getCodigo(),inicio,consumoInventado);
+                  System.out.println(m.getCodigo() + "," + inicio + "," + consumoInventado);
+                  telem.add(telemNew);
               }     
            }   
        }
+       return telem;
    }
-   
+   /*
    public void realizarFacturacion(){
        for(Medidor m: dataBase.getMedidor())
            if(m instanceof medidorAnalogico){
                double totalPago = m.
            }
-   }
+   }*/
 }

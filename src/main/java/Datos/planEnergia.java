@@ -1,6 +1,7 @@
 package Datos;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -13,9 +14,9 @@ public class planEnergia {
     private String nombrePlan;
     private double costoKW;
     private double cargo;
-    private ArrayList<LocalDateTime> horasPico;
+    private ArrayList<LocalTime> horasPico;
     
-    public planEnergia(String nombrePlan, double costoKw, double cargoBase, ArrayList<LocalDateTime> horasPico){
+    public planEnergia(String nombrePlan, double costoKw, double cargoBase, ArrayList<LocalTime> horasPico){
         this.nombrePlan= nombrePlan;
         this.cargo= cargoBase;
         this.costoKW= costoKw;
@@ -37,8 +38,8 @@ public class planEnergia {
     public double getCargo(){
         return cargo;
     }
-    public LocalDateTime horas(){
-        return horas;
+    public ArrayList<LocalTime> gethoras(){
+        return horasPico;
     }
     public void setNombrePlan(String nombrePlan){
         this.nombrePlan = nombrePlan;
@@ -46,8 +47,8 @@ public class planEnergia {
     public void setCostoKW(double costoKW){
         this.costoKW = costoKW;
     }
-    public void setHoras(LocalDateTime horas){
-        this.horas= horas;
+    public void setHoras(ArrayList<LocalTime> horas){
+        this.horasPico= horas;
     }
     
     @Override

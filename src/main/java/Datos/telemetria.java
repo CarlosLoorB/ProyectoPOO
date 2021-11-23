@@ -21,4 +21,8 @@ public class telemetria {
         this.consumo = consumo;
     }
     
+    public double getconsumo(){
+        return consumo;
+    }
+    
 }
