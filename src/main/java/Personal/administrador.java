@@ -196,7 +196,7 @@ private Scanner sc;
    }
    /*
    public void realizarFacturacion(){
-       for(Medidor m: dataBase.getMedidor())
+       for(Medidor m: ())
            if(m instanceof medidorAnalogico){
                double totalPago = m.
            }

@@ -94,7 +94,7 @@ public class Interfaz {
                     case 3 :
                         System.out.println("Ingrese la fecha de inicio");
                         System.out.println("Ingrese la fecha de fin:");
-                        admin.simularMedicion(LocalDateTime.MIN, LocalDateTime.MIN);
+                        admin.simularMedicion(LocalDateTime.MIN, LocalDateTime.MIN,dataBase);
                         break;
                     case 4:
                         break;

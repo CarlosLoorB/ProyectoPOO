@@ -15,6 +15,5 @@ public class factura {
     private Medidor Medidor;
     private planEnergia planEnergia;
      
-    
 }
 
