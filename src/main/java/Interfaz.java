@@ -13,6 +13,7 @@ import resultadosConjuntos.MedidoresUsuarios;
  *
  * @author gabri
  */
+/*
 public class Interfaz {
     private Scanner sc;
     private registro dataBase;
@@ -147,6 +148,6 @@ public class Interfaz {
      System.out.println("sesion de abonado");
      }
 }
-            
+*/           
             
 

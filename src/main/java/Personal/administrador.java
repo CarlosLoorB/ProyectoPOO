@@ -15,14 +15,13 @@ import Datos.telemetria;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 import resultadosConjuntos.MedidoresUsuarios;
 import org.apache.commons.lang3.RandomStringUtils;
 //import Personal.abonado;
 
 public class administrador extends user{
-private Scanner sc;
+Scanner sc = new Scanner(System.in);
     public administrador(String cedula,String usuario,String contrasena){
         super(cedula,usuario,contrasena);
     }
@@ -57,6 +56,7 @@ private Scanner sc;
         horapico.add(horaPicoI);
         horapico.add(horaPicoF);
         planEnergia nuevoPlan = new planEnergia(nombrePlan, costoKw, cargoBase, horapico);
+        System.out.println("El plan ha sido creado");
         if(planes.contains(nuevoPlan)){
         System.out.println("Ese Plan ya existe");
         return planes;
@@ -67,14 +67,12 @@ private Scanner sc;
         return planes;
     }
     
-    public int menuOpc(){
+    public void menuOpc(){
         System.out.println("1. Registrar plan");
         System.out.println("2. Registra medidor");
         System.out.println("3. Simular mediciones");
         System.out.println("4. Realizar facturacion");
         System.out.println("5. Salir");
-        int op = sc.nextInt();
-        return op;
     }
     
    public MedidoresUsuarios registrarMedidor(ArrayList<Medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){
@@ -207,12 +205,12 @@ private Scanner sc;
        }
        return med; 
    }
-   /*
+   
    public void realizarFacturacion(ArrayList<Medidor> medidoresPag){
        for(Medidor m: medidoresPag)
            if(m instanceof medidorAnalogico){
                factura facturarMed= new factura();
                
            }
-   }*/
+   }
 }

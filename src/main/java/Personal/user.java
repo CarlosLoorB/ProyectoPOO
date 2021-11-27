@@ -9,7 +9,7 @@ package Personal;
  * @author gabri
  */
 public class user {
-    private String cedula;
+    protected String cedula;
     private String usuario;
     private String contrasena; 
     
@@ -22,9 +22,12 @@ public class user {
     public user(String usuario,String contrasena){
         this.usuario=usuario;
         this.contrasena=contrasena;
+        this.cedula="-1";
     }
     
     public user(String cedula){
+        this.usuario="nada";
+        this.contrasena="nada";
         this.cedula=cedula;
     }
     
@@ -35,9 +38,9 @@ public class user {
             if(contrasena.equals(a.contrasena) && usuario.equals(a.usuario)){
                 return true;
             }
-            else if(cedula.equals(a.cedula))
+            else if(cedula.equals(a.cedula)){
                 return true;
-            
+            }
             else{
                 return false;
             }

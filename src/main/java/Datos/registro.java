@@ -5,6 +5,7 @@ import Personal.abonado;
 import Personal.administrador;
 import Personal.operario;
 import Personal.user;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -29,10 +30,22 @@ public class registro {
     
     public void inicializarDatos(){
         usuarios.add(new administrador("1302545984", "admin", "superadmin"));
-        usuarios.add(new operario("0978451295", "joselitoOp", "jose123"));
-        usuarios.add(new operario("0965221487", "juanor", "juajua34"));
-        usuarios.add(new abonado("1307069874", "penelope", "pe45", "penelope@gmail.com"));
-        usuarios.add(new abonado("1485622369", "gabriel09", "gablu23", "gabrielclucio14@gmail.com"));
+        usuarios.add(new operario("0978451295", "operario1","clave1"));
+        usuarios.add(new operario("0965221487", "operario2","clave2"));
+        usuarios.add(new abonado("1307069874", "abonado1","clave3", "penelope@gmail.com"));
+        usuarios.add(new abonado("1485622369", "abonado2", "clave4", "calobo2001@gmail.com"));
+        LocalTime horapico1 = LocalTime.of(18, 00, 00);
+        LocalTime horapico2 = LocalTime.of(20, 00, 00);
+        ArrayList<LocalTime> horaspico1 = new ArrayList<>();
+        ArrayList<LocalTime> horaspico2 = new ArrayList<>();
+        horaspico1.add(horapico1);
+        horaspico1.add(horapico2);
+        planEnergia plan1 = new planEnergia("baraton",20d,10d,horaspico1);
+        horaspico2.add(horapico1.plusHours(1));
+        horaspico2.add(horapico2.plusHours(2));
+        planEnergia plan2 = new planEnergia("mananero",18d,10d,horaspico2);
+        planes.add(plan1);
+        planes.add(plan2);
         
     }
         

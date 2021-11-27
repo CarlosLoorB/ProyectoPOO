@@ -23,6 +23,7 @@ import resultadosConjuntos.MedidoresUsuarios;
  *
  * @author gabri
  */
+
 public class Interfaz {
     private Scanner sc;
     private registro dataBase;
@@ -30,21 +31,6 @@ public class Interfaz {
     public Interfaz(){
         sc = new Scanner(System.in);
         dataBase = new registro();
-        administrador administradorInicial = new administrador("0","admin","superadmin");
-        operario operario1 = new operario("1","operario1","clave1");
-        operario operario2 = new operario("2","operario2","clave2");
-        LocalTime horapico1 = LocalTime.of(18, 00, 00);
-        LocalTime horapico2 = LocalTime.of(20, 00, 00);
-        ArrayList<LocalTime> horaspico1 = new ArrayList<>();
-        ArrayList<LocalTime> horaspico2 = new ArrayList<>();
-        horaspico1.add(horapico1);
-        horaspico1.add(horapico2);
-        planEnergia plan1 = new planEnergia("baraton",20d,10d,horaspico1);
-        horaspico2.add(horapico1.plusHours(1));
-        horaspico2.add(horapico2.plusHours(2));
-        planEnergia plan2 = new planEnergia("mananero",18d,10d,horaspico2);
-        abonado abonado1 = new abonado("3","abonado1","clave3","calobo2001@gmail.com");
-        abonado abonado2 = new abonado("4","abonado2","clave4","calobo2001@gmail.com");
     }
     
     public registro getRegistro(){
@@ -68,6 +54,7 @@ public class Interfaz {
                 String contra = sc.nextLine();
                 user log = new user(nombre,contra);
                 int posicion = dataBase.getUsuarios().indexOf(log);
+                System.out.println("La posicion es"+ posicion );
                 if(posicion != -1){
                     int tipo= dataBase.tipoUsuario(posicion);
                     switch(tipo){
@@ -103,27 +90,55 @@ public class Interfaz {
         int index = posicion;
         user nuevo = dataBase.getUsuarios().get(index);
         administrador admin = (administrador)nuevo;
-        int op = admin.menuOpc();
+        admin.menuOpc();
+        int op =sc.nextInt();
         //creo que este while se debe de poner al incico del metodo, y en la linea de arriba debe ir un int op = 0
             while(op != 5){
                 switch(op){
                     case 1:
                         dataBase.setPlanes(admin.registrarPlan(dataBase.getPlanes(), admin));
+                        System.out.println("Se ha anadidio el plan");
+                        System.out.println("Que desea hacer");
+                        admin.menuOpc();
+                        op =sc.nextInt();
                         break;
                     case 2 :
                         MedidoresUsuarios medidorcreado = admin.registrarMedidor(dataBase.getMedidores(), admin,dataBase.getUsuarios(), dataBase.getPlanes());
                         if (medidorcreado != null){
                         dataBase.setMedidores(medidorcreado.getMedidores());
                         dataBase.setUsuarios(medidorcreado.getUsuarios());
+                        System.out.println("Se ha anadidio el medidor");
+                        System.out.println("Que desea hacer");
+                        admin.menuOpc();
+                        op =sc.nextInt();
                         }
                         else{
-                           System.out.println("Opcion no valida"); 
+                           System.out.println("Opcion no valida");
+                           System.out.println("Que desea hacer");
+                            admin.menuOpc();
+                            op = sc.nextInt();
                         }
                         break;
                     case 3 :
-                        System.out.println("Ingrese la fecha de inicio");
-                        System.out.println("Ingrese la fecha de fin:");
-                        dataBase.setMedidores(admin.simularMedicion(LocalDateTime.MIN, LocalDateTime.MIN,dataBase));
+                        System.out.println("Ingrese el dia de inicio");
+                        int diaI = sc.nextInt();
+                        System.out.println("Ingrese el mes de inicio");
+                        int mesI = sc.nextInt();
+                        System.out.println("Ingrese el ano de inicio");
+                        int anoI = sc.nextInt();
+                        System.out.println("Ingrese el dia de fin");
+                        int diaF = sc.nextInt();
+                        System.out.println("Ingrese el mes de fin");
+                        int mesF = sc.nextInt();
+                        System.out.println("Ingrese el ano de fin");
+                        int anoF = sc.nextInt();
+                        LocalDateTime horapicoI = LocalDateTime.of(anoI, mesI, diaI,0,0);
+                        LocalDateTime horapicoF = LocalDateTime.of(anoF, mesF, diaF,0,0);
+                        dataBase.setMedidores(admin.simularMedicion(horapicoI, horapicoF,dataBase));
+                        System.out.println("Se ha creado las medicions");
+                        System.out.println("Que desea hacer");
+                        admin.menuOpc();
+                        op =sc.nextInt();
                         break;
                     case 4:
                         break;
@@ -156,6 +171,8 @@ public class Interfaz {
      public void iniciarSesionAbon(int posicion){
      System.out.println("sesion de abonado");
      }
+     
+
 }
             
             

@@ -52,5 +52,7 @@ public abstract class Medidor {
     public double getValor() {
         return ultValor;
     }
-    
+    public abonado getAbonado() {
+        return abonado;
+    }
 }
