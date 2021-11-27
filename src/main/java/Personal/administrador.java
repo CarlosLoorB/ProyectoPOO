@@ -5,13 +5,14 @@
  */
 package Personal;
 
-import Interfaz.Interfaz;
 import Datos.Medidor;
+import Datos.factura;
 import Datos.medidorAnalogico;
 import Datos.medidorInteligente;
 import Datos.planEnergia;
 import Datos.registro;
 import Datos.telemetria;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -207,10 +208,110 @@ Scanner sc = new Scanner(System.in);
    }
    
    public void realizarFacturacion(ArrayList<Medidor> medidoresPag){
-       for(Medidor m: medidoresPag)
-           if(m instanceof medidorAnalogico){
-               factura facturarMed= new factura();
-               
+        
+       for(Medidor m: medidoresPag){
+           int lfac = m.getFacturas().size();
+           if(m.getFacturas().isEmpty()){
+               planEnergia plan = m.getPlan();
+               if(m instanceof medidorAnalogico){
+                   medidorAnalogico ma = (medidorAnalogico)m;
+                   double parcial = 0;
+                   for(telemetria t: ma.getTelemetria()){ //duda sobre comprobacion de la fecha en la que se hace el metodo 
+                       parcial = parcial + (plan.getcostoKW() * t.getconsumo());
+                   }
+                   double total = plan.getCargo() + parcial;
+                   LocalDateTime fe = LocalDateTime.now();
+                   int lon = ma.getTelemetria().size()-1;
+                   LocalDateTime actu = ma.getTelemetria().get(lon).getFecha();
+                   int dia1 = ma.getTelemetria().get(0).getFecha().getDayOfYear();
+                   int diasF = LocalDateTime.now().getDayOfYear() - dia1;
+                   factura fac = new factura(fe, actu, diasF, m, plan);
+                   fac.setLecturaActual(ma.getTelemetria().get(lon).getconsumo());
+                   fac.setLecturaAnterior();
+                   m.agregarFactura(fac);
+               // Aqui va lo de envio de correo
+               } else {
+                   double totalPico = 0;
+                   double totalNP = 0;
+                   medidorInteligente mi = (medidorInteligente) m;
+                   for(telemetria t: mi.getTelemetria()){
+                       int dthora = t.getFecha().getHour();
+                       ArrayList<LocalTime> horasP = plan.getHoras();
+                       for(LocalTime hora: horasP){
+                           int h = hora.getHour();
+                           if(dthora == h){
+                              double consumoP = 2 * plan.getcostoKW() * mi.getConsumo();
+                              totalPico = totalPico + consumoP;
+                           } else {
+                              double consumoNP = plan.getcostoKW() * mi.getConsumo();
+                              totalNP = totalNP + consumoNP;
+                              }  
+                       }
+                   }
+                   double total = plan.getCargo() + totalPico + totalNP;
+                   LocalDateTime fe = LocalDateTime.now();
+                   int lon = mi.getTelemetria().size()-1;
+                   LocalDateTime actu = mi.getTelemetria().get(lon).getFecha();
+                   int dia1 = mi.getTelemetria().get(0).getFecha().getDayOfYear();
+                   int diasF = LocalDateTime.now().getDayOfYear() - dia1;
+                   factura fac = new factura(fe, actu, diasF, m, plan);
+                   fac.setLecturaActual(mi.getTelemetria().get(lon).getconsumo());
+                   fac.setLecturaAnterior();
+                   m.agregarFactura(fac);
+                   //Aqui va lo de envio de correo
+                }
+           } else {
+               planEnergia plan = m.getPlan();
+               if(m instanceof medidorAnalogico){
+                   medidorAnalogico ma = (medidorAnalogico)m;
+                   double parcial = 0;
+                   for(telemetria t: ma.getTelemetria()){ //duda sobre comprobacion de la fecha en la que se hace el metodo 
+                       if(t.getFecha().isAfter(m.getFacturas().get(lfac-1).getEmision())){
+                         parcial = parcial + (plan.getcostoKW() * t.getconsumo());  
+                       }
+                   }
+                   double total = plan.getCargo() + parcial;
+                   LocalDateTime fe = LocalDateTime.now();
+                   int lon = ma.getTelemetria().size()-1;
+                   LocalDateTime actu = ma.getTelemetria().get(lon).getFecha();
+                   int dia1 = ma.getTelemetria().get(0).getFecha().getDayOfYear();
+                   int diasF = LocalDateTime.now().getDayOfYear() - dia1;
+                   factura fac = new factura(fe, actu, diasF, m, plan);
+                   fac.setLecturaActual(ma.getTelemetria().get(lon).getconsumo());
+                   fac.setLecturaAnterior();
+                   m.agregarFactura(fac);
+               // Aqui va lo de envio de correo
+               } else {
+                   double totalPico = 0;
+                   double totalNP = 0;
+                   medidorInteligente mi = (medidorInteligente) m;
+                   for(telemetria t: mi.getTelemetria()){
+                       int dthora = t.getFecha().getHour();
+                       ArrayList<LocalTime> horasP = plan.getHoras();
+                       for(LocalTime hora: horasP){
+                           int h = hora.getHour();
+                           if(dthora == h){
+                              double consumoP = 2 * plan.getcostoKW() * mi.getConsumo();
+                              totalPico = totalPico + consumoP;
+                           } else {
+                              double consumoNP = plan.getcostoKW() * mi.getConsumo();
+                              totalNP = totalNP + consumoNP;
+                              }  
+                       }
+                   }
+                   double total = plan.getCargo() + totalPico + totalNP;
+                   LocalDateTime fe = LocalDateTime.now();
+                   int lon = mi.getTelemetria().size()-1;
+                   LocalDateTime actu = mi.getTelemetria().get(lon).getFecha();
+                   int dia1 = mi.getTelemetria().get(0).getFecha().getDayOfYear();
+                   int diasF = LocalDateTime.now().getDayOfYear() - dia1;
+                   factura fac = new factura(fe, actu, diasF, m, plan);
+                   fac.setLecturaActual(mi.getTelemetria().get(lon).getconsumo());
+                   fac.setLecturaAnterior();
+                   m.agregarFactura(fac);
+                   //Aqui va lo de envio de correo
+                }
            }
+       }
    }
 }

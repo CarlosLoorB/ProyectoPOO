@@ -24,5 +24,7 @@ public class telemetria {
     public double getconsumo(){
         return consumo;
     }
-    
+    public LocalDateTime getFecha(){
+        return fecha;
+    }
 }

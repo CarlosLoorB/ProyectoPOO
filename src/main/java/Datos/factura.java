@@ -2,6 +2,7 @@
 package Datos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -9,14 +10,16 @@ import java.time.LocalDate;
  * @author kevaalci
  */
 public class factura {
-    private LocalDate fechasEmi;
-    private LocalDate fecLecturaAct;
+    private LocalDateTime fechaEmi;
+    private LocalDateTime fecLecturaAct;
     private int numDiasFact;
     private Medidor Medidor;
     private planEnergia planEnergia;
+    private double lecturaAnterior;
+    private double lecturaActual;
      
-    public factura(LocalDate fechasEmi,LocalDate fecLecturaAct,int numDiasFact,Medidor Medidor,planEnergia planEnergia){
-        this.fechasEmi=fechasEmi;
+    public factura(LocalDateTime fechasEmi,LocalDateTime fecLecturaAct,int numDiasFact,Medidor Medidor,planEnergia planEnergia){
+        this.fechaEmi=fechasEmi;
         this.fecLecturaAct=fecLecturaAct;
         this.numDiasFact=numDiasFact;
         this.Medidor=Medidor;
@@ -26,5 +29,15 @@ public class factura {
     public Medidor getMedidor(){
         return Medidor;
     }
+    public LocalDateTime getEmision(){
+        return fechaEmi;
+    }
+    public void setLecturaActual(double lectura){
+        this.lecturaActual = lectura;
+    }
+    public void setLecturaAnterior(){
+        this.lecturaAnterior = lecturaActual;
+    }
+    
 }
 

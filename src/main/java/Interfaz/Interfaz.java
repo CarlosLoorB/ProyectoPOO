@@ -157,13 +157,24 @@ public class Interfaz {
         int index = posicion;
         user nuevo = dataBase.getUsuarios().get(index);
         operario oper = (operario)nuevo;
-        int op = oper.menuOpc();
-        //creo que este while se debe de poner al incico del metodo, y en la linea de arriba debe ir un int op = 0
+        oper.menuOpc();
+        int op = sc.nextInt();
             while(op != 2){
-                    if (op == 1){
+                switch(op){
+                    case 1:
                         dataBase.setMedidores(oper.registrarMedicion(dataBase.getMedidores()));
-                        
-                    }
+                        System.out.println("Se ha registrado una nueva medicion.");
+                        System.out.println("Que desea hacer");
+                        oper.menuOpc();
+                        op = sc.nextInt();
+                        break;
+                    case 2:
+                        System.out.println("Saliendo");
+                        break;
+                    default:
+                        System.out.println("Opcion Invalida");
+                        break;
+                }
             }
         System.out.println("Saliendo");
      }
