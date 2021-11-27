@@ -39,7 +39,7 @@ public class planEnergia {
     public double getCargo(){
         return cargo;
     }
-    public ArrayList<LocalTime> gethoras(){
+    public ArrayList<LocalTime> getHoras(){
         return horasPico;
     }
     public void setNombrePlan(String nombrePlan){
