@@ -5,7 +5,7 @@
  */
 package Personal;
 
-import interfaz.Interfaz;
+import Interfaz.Interfaz;
 import Datos.Medidor;
 import Datos.medidorAnalogico;
 import Datos.medidorInteligente;
@@ -40,17 +40,27 @@ private Scanner sc;
         System.out.println("Desea ingresar otra provincia:");
         repetir = sc.nextLine().toUpperCase();
         if(repetir.equals("SI"))
-            System.out.println("Ingrese el nombre de las provincias disponibles");
+         System.out.println("Ingrese el nombre de las provincias disponibles");
         //hacer el sistema de toma de datos enum para las provincias
         }
         while(repetir.equals("SI"));
         System.out.println("Ingrese el cargo base");
         double cargoBase = sc.nextDouble();
-        //pedir el LocalTime en el cual se hace la hora pico 
-        planEnergia nuevoPlan = new planEnergia(nombrePlan, costoKw, cargoBase, horaPico);
+        System.out.println("Ingrese solo la hora del incicio de la hora pico");
+        int inicioHPico = sc.nextInt();
+        System.out.println("Ingrese el final de la hora pico");
+        int finHPico = sc.nextInt();
+        // agregar un if que confirme que todos los datos son validos 
+        LocalTime horaPicoI = LocalTime.of(inicioHPico, 00 , 00);
+        LocalTime horaPicoF = LocalTime.of(finHPico, 00 , 00);
+        ArrayList<LocalTime> horapico = new ArrayList<>();
+        horapico.add(horaPicoI);
+        horapico.add(horaPicoF);
+        planEnergia nuevoPlan = new planEnergia(nombrePlan, costoKw, cargoBase, horapico);
         if(planes.contains(nuevoPlan)){
         System.out.println("Ese Plan ya existe");
         return planes;
+        //}
         }
         else
             planes.add(nuevoPlan);
@@ -169,12 +179,14 @@ private Scanner sc;
           return null;
         }
    
-   public ArrayList<telemetria> simularMedicion(LocalDateTime inicio, LocalDateTime fin, registro ui){
-       ArrayList<telemetria> telem= new ArrayList<>();
+   //esto me debe devolver el array de medidores con las nuevas telemtrias credas y añadidas al medidor en cuestion 
+   public ArrayList<Medidor> simularMedicion(LocalDateTime inicio, LocalDateTime fin, registro ui){
+       ArrayList<telemetria> telem; //= new ArrayList<>();
        System.out.println("Fecha inicio:" + inicio);
        System.out.println("Fecha fin:" + fin);
        ArrayList<Medidor> med = ui.getMedidores();  
-       for(Medidor n: med){
+       for(int i=0;i<med.size();i++){
+           Medidor n = med.get(i);
            if(n instanceof medidorInteligente){
               medidorInteligente m = (medidorInteligente)n;
               System.out.println("Lecturas para medidor con codigo" + m.getCodigo() + "con valor actual" + m.getValor() );
@@ -189,16 +201,18 @@ private Scanner sc;
                   telemetria telemNew = new telemetria(m.getCodigo(),inicio,consumoInventado);
                   System.out.println(m.getCodigo() + "," + inicio + "," + consumoInventado);
                   telem.add(telemNew);
-              }     
+              }
+              m.setTelemetria(telem);
            }   
        }
-       return telem;
+       return med; 
    }
    /*
-   public void realizarFacturacion(){
-       for(Medidor m: ())
+   public void realizarFacturacion(ArrayList<Medidor> medidoresPag){
+       for(Medidor m: medidoresPag)
            if(m instanceof medidorAnalogico){
-               double totalPago = m.
+               factura facturarMed= new factura();
+               
            }
    }*/
 }

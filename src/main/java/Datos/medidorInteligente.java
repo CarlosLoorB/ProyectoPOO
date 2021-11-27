@@ -29,4 +29,8 @@ public class medidorInteligente extends Medidor{
     public ArrayList<telemetria> getTelemetria(){
         return telemetrias;
     }
+    
+    public void setTelemetria(ArrayList<telemetria> telemetrias){
+        this.telemetrias=telemetrias;
+    }
 }

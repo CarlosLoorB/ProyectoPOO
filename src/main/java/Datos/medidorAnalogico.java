@@ -5,6 +5,7 @@
 package Datos;
 
 import Personal.abonado;
+import java.time.LocalDate;
 
 /**
  *
@@ -16,4 +17,11 @@ public class medidorAnalogico extends Medidor {
         super(codigo,direccion,plan,abonado);
     }
     
+    public void registrarMedicion(double ultValor){
+        super.ultMedida=LocalDate.now();
+        double valorPasado = super.ultValor;
+        double consumoActual = ultValor - valorPasado;
+        super.consumo= consumoActual;
+        super.ultValor=ultValor;
+    }
 }

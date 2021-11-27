@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
  *
  * @author CAELOS JR 2018
  */
-public class Medidor {
+public abstract class Medidor {
     private String codigo;
     private String direccion;
     private planEnergia plan;
     private abonado abonado;
-    private double consumo;
-    private double ultValor;
-    private LocalDate ultMedida;
+    protected double consumo;
+    protected double ultValor;
+    protected LocalDate ultMedida;
     
   public Medidor(String codigo, String direccion, planEnergia plan, abonado abonado){
         this.codigo= codigo;
@@ -28,7 +28,7 @@ public class Medidor {
         this.ultValor= 0;
         this.ultMedida= LocalDate.now();
     }
-  
+    
 
     public boolean equals(Object obj){
         if (obj instanceof Medidor){

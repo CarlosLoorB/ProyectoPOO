@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 //en el formato el tipo de dato de cargo es double
 //en el formato el tipo de dato de horas es LocalDateTime
+//hay que agregar el enum de provincias
 public class planEnergia {
     private String nombrePlan;
     private double costoKW;
