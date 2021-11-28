@@ -120,20 +120,36 @@ public class Interfaz {
                         }
                         break;
                     case 3 :
+                        int d = 0;
+                        int m = 0;
+                        int df = 0;
+                        int mf = 0;
+                        do{
                         System.out.println("Ingrese el dia de inicio");
                         int diaI = sc.nextInt();
+                        d = diaI;
+                        }while(d<1 || d>31);
+                        do{
                         System.out.println("Ingrese el mes de inicio");
                         int mesI = sc.nextInt();
+                        m = mesI;
+                        }while(m<1 || m>12);
                         System.out.println("Ingrese el ano de inicio");
                         int anoI = sc.nextInt();
+                        do{
                         System.out.println("Ingrese el dia de fin");
                         int diaF = sc.nextInt();
+                        df = diaF;
+                        }while(d<1 || d>31);
+                        do{
                         System.out.println("Ingrese el mes de fin");
                         int mesF = sc.nextInt();
+                        mf = mesF;
+                        }while(m<1 || m>12);
                         System.out.println("Ingrese el ano de fin");
                         int anoF = sc.nextInt();
-                        LocalDateTime horapicoI = LocalDateTime.of(anoI, mesI, diaI,0,0);
-                        LocalDateTime horapicoF = LocalDateTime.of(anoF, mesF, diaF,0,0);
+                        LocalDateTime horapicoI = LocalDateTime.of(anoI, m, d,0,0);
+                        LocalDateTime horapicoF = LocalDateTime.of(anoF, mf, df,0,0);
                         dataBase.setMedidores(admin.simularMedicion(horapicoI, horapicoF,dataBase));
                         System.out.println("Se ha creado las medicions");
                         System.out.println("Que desea hacer");
@@ -141,6 +157,10 @@ public class Interfaz {
                         op =sc.nextInt();
                         break;
                     case 4:
+                        System.out.println("Se ha realizado la facturacion y se han enviado los correos");
+                        System.out.println("Que desea hacer");
+                        admin.menuOpc();
+                        op =sc.nextInt();
                         break;
                     case 5 :
                         System.out.println("Saliendo");

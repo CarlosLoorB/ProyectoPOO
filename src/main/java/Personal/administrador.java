@@ -310,6 +310,7 @@ Scanner sc = new Scanner(System.in);
                    fac.setLecturaAnterior();
                    m.agregarFactura(fac);
                    //Aqui va lo de envio de correo
+                   
                 }
            }
        }

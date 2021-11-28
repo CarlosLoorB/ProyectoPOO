@@ -6,6 +6,7 @@ package Datos;
 
 import Personal.abonado;
 import Personal.operario;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -32,5 +33,13 @@ public class medidorInteligente extends Medidor{
     
     public void setTelemetria(ArrayList<telemetria> telemetrias){
         this.telemetrias=telemetrias;
+    }
+    
+    public void registrarMedi(double ultValor){
+        super.ultMedida=LocalDate.now();
+        double valorPasado = super.ultValor;
+        double consumoActual = ultValor - valorPasado;
+        super.consumo= consumoActual;
+        super.ultValor=ultValor;
     }
 }

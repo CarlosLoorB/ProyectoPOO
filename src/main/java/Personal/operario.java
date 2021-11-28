@@ -6,6 +6,7 @@ package Personal;
 
 import Datos.Medidor;
 import Datos.medidorAnalogico;
+import Datos.medidorInteligente;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,11 +21,9 @@ public class operario extends user{
         super(cedula,usuario,contrasena);
     }
     
-    public int menuOpc(){
+    public void menuOpc(){
         System.out.println("1. Registrar medicion");
         System.out.println("2. Salir");
-        int op = sc.nextInt();
-        return op;
     }
     
     public ArrayList<Medidor> registrarMedicion(ArrayList<Medidor> medidoresPag){
@@ -49,8 +48,13 @@ public class operario extends user{
                 return medidoresPag ;
             }
             else{
-               System.out.println("El medidor no es analogico");
-               return null;
+                medidorInteligente medidorR = (medidorInteligente)medidor;
+                System.out.println("Ingrese el valor del medidor");
+                double ultValor = sc.nextDouble();
+                sc.nextLine();
+                medidorR.registrarMedi(ultValor);
+                medidoresPag.set(posMedidor,medidorR);
+                return medidoresPag ;
             }
         }
         else{
