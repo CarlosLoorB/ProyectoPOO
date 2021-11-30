@@ -17,13 +17,15 @@ public class factura {
     private planEnergia planEnergia;
     private double lecturaAnterior;
     private double lecturaActual;
+    private String codigo;
      
-    public factura(LocalDateTime fechasEmi,LocalDateTime fecLecturaAct,int numDiasFact,Medidor Medidor,planEnergia planEnergia){
+    public factura(LocalDateTime fechasEmi,LocalDateTime fecLecturaAct,int numDiasFact,Medidor Medidor,planEnergia planEnergia,String codigo){
         this.fechaEmi=fechasEmi;
         this.fecLecturaAct=fecLecturaAct;
         this.numDiasFact=numDiasFact;
         this.Medidor=Medidor;
         this.planEnergia=planEnergia;
+        this.codigo= codigo;
     }
     
     public Medidor getMedidor(){
@@ -32,6 +34,11 @@ public class factura {
     public LocalDateTime getEmision(){
         return fechaEmi;
     }
+    
+    public String getCodigo(){
+        return codigo;
+    }
+    
     public void setLecturaActual(double lectura){
         this.lecturaActual = lectura;
     }

@@ -44,28 +44,62 @@ public class abonado extends user{
         this.medidores= a;
     } 
     
-    public void historicoFacturado(ArrayList<factura> facturas){
+    public void historicoFacturado(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Los medidores a su disposicion son");
         for (Medidor n : medidores){
-            if ((n.getAbonado().cedula).equals(cedula)){
                 System.out.println(n.getCodigo());
-            }      
-        }
-        //hay que corregir
+            }
         System.out.println("Ingrese el codigo del medidor del cual desea ver sus facturas");
         String codigo = sc.nextLine();
         int impresiones = 0;
-        for ( factura n : facturas){ // le voy a cambiar las variables las que solo tienen una vocal o alguna consonante 
-            while (impresiones <4 ){ //y si se le hace un do y while?  
-            if (((n.getMedidor()).getCodigo()).equals(codigo)){
-                //hay que poner para que se imprima la factura en cuestion
-                System.out.print(n);
-                impresiones++;
+        for ( int i=0;i<medidores.size();i++){
+            Medidor n = medidores.get(i);
+            while (impresiones < 4) { //y si se le hace un do y while?  
+                if ((n.getCodigo()).equals(codigo)) {
+                    ArrayList<factura> listaFact = n.getFacturas();
+                    final Object[][] table = new String[4][];
+                    table[0] = new String[]{"Numero de factura", "Nombre del plan", "Codigo del medidor"};
+                    for (int o = 1; o < 4; o++) {
+                        factura fact = listaFact.get(o);
+                        table[o] = new String[]{fact.getCodigo(), n.getPlan().getNombrePlan(), fact.getMedidor().getCodigo()};
+                    }
+                    for (final Object[] row : table) {
+                        System.out.format("%15s%15s%15s\n", row);
+                    }
+                }
             }
             }
         }
-        if (impresiones == 0)
-        System.out.println("Esas son sus facturas");
     }
-}
+    
+
+    
+    
+    
+    
+    // Carlos Loor - este ya no sirve 
+    /*
+   public void historicoFacturado(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Los medidores a su disposicion son");
+        for (Medidor n : medidores){
+                System.out.println(n.getCodigo());
+            }
+        System.out.println("Ingrese el codigo del medidor del cual desea ver sus facturas");
+        String codigo = sc.nextLine();
+        int impresiones = 0;
+        for ( int i=0;i<medidores.size();i++){
+            Medidor n = medidores.get(i);
+            while (impresiones <4 ){ //y si se le hace un do y while?  
+            if ((n.getCodigo()).equals(codigo)){
+                ArrayList<factura> listaFact = n.getFacturas();
+                
+                for( int o=0;o<4;o++){
+                    factura fact = listaFact.get(o);
+                    System.out.println(fact.toString());
+                }
+            }
+            }
+        }
+    }*/

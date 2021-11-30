@@ -48,13 +48,8 @@ public class operario extends user{
                 return medidoresPag ;
             }
             else{
-                medidorInteligente medidorR = (medidorInteligente)medidor;
-                System.out.println("Ingrese el valor del medidor");
-                double ultValor = sc.nextDouble();
-                sc.nextLine();
-                medidorR.registrarMedi(ultValor);
-                medidoresPag.set(posMedidor,medidorR);
-                return medidoresPag ;
+                System.out.println("El medidor no es analogico");
+                return null;
             }
         }
         else{
