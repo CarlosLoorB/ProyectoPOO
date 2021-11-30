@@ -3,6 +3,7 @@ package Datos;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -11,21 +12,27 @@ import java.time.LocalDateTime;
  */
 public class factura {
     private LocalDateTime fechaEmi;
-    private LocalDateTime fecLecturaAct;
+    private LocalDateTime fecInicioLectura; //nuevo 
+    private LocalDateTime fecFinalLectura; //nuevo
     private int numDiasFact;
     private Medidor Medidor;
     private planEnergia planEnergia;
     private double lecturaAnterior;
     private double lecturaActual;
-    private String codigo;
+    private String codigo; //nuevo
+    private double valorPagar; // nuevo 
+    private double cargoBase; //nuevo
+
      
-    public factura(LocalDateTime fechasEmi,LocalDateTime fecLecturaAct,int numDiasFact,Medidor Medidor,planEnergia planEnergia,String codigo){
+    public factura(LocalDateTime fechasEmi,LocalDateTime fecIncicioLectura,LocalDateTime fecFinalLectura,int numDiasFact,Medidor Medidor,planEnergia planEnergia,String codigo){
         this.fechaEmi=fechasEmi;
-        this.fecLecturaAct=fecLecturaAct;
+        this.fecInicioLectura=fecIncicioLectura;
+        this.fecFinalLectura=fecFinalLectura;
         this.numDiasFact=numDiasFact;
         this.Medidor=Medidor;
         this.planEnergia=planEnergia;
         this.codigo= codigo;
+        
     }
     
     public Medidor getMedidor(){
@@ -33,6 +40,32 @@ public class factura {
     }
     public LocalDateTime getEmision(){
         return fechaEmi;
+    }
+    
+    public String getEmisionString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String fechaSt = fechaEmi.format(formatter);
+        return fechaSt;
+    }
+    
+    public String getInicioString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String fechaSt = fecInicioLectura.format(formatter);
+        return fechaSt;
+    }
+    
+    public String getFinString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String fechaSt = fecFinalLectura.format(formatter);
+        return fechaSt;
+    }
+    
+    public void setValorPagarString(double Valor){
+        this.valorPagar=Valor;
+    }
+    
+    public void setcargoBaseString(double cargo){
+        this.cargoBase = cargo;
     }
     
     public String getCodigo(){
@@ -46,5 +79,8 @@ public class factura {
         this.lecturaAnterior = lecturaActual;
     }
     
+    public String toString(){
+        return ("Medidor: "+Medidor.getCodigo()+"\nNombre del Plan: "+planEnergia.getNombrePlan()+"\nDesde: "+getInicioString()+"\nHasta: "+getFinString()+"\nDias facturados: "+numDiasFact+"\nLectura Anterior: "+lecturaAnterior+"\nLectura Actual: "+lecturaActual+"\nConsumo: "+(lecturaActual-lecturaAnterior)+"\nCargo fijo: $"+cargoBase+"\nTotala a pagar: $"+valorPagar);
+    }
 }
 

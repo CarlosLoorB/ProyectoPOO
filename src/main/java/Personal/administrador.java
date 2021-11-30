@@ -206,7 +206,8 @@ Scanner sc = new Scanner(System.in);
        }
        return med; 
    }
-   
+   // el nuevo contructor ya tiene la fecha de incicio agregada, la fecha de final agragada y el coido tambien, asi que no te olvides de agregarlas al constructor 
+   // para el cargo base y el costo ya estan creados los setters para que los agreges apenas lo tengas 
    public void realizarFacturacion(ArrayList<Medidor> medidoresPag){
         
        for(Medidor m: medidoresPag){

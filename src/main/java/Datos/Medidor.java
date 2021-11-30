@@ -77,8 +77,8 @@ public class Medidor {
     public ArrayList<factura> getFacturas() {
         return facturas;
     }
-   
-   
+    
+
    public void agregarFactura(factura f){
        facturas.add(f);
    }

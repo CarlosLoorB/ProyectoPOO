@@ -44,6 +44,39 @@ public class abonado extends user{
         this.medidores= a;
     } 
     
+    public void consultarFactura(){
+        Scanner sc = new Scanner(System.in);
+        int cantTotalFacturas = 0;
+        System.out.println("Facturas Asociadas");
+        for (Medidor m : medidores){
+            int cantidadFact = m.getFacturas().size();
+            cantTotalFacturas= cantTotalFacturas + cantidadFact + 1;
+        }
+        final Object[][] table = new String[cantTotalFacturas][];
+        table[0] = new String[]{"Numero de factura", "Fecha emision", "Codigo del medidor"};
+        int numerocolumna= 1;
+        for (Medidor m : medidores){
+            ArrayList<factura> facturas = m.getFacturas();
+            for ( int i=0;i<facturas.size();i++){
+                factura f = facturas.get(i);
+                table[numerocolumna] = new String[]{f.getCodigo(), f.getEmisionString(), f.getMedidor().getCodigo()};
+                numerocolumna++; 
+            }
+        }
+        System.out.println("Ingrese codigo de factura");
+        String codeFacturaElegida = sc.nextLine();
+        for (Medidor m : medidores){
+            ArrayList<factura> facturas = m.getFacturas();
+            for ( int i=0;i<facturas.size();i++){
+                factura fact = facturas.get(i);
+                if (fact.getCodigo().equals(codeFacturaElegida)){
+                    System.out.println(fact.toString());
+                }
+            }
+        }
+        
+    }
+    
     public void historicoFacturado(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Los medidores a su disposicion son");
@@ -71,12 +104,7 @@ public class abonado extends user{
             }
             }
         }
-    }
-    
-
-    
-    
-    
+    }   
     
     // Carlos Loor - este ya no sirve 
     /*
