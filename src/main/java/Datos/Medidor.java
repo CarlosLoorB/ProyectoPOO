@@ -53,33 +53,54 @@ public class Medidor {
     }
     
     /**
-    * Se Implementa los get de cada constructor de abonado, dirección, tipoPlan, codigo, consumo, ultValor, ultMedida, facturas
-    * es para que las variables se las puedan nombrar en otras clases
-    * @return me retorna si el abonado ha ingreso bien los datos, la dreccion, el tipoPlan que se ha solicitado,las facturas.
+    * Se Implementa el get de codigo para que se pueda nombrar en otra clase
+    * @return me retorna el codigo.
     */
     
     public String getCodigo(){
         return codigo;
     }
-    
+    /**
+     * Se implementa el get valor
+     * @return me retorna el ultimo valor 
+     */
     public double getValor() {
         return ultValor;
     }
+    /**
+     * Se implementa el get de abonado para asi poderlo llamar en otras clases ya que es de modo privado
+     * @return me retorna abonado 
+     */
     public abonado getAbonado() {
         return abonado;
     }
+    /**
+     * Se implementa el get de plan del cual se llama de la clase planEnergia para saber los tipos de plan
+     * @return me retorna plan 
+     */
     public planEnergia getPlan(){
         return plan;
     }
+    /**
+     * Se implementa un get de consumo para que se pueda llamar en otras clases debido a que esta de forma privada
+     * @return el consumo del cual sera el consumo que genera de acuerdo al plan de energia que se solicito.
+     */
     public double getConsumo(){
         return consumo;
     }
+    /**
+     * Se implementa el get de facturas
+     * @return las facturas
+     */
     public ArrayList<factura> getFacturas() {
         return facturas;
     }
    
-   
-   public void agregarFactura(factura f){
+    /**
+     * Se implementa el metodo de agregar facturas recibe la factura
+     * @param f se va añadiendo a la lista de arreglos facturas. 
+     */
+    public void agregarFactura(factura f){
        facturas.add(f);
    }
    
