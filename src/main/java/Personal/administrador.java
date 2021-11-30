@@ -18,7 +18,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import resultadosConjuntos.MedidoresUsuarios;
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils; // este para que sirve? es porque me sale en rojo como advertencia ¿es para que salga la contraseña en random?
 //import Personal.abonado;
 
 public class administrador extends user{

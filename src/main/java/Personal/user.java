@@ -31,14 +31,19 @@ public class user {
         this.cedula=cedula;
     }
     
+    /**
+     * Se Implementa el equal del constructor de user para comprobar la contrasena y el usuario son iguales
+     * @param obj es de metodo Objeto ya que esta verificando si son iguales o no con la variable comp 
+     * @return me retorna un booleano para indicarme si es verdadero o falso 
+     */
     @Override
     public boolean equals(Object obj){
         if (obj instanceof user){
-            user a = (user)obj;
-            if(contrasena.equals(a.contrasena) && usuario.equals(a.usuario)){
+            user comp = (user)obj;
+            if(contrasena.equals(comp.contrasena) && usuario.equals(comp.usuario)){
                 return true;
             }
-            else if(cedula.equals(a.cedula)){
+            else if(cedula.equals(comp.cedula)){
                 return true;
             }
             else{

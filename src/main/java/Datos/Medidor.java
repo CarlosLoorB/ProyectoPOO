@@ -31,9 +31,14 @@ public class Medidor {
         this.ultMedida= LocalDate.now();
         this.facturas = new ArrayList();
    }
-    
    
-   public boolean equals(Object obj){
+    /**
+     *Se Implementa el método equals debido que se quiere verificar que el codigo sea único
+     * @param obj es de tipo objeto con el cual hace la comprobacion si el codigo que se ingreso es igual o diferente
+     * @return retorna un booleano difiendo si la palabra es diferente o igual. 
+     */
+   
+    public boolean equals(Object obj){
         if (obj instanceof Medidor){
             Medidor a = (Medidor)obj;
             if (codigo.equals(a.codigo)){
@@ -45,31 +50,37 @@ public class Medidor {
         }
         else
             return false;
-   }
+    }
     
-   public String getCodigo(){
+    /**
+    * Se Implementa los get de cada constructor de abonado, dirección, tipoPlan, codigo, consumo, ultValor, ultMedida, facturas
+    * es para que las variables se las puedan nombrar en otras clases
+    * @return me retorna si el abonado ha ingreso bien los datos, la dreccion, el tipoPlan que se ha solicitado,las facturas.
+    */
+    
+    public String getCodigo(){
         return codigo;
-   }
+    }
     
-
-   public double getValor() {
+    public double getValor() {
         return ultValor;
-   }
-   public abonado getAbonado() {
+    }
+    public abonado getAbonado() {
         return abonado;
-   }
-   public planEnergia getPlan(){
+    }
+    public planEnergia getPlan(){
         return plan;
-   }
-   public double getConsumo(){
+    }
+    public double getConsumo(){
         return consumo;
-   }
-   public void agregarFactura(factura f){
-       facturas.add(f);
-   }
-
+    }
     public ArrayList<factura> getFacturas() {
         return facturas;
     }
+   
+   
+   public void agregarFactura(factura f){
+       facturas.add(f);
+   }
    
 }

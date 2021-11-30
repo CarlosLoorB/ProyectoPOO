@@ -16,6 +16,13 @@ public class abonado extends user{
     private ArrayList<Medidor> medidores;
     private String correo;
     
+    /**
+     * Se Implementa el metodo que ingresa la cédula, usuario, contrasena y correo 
+     * @param cedula Se deriva del constructor de user  
+     * @param usuario Se deriva del constructor de user
+     * @param contrasena Se deriva del constructor de user
+     * @param correo Se implementa para que no se tenga algun inconveniente a la hora de llamarla 
+     */
     public abonado(String cedula,String usuario,String contrasena,String correo){
     super(cedula,usuario,contrasena);
     this.correo= correo;
@@ -49,8 +56,8 @@ public class abonado extends user{
         System.out.println("Ingrese el codigo del medidor del cual desea ver sus facturas");
         String codigo = sc.nextLine();
         int impresiones = 0;
-        for ( factura n : facturas){
-            while (impresiones <4 ){
+        for ( factura n : facturas){ // le voy a cambiar las variables las que solo tienen una vocal o alguna consonante 
+            while (impresiones <4 ){ //y si se le hace un do y while?  
             if (((n.getMedidor()).getCodigo()).equals(codigo)){
                 //hay que poner para que se imprima la factura en cuestion
                 System.out.print(n);
