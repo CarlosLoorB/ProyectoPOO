@@ -20,6 +20,13 @@ public class registro {
     private ArrayList<factura> facturas;
     private ArrayList<planEnergia> planes;
     
+    /**
+     * Se crea un constructor llamado registro del cual no recibe nada.
+     * usuarios sera una nueva lista de arreglos donde tendra los usuarios de operadores, administradores y abonados.
+     * medidores es una nueva lista de arreglo del cual tendra los tipos de medidores
+     * facturas es una nueva lista de arreglos donde tendra las facturas
+     * planes es una lista de arreglo que tiene los tipos de planes
+     */
     public registro(){
         usuarios= new ArrayList<>();
         medidores= new ArrayList<>();
@@ -28,6 +35,10 @@ public class registro {
         inicializarDatos();
     }
     
+    /**
+     * se crea un constructor llamado inicializarDatos del cual se agregara  
+     * inicalmente un usuario de administrador, dos operarios dos abonados 
+     */
     public void inicializarDatos(){
         usuarios.add(new administrador("1302545984", "admin", "superadmin"));
         usuarios.add(new operario("0978451295", "operario1","clave1"));

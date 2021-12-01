@@ -79,6 +79,7 @@ public class factura {
         this.lecturaAnterior = lecturaActual;
     }
     
+    @Override
     public String toString(){
         return ("Medidor: "+Medidor.getCodigo()+"\nNombre del Plan: "+planEnergia.getNombrePlan()+"\nDesde: "+getInicioString()+"\nHasta: "+getFinString()+"\nDias facturados: "+numDiasFact+"\nLectura Anterior: "+lecturaAnterior+"\nLectura Actual: "+lecturaActual+"\nConsumo: "+(lecturaActual-lecturaAnterior)+"\nCargo fijo: $"+cargoBase+"\nTotala a pagar: $"+valorPagar);
     }
