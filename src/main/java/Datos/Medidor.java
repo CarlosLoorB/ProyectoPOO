@@ -95,19 +95,12 @@ public class Medidor {
     public ArrayList<factura> getFacturas() {
         return facturas;
     }
-<<<<<<< HEAD
-    
-
-   public void agregarFactura(factura f){
-=======
-   
     /**
-     * Se implementa el metodo de agregar facturas recibe la factura
-     * @param f se va añadiendo a la lista de arreglos facturas. 
+     * Se implementa el metodo de agregar facturas del cual recibe la factura
+     * @param f es la factura que se va añadir en la lista de arreglos de facturas.
      */
     public void agregarFactura(factura f){
->>>>>>> e655080f071cf2da26b383309a3b2fe251523b81
-       facturas.add(f);
-   }
+        facturas.add(f);
+    }
    
 }
