@@ -32,34 +32,61 @@ public class planEnergia {
     }
     
     /**
-     * Implementando los gets de cada constructor del nombre del plan, los costos de los kilovateos que ha consumido, 
-     * el cargo base es de tipo double, las horas pico son con formato LocalDateTime
+     * Implementando los gets de cada constructor del nombre del plan
      * para que se pueda llamar el constructor porque están de forma privada.
-     * @return  va a retornar el nombre del plan, el costoKw, cargo base con el que comienza el plan, lista de las horaspico 
+     * @return  va a retornar el nombre del plan. 
      */
     
     public String getNombrePlan(){
         return nombrePlan;
     }
+    /**
+     * Se implementa el get de costoKW para que pueda ser llamado en otra clase
+     * @return  el costoKW
+     */
     public double getcostoKW(){
         return costoKW;
     }
+    /**
+     * Se implementa el get de cargo para que pueda ser llamado en otra clase
+     * @return retorna el cargo
+     */
     public double getCargo(){
         return cargo;
     }
+    /**
+     * Se implementa el get de las Horas picos para que pueda ser llamado en otra clase
+     * @return me retornara las horas picos 
+     */
     public ArrayList<LocalTime> getHoras(){
         return horasPico;
     }
     
+    /**
+     * Se implementa un set del nombrePlan 
+     * @param nombrePlan mediante un this se llama la variable nombreplan para que no haya algun con la variable de iniciacion y la local
+     */
     public void setNombrePlan(String nombrePlan){
         this.nombrePlan = nombrePlan;
     }
+    /**
+     * Seimplementa un set de costoKW
+     * @param costoKW mediante un this se llama la variable nombreplan para que no haya algun con la variable de iniciacion y la local
+     */
     public void setCostoKW(double costoKW){
         this.costoKW = costoKW;
     }
+    /**
+     * Se implementa un set de cargo
+     * @param cargo mediante un this se llama la variable nombreplan para que no haya algun con la variable de iniciacion y la local
+     */
     public void setCargoBase(double cargo){
         this.cargo=cargo;
     }
+    /**
+     * Se implementa un set de las horas picos con formato LocalTime
+     * @param horasPico mediante un this se llama la variable nombreplan para que no haya algun con la variable de iniciacion y la local
+     */
     public void setHoras(ArrayList<LocalTime> horasPico){
         this.horasPico= horasPico;
     }

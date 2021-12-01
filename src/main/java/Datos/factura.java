@@ -35,9 +35,17 @@ public class factura {
         this.valorPagar = valorPagar;
     }
     
+    /**
+     * Se implementa un get Medidor para que pueda ser llamada en otras clases
+     * @return me retorna un Medidor
+     */
     public Medidor getMedidor(){
         return Medidor;
     }
+    /**
+     * Se implementa un get de emision para que pueda se llamada en otra clase debido que esta de forma privada
+     * @return me retornara la fecha de emision con formato LocalDateTime
+     */
     public LocalDateTime getEmision(){
         return fechaEmi;
     }

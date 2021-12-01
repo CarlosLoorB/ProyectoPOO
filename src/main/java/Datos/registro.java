@@ -60,39 +60,76 @@ public class registro {
         planes.add(plan2);
         Medidor m = new Medidor("1234", "10 de agosto", plan1, a);
     }
-        
+    
+    /**
+     * Se implementa un get de planes de una lista de arreglos de la clase  planEnergia para ser llamada en otras clases 
+     * @return retorna los planes 
+     */    
     public ArrayList<planEnergia> getPlanes(){
         return planes;
     } 
     
+    /**
+     * Se implementa un get de usuarios del cual por medio de una lista de arreglos de la clase de user  para ser llamada en otra clase
+     * @return los usuarios 
+     */
     public ArrayList<user> getUsuarios(){
         return usuarios;
     } 
     
+    /**
+     * Se implementa un get de facturas  para que pueda ser llamada en otra clase
+     * @return me retornara las facturas
+     */
     public ArrayList<factura> getFacturas(){
         return facturas;
     } 
     
+    /**
+     * Se implementa el get de Medidores para que no haya ningun imconveniente al momento de llamar en otra clase
+     * @return me retorna las medidores
+     */
     public ArrayList<Medidor> getMedidores(){
         return medidores;
     } 
     
+    /**
+     * Se implementa un set planes 
+     * @param a por medio de this la variable inicial y  la de local no tenga algun inconventiente se coloca el valor de a 
+     */
     public void setPlanes(ArrayList<planEnergia> a){
         this.planes= a;
     } 
     
+    /**
+     * Se implementa un set de usuarios
+     * @param a por medio de this la variable inicial y  la de local no tenga algun inconventiente se coloca el valor de a
+     */
     public void setUsuarios(ArrayList<user> a){
         this.usuarios= a;
     }
     
+    /**
+     * Se implementa un set de facturas 
+     * @param a por medio de this la variable inicial y  la de local no tenga algun inconventiente se coloca el valor de a
+     */
     public void setFacturas(ArrayList<factura> a){
         this.facturas= a;
     } 
     
+    /**
+     * Se implementa un set Medidores
+     * @param a por medio de this la variable inicial y  la de local no tenga algun inconventiente se coloca el valor de a
+     */
     public void setMedidores(ArrayList<Medidor> a){
         this.medidores= a;
     } 
     
+    /**
+     * Se implementa un metodo de tipo usuario que ingresa un int del cual se llama la clase user para hacer una revision
+     * @param pos verifica si en usuarios. get(pos) se encuentra en la lista de arreglos de usuarios
+     * @return me retornara un numero indicando si es un administrador, operario, administrador 
+     */
     public int tipoUsuario(int pos){
         user revision = usuarios.get(pos);
         if(revision instanceof administrador)
