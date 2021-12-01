@@ -6,6 +6,10 @@ package Personal;
 
 import Datos.Medidor;
 import Datos.factura;
+import Datos.medidorInteligente;
+import Datos.telemetria;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -43,6 +47,10 @@ public class abonado extends user{
     public void setMedidores(ArrayList<Medidor> a){
         this.medidores= a;
     } 
+    
+    public String getCorreo(){
+        return correo;
+    }
     
     public void consultarFactura(){
         Scanner sc = new Scanner(System.in);
@@ -104,7 +112,33 @@ public class abonado extends user{
             }
             }
         }
-    }   
+    
+    public void consumoHora(LocalDateTime fechaInicio, LocalDateTime fechaFin){
+        Scanner sc = new Scanner(System.in);
+        for(Medidor m: medidores){
+           System.out.println("Los medidores inteligentes asociados son:"); 
+           if(m instanceof medidorInteligente){
+               System.out.println("Codigo medidor: " + m.getCodigo()); 
+               System.out.println("Tipo de medidor: Inteligente");
+               System.out.println("Nombre del plan: " + m.getPlan().getNombrePlan());
+           }    
+        }
+        System.out.println("Ingrese el codigo del medidor a consultar: ");
+        String codigo = sc.nextLine();
+        for(Medidor m: medidores){
+           if(m.getCodigo().equalsIgnoreCase(codigo)){
+               medidorInteligente mi = (medidorInteligente) m;
+               for(telemetria t: mi.getTelemetria()){
+                   if((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin))){
+                       
+                   }
+               }
+           }
+           
+        }
+        
+    }
+}   
     
     // Carlos Loor - este ya no sirve 
     /*

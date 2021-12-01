@@ -6,6 +6,7 @@
 package Personal;
 
 import Datos.Medidor;
+import Datos.correo;
 import Datos.factura;
 import Datos.medidorAnalogico;
 import Datos.medidorInteligente;
@@ -81,6 +82,7 @@ Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese el numero de cedula del abonado");
         String numCedula = sc.nextLine();
         user abonTest = new user(numCedula);
+        correo c = new correo();
         int posicionAbon = abonados.indexOf(abonTest);
                 if(posicionAbon != -1){
                    user clienteUser =abonados.get(posicionAbon);
@@ -105,7 +107,8 @@ Scanner sc = new Scanner(System.in);
                            cliente.setMedidores(listaCliente);
                            abonados.set(posicionAbon,cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
-                           //aqui envias el correo 
+                           Medidor med = (Medidor) medidorCreado;
+                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString()); 
                            return retorno;
                        }
                        else if(tipoMedidor.equals("INTELIGENTE")){
@@ -118,9 +121,11 @@ Scanner sc = new Scanner(System.in);
                            cliente.setMedidores(listaCliente);
                            abonados.set(posicionAbon,cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
-                           //aqui envias el correo 
+                           Medidor med = (Medidor) medidorCreado;
+                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString());
                            return retorno;
                        }
+                       
                    }
                    else{
                      System.out.println("No existe el plan ");
@@ -154,9 +159,12 @@ Scanner sc = new Scanner(System.in);
                            cliente.setMedidores(listaCliente);
                            abonados.add(cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
-                           //aqui envias el correo 
+                           Medidor med = (Medidor) medidorCreado;
+                           String contenido = med.toString() + "\nSu usuario es: " + numCedula + "\nSu contraseña es:" + contrasena ;
+                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", contenido); 
                            return retorno;
                            }
+                       
                        else if(tipoMedidor.equals("INTELIGENTE")){
                            //GENERA UN NUMERO ALEATORIO Y REVISA QUE YA NO ESTE EN LA LSITA DE MEDIDORES,PONLE DE NOMBRE codigo
                            String codigo = RandomStringUtils.randomAlphanumeric(6);
@@ -167,7 +175,10 @@ Scanner sc = new Scanner(System.in);
                            cliente.setMedidores(listaCliente);
                            abonados.set(posicionAbon,cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
-                           //aqui envias el correo 
+                           Medidor med = (Medidor) medidorCreado;
+                           String contenido = med.toString() + "\nSu usuario es: " + numCedula + "\nSu contraseña es:" + contrasena ;
+                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", contenido); 
+                           
                            return retorno;
                        }
                     }
@@ -229,6 +240,7 @@ Scanner sc = new Scanner(System.in);
                    double total = cargoPlan + (plan.getcostoKW()*m.getConsumo()); // El costo por el consumo del medidor                        
                    factura fac = new factura(femi, fInicio, actual, 0, m, plan, "1231", total);
                    m.agregarFactura(fac);
+                   
                    // Aqui va lo de envio de correo
                } else {
                    double totalPico = 0;
@@ -251,7 +263,6 @@ Scanner sc = new Scanner(System.in);
                    double total = cargoPlan + totalPico + totalNP;
                    factura fac = new factura(femi, fInicio, actual, 0, m, plan, "1231", total);
                    m.agregarFactura(fac);
-                   //Aqui va lo de envio de correo
                   }
            } else {
                int numeroFacturas = m.getFacturas().size() - 1;                   
@@ -261,7 +272,6 @@ Scanner sc = new Scanner(System.in);
                    double total = cargoPlan + (plan.getcostoKW()*m.getConsumo()); // El costo por el consumo del medidor                        
                    factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, "1231", total);
                    m.agregarFactura(fac);                                     
-                   // Aqui va lo de envio de correo
                } else {
                    double totalPico = 0;
                    double totalNP = 0;
@@ -285,9 +295,11 @@ Scanner sc = new Scanner(System.in);
                    double total = cargoPlan + totalPico + totalNP;
                    factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, "1231", total);
                    m.agregarFactura(fac);
-                   //Aqui va lo de envio de correo
                 }
            }
+           int posicion = m.getFacturas().size()-1;
+           factura f = m.getFacturas().get(posicion);
+           correo.enviarCorreo(m.getAbonado().getCorreo(), "Facturas", f.toString());            
        }
    }
 }

@@ -1,5 +1,6 @@
 
 
+import Datos.correo;
 import Interfaz.Interfaz;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
