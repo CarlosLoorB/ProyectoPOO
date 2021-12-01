@@ -6,6 +6,7 @@ package Datos;
 import Personal.abonado;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 /**
  *
@@ -102,5 +103,8 @@ public class Medidor {
     public void agregarFactura(factura f){
         facturas.add(f);
     }
-   
+    
+    public LocalDate getUltimaMedida() {
+        return ultMedida;
+    }
 }

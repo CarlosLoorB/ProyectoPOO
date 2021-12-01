@@ -12,8 +12,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class factura {
     private LocalDateTime fechaEmi;
-    private LocalDateTime fecInicioLectura; //nuevo 
-    private LocalDateTime fecFinalLectura; //nuevo
+    private LocalDate fecInicioLectura; //nuevo 
+    private LocalDate fecFinalLectura; //nuevo
     private int numDiasFact;
     private Medidor Medidor;
     private planEnergia planEnergia;
@@ -24,7 +24,7 @@ public class factura {
     private double cargoBase; //nuevo
 
      
-    public factura(LocalDateTime fechasEmi,LocalDateTime fecIncicioLectura,LocalDateTime fecFinalLectura,int numDiasFact,Medidor Medidor,planEnergia planEnergia,String codigo){
+    public factura(LocalDateTime fechasEmi,LocalDate fecIncicioLectura,LocalDate fecFinalLectura,int numDiasFact,Medidor Medidor,planEnergia planEnergia,String codigo, double valorPagar){
         this.fechaEmi=fechasEmi;
         this.fecInicioLectura=fecIncicioLectura;
         this.fecFinalLectura=fecFinalLectura;
@@ -32,7 +32,7 @@ public class factura {
         this.Medidor=Medidor;
         this.planEnergia=planEnergia;
         this.codigo= codigo;
-        
+        this.valorPagar = valorPagar;
     }
     
     public Medidor getMedidor(){
@@ -54,6 +54,9 @@ public class factura {
         return fechaSt;
     }
     
+    public LocalDate getfecFinalLectura(){
+        return fecFinalLectura;
+    }
     public String getFinString(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         String fechaSt = fecFinalLectura.format(formatter);

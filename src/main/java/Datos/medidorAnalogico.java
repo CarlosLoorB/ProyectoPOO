@@ -13,8 +13,7 @@ import java.util.ArrayList;
  * @author CAELOS JR 2018
  */
 public class medidorAnalogico extends Medidor {
-    private ArrayList<telemetria> telemetrias;
-    
+     
     /**
      * Se implementa un constructor que reciba un codigo, una direccion, un tipo de plan que se deriva de la clase Medidor
      * planEnergia, un abonado que se deriva de la clase abonado
@@ -26,7 +25,6 @@ public class medidorAnalogico extends Medidor {
      */
     public medidorAnalogico(String codigo, String direccion, planEnergia plan, abonado abonado){
         super(codigo,direccion,plan,abonado);
-        this.telemetrias = new ArrayList<>();
     }
     
     /**
@@ -45,7 +43,5 @@ public class medidorAnalogico extends Medidor {
      * Se implementa un get de telemetria debido a que esta de forma privada y pueda ser nombrado en otra clase 
      * @return me retorna la telemetrica.
      */
-    public ArrayList<telemetria> getTelemetria() {
-        return telemetrias;
-    }
+    
 }
