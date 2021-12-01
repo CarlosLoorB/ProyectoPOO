@@ -113,6 +113,13 @@ public class abonado extends user{
             }
         }
     
+    /*
+    Ya esta avanzado, ya esta lo de mostrar todos los medidores y lo de recibir el codigo para elegir el medidor
+    solo falta el calculo de los promedios.
+    Yo estaba pensando hacer primero un for para recorrer las 24 horas y usar ese for para ver las telemetrias de dicha hora
+    pero no se como creas conveniente hacerlo.
+    No te olvides de ver si esta puesto en el menu el metodo
+    */
     public void consumoHora(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         Scanner sc = new Scanner(System.in);
         for(Medidor m: medidores){

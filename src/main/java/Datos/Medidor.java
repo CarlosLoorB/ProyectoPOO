@@ -107,4 +107,9 @@ public class Medidor {
     public LocalDate getUltimaMedida() {
         return ultMedida;
     }
+    
+    @Override
+    public String toString(){
+        return "codigo: " + codigo + " direccion: " + direccion + " plan: " + plan;
+    }
 }
