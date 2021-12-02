@@ -67,16 +67,15 @@ public class abonado extends user{
     
     public void consultarFactura(){
         Scanner sc = new Scanner(System.in);
-         int cantTotalFacturas = 0;
+        int cantTotalFacturas = 0;
         System.out.println("Facturas Asociadas");
         for (Medidor m : medidores){
             int cantidadFact = m.getFacturas().size();
             System.out.println(cantidadFact);
-            cantTotalFacturas= cantTotalFacturas + cantidadFact + 1 ;
+            cantTotalFacturas= cantTotalFacturas + cantidadFact ;
             System.out.println(cantTotalFacturas);
-
         }
-        final Object[][] table = new String[cantTotalFacturas][];
+        final Object[][] table = new String[cantTotalFacturas + 1][];
         table[0] = new String[]{"Numero de factura", "Fecha emision", "Codigo del medidor"};
         int numerocolumna= 1;
         for (Medidor m : medidores){
@@ -122,8 +121,6 @@ public class abonado extends user{
                 final Object[][] table = new String[4][];
                 while (impresiones < 4) { //y si se le hace un do y while?  
                     ArrayList<factura> listaFact = n.getFacturas();
-                    //int listaFacttTamano = listaFact.size();
-                    //if (listaFactTamano)
                     table[0] = new String[]{"Numero de factura", "Nombre del plan", "Codigo del medidor"};
                     for (int o = 0; o<listaFact.size(); o++) {
                         factura fact = listaFact.get(o);
@@ -176,28 +173,3 @@ public class abonado extends user{
     }
 }   
     
-    // Carlos Loor - este ya no sirve 
-    /*
-   public void historicoFacturado(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Los medidores a su disposicion son");
-        for (Medidor n : medidores){
-                System.out.println(n.getCodigo());
-            }
-        System.out.println("Ingrese el codigo del medidor del cual desea ver sus facturas");
-        String codigo = sc.nextLine();
-        int impresiones = 0;
-        for ( int i=0;i<medidores.size();i++){
-            Medidor n = medidores.get(i);
-            while (impresiones <4 ){ //y si se le hace un do y while?  
-            if ((n.getCodigo()).equals(codigo)){
-                ArrayList<factura> listaFact = n.getFacturas();
-                
-                for( int o=0;o<4;o++){
-                    factura fact = listaFact.get(o);
-                    System.out.println(fact.toString());
-                }
-            }
-            }
-        }
-    }*/

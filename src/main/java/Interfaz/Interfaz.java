@@ -57,7 +57,6 @@ public class Interfaz {
                 String contra = sc.nextLine();
                 user log = new user(nombre,contra);
                 int posicion = dataBase.getUsuarios().indexOf(log);
-                System.out.println("La posicion es"+ posicion );
                 if(posicion != -1){
                     int tipo= dataBase.tipoUsuario(posicion);
                     switch(tipo){
@@ -65,10 +64,10 @@ public class Interfaz {
                             iniciarSesionAdmin(posicion);
                         break;
                         case 2:
-                            iniciarSesionOper(posicion); // Aun hay que crearlo
+                            iniciarSesionOper(posicion); 
                         break;
                         case 3:
-                            iniciarSesionAbon(posicion); //Aun hay que crearlos 
+                            iniciarSesionAbon(posicion); 
                         break;      
                     }
                 }
@@ -95,7 +94,6 @@ public class Interfaz {
         administrador admin = (administrador)nuevo;
         admin.menuOpc();
         int op =sc.nextInt();
-        //creo que este while se debe de poner al incico del metodo, y en la linea de arriba debe ir un int op = 0
             while(op != 5){
                 switch(op){
                     case 1:
@@ -157,9 +155,8 @@ public class Interfaz {
                         LocalDateTime horapicoI = LocalDateTime.of(anoI, m, d,0,0);
                         LocalDateTime horapicoF = LocalDateTime.of(anoF, mf, df,0,0);
                         dataBase.setMedidores(admin.simularMedicion(horapicoI, horapicoF,dataBase));
-                        System.out.println("Se ha creado las medicions");
+                        System.out.println("Se ha creado las medicion");
                         medidorInteligente med = (medidorInteligente)(dataBase.getMedidores().get(2));
-                        System.out.println(med.getTelemetria().size());
                         System.out.println("Que desea hacer");
                         admin.menuOpc();
                         op =sc.nextInt();
@@ -229,7 +226,6 @@ public class Interfaz {
         abonado abon = (abonado)nuevo;
         abon.menuOpc();
         int op =sc.nextInt();
-        //creo que este while se debe de poner al incico del metodo, y en la linea de arriba debe ir un int op = 0
             while(op != 4){
                 switch(op){
                     case 1:

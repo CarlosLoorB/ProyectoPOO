@@ -188,7 +188,7 @@ Scanner sc = new Scanner(System.in);
                            medidoresReg.add(medidorCreado);
                            listaCliente.add(medidorCreado);
                            cliente.setMedidores(listaCliente);
-                           abonados.set(posicionAbon,cliente);
+                           abonados.add(cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
                            Medidor med = (Medidor) medidorCreado;
                            String contenido = med.toString() + "\nSu usuario es: " + numCedula + "\nSu contraseña es:" + contrasena ;                           
@@ -208,6 +208,7 @@ Scanner sc = new Scanner(System.in);
    
    //esto me debe devolver el array de medidores con las nuevas telemtrias credas y añadidas al medidor en cuestion 
    public ArrayList<Medidor> simularMedicion(LocalDateTime inicio, LocalDateTime fin, registro ui){
+       //LocalDateTime iniciocalculo
        ArrayList<telemetria> telem; //= new ArrayList<>();
        System.out.println("Fecha inicio:" + inicio);
        System.out.println("Fecha fin:" + fin);
@@ -217,16 +218,17 @@ Scanner sc = new Scanner(System.in);
            Medidor n = med.get(i);
            if(n instanceof medidorInteligente){
               medidorInteligente m = (medidorInteligente)n;
-              System.out.println("Lecturas para medidor con codigo" + m.getCodigo() + "con valor actual" + m.getValor() );
+              System.out.println("Lecturas para medidor con codigo " + m.getCodigo() + " con valor actual " + m.getValor() );
               System.out.println(m.getCodigo() + "," + inicio + "," + m.getValor());
               telem = m.getTelemetria();
-              while(inicio.isBefore(fin)){
-                  inicio = inicio.plusMinutes(10);
+              LocalDateTime inicioCalculo = inicio;
+              do{
+                  inicioCalculo = inicioCalculo.plusMinutes(10);
                   int tamano = telem.size();
                   if (tamano == 0){
                       consumoInventado = Math.random() * 10;
-                      telemetria telemNew = new telemetria(m.getCodigo(), inicio, consumoInventado);
-                      System.out.println(m.getCodigo() + "," + inicio + "," + consumoInventado);
+                      telemetria telemNew = new telemetria(m.getCodigo(), inicioCalculo, consumoInventado);
+                      System.out.println(m.getCodigo() + "," + inicioCalculo + "," + consumoInventado);
                       telem.add(telemNew);
                       
                   }
@@ -234,12 +236,14 @@ Scanner sc = new Scanner(System.in);
                   telemetria elemento = telem.get(tamano - 1);
                   double valorInicial = elemento.getconsumo();
                   consumoInventado = valorInicial + Math.random()*10;
-                  telemetria telemNew = new telemetria(m.getCodigo(),inicio,consumoInventado);
-                  System.out.println(m.getCodigo() + "," + inicio + "," + consumoInventado);
+                  telemetria telemNew = new telemetria(m.getCodigo(),inicioCalculo,consumoInventado);
+                  System.out.println(m.getCodigo() + "," + inicioCalculo + "," + consumoInventado);
                   telem.add(telemNew);
                   }
               }
+              while(inicioCalculo.isBefore(fin));
               m.setTelemetria(telem);
+              
               m.registrarMedicion(consumoInventado);
               med.set(i,m);
               
