@@ -47,7 +47,7 @@ Scanner sc = new Scanner(System.in);
         while(repetir.equals("SI"));
         System.out.println("Ingrese el cargo base");
         double cargoBase = sc.nextDouble();
-        System.out.println("Ingrese solo la hora del incicio de la hora pico");
+        System.out.println("Ingrese solo la hora del incicio de la hora pico"); // while se desea ingresar mas horas 
         int inicioHPico = sc.nextInt();
         System.out.println("Ingrese el final de la hora pico");
         int finHPico = sc.nextInt();
@@ -219,40 +219,41 @@ Scanner sc = new Scanner(System.in);
    }
    // el nuevo contructor ya tiene la fecha de incicio agregada, la fecha de final agragada y el coido tambien, asi que no te olvides de agregarlas al constructor 
    // para el cargo base y el costo ya estan creados los setters para que los agreges apenas lo tengas 
-   public void realizarFacturacion(ArrayList<Medidor> medidoresPag){
-        
+   public ArrayList<Medidor> realizarFacturacion(ArrayList<Medidor> medidoresPag){
+       ArrayList<Medidor> medidoresFacturasActualizadas = new ArrayList<>();
        for(Medidor m: medidoresPag){
            int lfac = m.getFacturas().size();
            planEnergia plan = m.getPlan();
            LocalDateTime femi = LocalDateTime.now(); //Fecha de emision
-           LocalDate fInicio = LocalDate.now();
+           LocalDate fInicio = LocalDate.now();  /// revisar mas adelnate 
            String codigo = m.getCodigo(); //codigo del medidor
            String nombrePlan = plan.getNombrePlan(); // nombre del plan
            LocalDate actual = m.getUltimaMedida(); // fecha de ultima lectura
            double cargoPlan = plan.getCargo(); //Consumo fijo del plan
            double lecActual = m.getValor(); // Kw actuales
            double consumo = m.getConsumo(); //consumo en Kw
-           if(m.getFacturas().isEmpty()){    
+           if(m.getFacturas().isEmpty()){  // si no hay ninguna factura   
                String fechaPasada = "Esta es la primera factura para este medidor"; // Fecha de lectura pasada
                int facturados = 0; // numero de dias facturados                 
-               int kwPasados = 0; // kw pasados
+               int kwPasados = 0; // kw pasados //creo que se deben eliminar por que al fin y al cabo estas poninedo los valores de una y nunca usas estas variables 
                if(m instanceof medidorAnalogico){
-                   double total = cargoPlan + (plan.getcostoKW()*m.getConsumo()); // El costo por el consumo del medidor                        
-                   factura fac = new factura(femi, fInicio, actual, 0, m, plan, "1231", total);
+                   double total = cargoPlan + (plan.getcostoKW()*consumo); // El costo por el consumo del medidor // en vez de m.get consumo no deberias usar consumo que creaste al incio                       
+                   factura fac = new factura(femi, actual, actual, 0, m, plan, "12345678", total); //intercambiar el valor de FInicio y actual //revisar el valor de inicio 
                    m.agregarFactura(fac);
-                   
-                   // Aqui va lo de envio de correo
+                   medidoresFacturasActualizadas.add(m);
+                   // hay que agregar el medidor a la lista de medidores creada arriba 
+                   // Aqui va lo de envio de correo, no esta 
                } else {
                    double totalPico = 0;
                    double totalNP = 0;
-                   medidorInteligente mi = (medidorInteligente) m;
-                   for(telemetria t: mi.getTelemetria()){
-                       int dthora = t.getFecha().getHour();
-                       ArrayList<LocalTime> horasP = plan.getHoras();
-                       for(LocalTime hora: horasP){
+                   medidorInteligente mi = (medidorInteligente) m; //el medidor  se vuelve inteligente econ la variable mi 
+                   for(telemetria t: mi.getTelemetria()){ //para ese medidor se va a tomar c/u de las telemetrias con variable t
+                       int dthora = t.getFecha().getHour(); //aqui sacas el valor de la hora de cada telemtria 
+                       ArrayList<LocalTime> horasP = plan.getHoras(); //tomas los valores de las horas 
+                       for(LocalTime hora: horasP){  // para las horas se toima cada una de las horas , sin embargo deberia ser si esta en medio de las horas que se entregan no si son iguales  
                            int h = hora.getHour();
-                           if(dthora == h){
-                              double consumoP = 2 * plan.getcostoKW() * mi.getConsumo();
+                           if(dthora == h){ 
+                              double consumoP = 2 * plan.getcostoKW() * mi.getConsumo();  // esto deberia ser el metodo calcular valor 
                               totalPico = totalPico + consumoP;
                            } else {
                               double consumoNP = plan.getcostoKW() * mi.getConsumo();
@@ -261,23 +262,27 @@ Scanner sc = new Scanner(System.in);
                        }
                    }
                    double total = cargoPlan + totalPico + totalNP;
-                   factura fac = new factura(femi, fInicio, actual, 0, m, plan, "1231", total);
-                   m.agregarFactura(fac);
+                   factura fac = new factura(femi, fInicio, actual, 0, m, plan, "12345678", total); 
+                   m.agregarFactura(fac); //agrega al inicio 
+                   medidoresFacturasActualizadas.add(m);
                   }
            } else {
                int numeroFacturas = m.getFacturas().size() - 1;                   
-               LocalDate fechaAnterior = m.getFacturas().get(numeroFacturas).getfecFinalLectura();
-               int dias = actual.getDayOfYear() - fechaAnterior.getDayOfYear();
+               LocalDate fechaAnterior = m.getFacturas().get(numeroFacturas).getfecFinalLectura();  // saca el primero 
+               LocalDateTime fechaAnteriorTime=  m.getFacturas().get(numeroFacturas).getfecFinalLecturaTime();
+               int dias = actual.getDayOfYear() - fechaAnterior.getDayOfYear(); 
                if(m instanceof medidorAnalogico){ 
                    double total = cargoPlan + (plan.getcostoKW()*m.getConsumo()); // El costo por el consumo del medidor                        
                    factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, "1231", total);
-                   m.agregarFactura(fac);                                     
+                   m.agregarFactura(fac);
+                   medidoresFacturasActualizadas.add(m);
+
                } else {
                    double totalPico = 0;
                    double totalNP = 0;
                    medidorInteligente mi = (medidorInteligente) m;
                    for(telemetria t: mi.getTelemetria()){
-                       if(t.getFecha().isAfter(fechaAnterior)){                                               
+                       if(t.getFecha().isAfter(fechaAnteriorTime)){                                               
                            int dthora = t.getFecha().getHour();
                            ArrayList<LocalTime> horasP = plan.getHoras();
                            for(LocalTime hora: horasP){
@@ -295,11 +300,14 @@ Scanner sc = new Scanner(System.in);
                    double total = cargoPlan + totalPico + totalNP;
                    factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, "1231", total);
                    m.agregarFactura(fac);
+                   medidoresFacturasActualizadas.add(m);
+
                 }
            }
            int posicion = m.getFacturas().size()-1;
            factura f = m.getFacturas().get(posicion);
            correo.enviarCorreo(m.getAbonado().getCorreo(), "Facturas", f.toString());            
        }
+       return medidoresFacturasActualizadas;
    }
 }

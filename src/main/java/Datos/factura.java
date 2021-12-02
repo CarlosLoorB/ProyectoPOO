@@ -24,7 +24,8 @@ public class factura {
     private double cargoBase; //nuevo
 
      
-    public factura(LocalDateTime fechasEmi,LocalDate fecIncicioLectura,LocalDate fecFinalLectura,int numDiasFact,Medidor Medidor,planEnergia planEnergia,String codigo, double valorPagar){
+    public factura(LocalDateTime fechasEmi,LocalDate fecIncicioLectura,LocalDate fecFinalLectura,int numDiasFact,
+            Medidor Medidor,planEnergia planEnergia,String codigo, double valorPagar){
         this.fechaEmi=fechasEmi;
         this.fecInicioLectura=fecIncicioLectura;
         this.fecFinalLectura=fecFinalLectura;
@@ -65,6 +66,12 @@ public class factura {
     public LocalDate getfecFinalLectura(){
         return fecFinalLectura;
     }
+    
+    public LocalDateTime getfecFinalLecturaTime(){
+        LocalDateTime fechaFinal = fecFinalLectura.atTime(0,0, 0);       
+        return fechaFinal;
+    }
+    
     public String getFinString(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         String fechaSt = fecFinalLectura.format(formatter);
