@@ -18,13 +18,15 @@ public class planEnergia {
     private double costoKW;
     private double cargo;
     private ArrayList<LocalTime> horasPico;
+    private ArrayList<Provincia> provinciaPlan;
+
     
-    public planEnergia(String nombrePlan, double costoKw, double cargoBase, ArrayList<LocalTime> horasPico){
+    public planEnergia(String nombrePlan, double costoKw, double cargoBase, ArrayList<LocalTime> horasPico,ArrayList<Provincia> provinciaPlan){
         this.nombrePlan= nombrePlan;
         this.cargo= cargoBase;
         this.costoKW= costoKw;
         this.horasPico= horasPico;
-        
+        this.provinciaPlan=provinciaPlan;
     }
     
     public planEnergia(String nombrePlan){

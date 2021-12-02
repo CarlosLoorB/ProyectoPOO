@@ -99,8 +99,10 @@ public class Interfaz {
             while(op != 5){
                 switch(op){
                     case 1:
+                        System.out.println(dataBase.getPlanes().size()); // borrar comprobacion 
                         dataBase.setPlanes(admin.registrarPlan(dataBase.getPlanes(), admin));
                         System.out.println("Se ha anadidio el plan");
+                        System.out.println(dataBase.getPlanes().size()); //borrar comprobacion
                         System.out.println("Que desea hacer");
                         admin.menuOpc();
                         op =sc.nextInt();
@@ -174,6 +176,9 @@ public class Interfaz {
                         break;
                     default:
                         System.out.println("Opcion invalida");
+                        System.out.println("Que desea hacer");
+                        admin.menuOpc();
+                        op =sc.nextInt();
                         break;        
                 }
                 System.out.println("Saliendo");
@@ -209,6 +214,9 @@ public class Interfaz {
                         break;
                     default:
                         System.out.println("Opcion Invalida");
+                        System.out.println("Que desea hacer");
+                            oper.menuOpc();
+                            op = sc.nextInt();
                         break;
                 }
             }
@@ -249,6 +257,9 @@ public class Interfaz {
                         break;
                     default:
                         System.out.println("Opcion Invalida");
+                        System.out.println("Que desea hacer");
+                        abon.menuOpc();
+                        op = sc.nextInt();
                         break;
                     
                 }}

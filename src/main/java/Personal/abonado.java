@@ -67,11 +67,14 @@ public class abonado extends user{
     
     public void consultarFactura(){
         Scanner sc = new Scanner(System.in);
-        int cantTotalFacturas = 0;
+         int cantTotalFacturas = 0;
         System.out.println("Facturas Asociadas");
         for (Medidor m : medidores){
             int cantidadFact = m.getFacturas().size();
-            cantTotalFacturas= cantTotalFacturas + cantidadFact + 1;
+            System.out.println(cantidadFact);
+            cantTotalFacturas= cantTotalFacturas + cantidadFact + 1 ;
+            System.out.println(cantTotalFacturas);
+
         }
         final Object[][] table = new String[cantTotalFacturas][];
         table[0] = new String[]{"Numero de factura", "Fecha emision", "Codigo del medidor"};
@@ -83,6 +86,9 @@ public class abonado extends user{
                 table[numerocolumna] = new String[]{f.getCodigo(), f.getEmisionString(), f.getMedidor().getCodigo()};
                 numerocolumna++; 
             }
+        }
+        for (final Object[] row : table) {
+            System.out.format("%15s%15s%15s\n", row);
         }
         System.out.println("Ingrese codigo de factura");
         String codeFacturaElegida = sc.nextLine();
@@ -113,18 +119,23 @@ public class abonado extends user{
             if ((n.getCodigo()).equals(codigo)) {
                 System.out.println("Se buscara sus facturas");
                 exists = true;
+                final Object[][] table = new String[4][];
                 while (impresiones < 4) { //y si se le hace un do y while?  
                     ArrayList<factura> listaFact = n.getFacturas();
-                    final Object[][] table = new String[4][];
+                    //int listaFacttTamano = listaFact.size();
+                    //if (listaFactTamano)
                     table[0] = new String[]{"Numero de factura", "Nombre del plan", "Codigo del medidor"};
-                    for (int o = 1; o < 4; o++) {
+                    for (int o = 0; o<listaFact.size(); o++) {
                         factura fact = listaFact.get(o);
-                        table[o] = new String[]{fact.getCodigo(), n.getPlan().getNombrePlan(), fact.getMedidor().getCodigo()};
+                        table[o+1] = new String[]{fact.getCodigo(), n.getPlan().getNombrePlan(), fact.getMedidor().getCodigo()};
+                        impresiones++;
                     }
-                    for (final Object[] row : table) {
+                    if(impresiones != 4)
+                        impresiones = 4;
+                }
+                for (final Object[] row : table) {
                         System.out.format("%15s%15s%15s\n", row);
                     }
-                }
             }
         }
         if (!exists)//revisado

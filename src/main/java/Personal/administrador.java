@@ -11,6 +11,7 @@ import Datos.factura;
 import Datos.medidorAnalogico;
 import Datos.medidorInteligente;
 import Datos.planEnergia;
+import Datos.planEnergia.Provincia;
 import Datos.registro;
 import Datos.telemetria;
 import java.time.LocalDate;
@@ -30,51 +31,56 @@ Scanner sc = new Scanner(System.in);
     }
     // adentro del metodo se pediran las provinciastodas las cosas 
     public ArrayList<planEnergia> registrarPlan(ArrayList<planEnergia> planes,administrador admin){
+        ArrayList<Provincia> planProvincias = new ArrayList<>();
+        ArrayList<LocalTime> horapico = new ArrayList<>();
         String repetir;
         System.out.println("Ingrese el nombre del plan");
         String nombrePlan = sc.nextLine();
         System.out.println("Ingrese el costo KwH");
         double costoKw = sc.nextDouble();
         sc.nextLine();
-        System.out.println("Ingrese el nombre de las provincias disponibles");
-        //hacer esl sistema de toma de datos enum para las provincias 
-        do{
-        System.out.println("Desea ingresar otra provincia:");
-        repetir = sc.nextLine().toUpperCase();
-        if(repetir.equals("SI"))
-         System.out.println("Ingrese el nombre de las provincias disponibles");
-        String posibleProvincia1 = sc.nextLine().toUpperCase();
-        String posibleProvincia = posibleProvincia1.replace(" ", "_");
-        ArrayList<String> Provincias = new ArrayList<>(Arrays.asList("AZUAY", "BOLIVAR", "CANIAR", "CARCHI", "CHIMBORAZO", "COTOPAXI", "EL_ORO", "ESMERALDAS", "GALAPAGOS", 
-        "GUAYAS", "IMBABURA", "LOJA", "LOS_RIOS", "MANABI", "MORONA_SANTIAGO", "NAPO","ORELLANA","PASTAZA",
-        "PICHINCHA", "SANTA_ELENA", "SANTO_DOMINGO_DE_LOS_TSACHILAS","SUCUMBIOS", "TUNGURAHUA", "ZAMORA_CHINCHIPE"));
-        if (Provincias.contains(posibleProvincia)){
-                        
-        }
-        //hacer el sistema de toma de datos enum para las provincias
-        }
-        while(repetir.equals("SI"));
+        do {
+
+            System.out.println("Ingrese el nombre de las provincias disponibles");
+            String posibleProvincia1 = sc.nextLine().toUpperCase();
+            String posibleProvincia = posibleProvincia1.replace(" ", "_");
+            ArrayList<String> Provincias = new ArrayList<>(Arrays.asList("AZUAY", "BOLIVAR", "CANIAR", "CARCHI", "CHIMBORAZO", "COTOPAXI", "EL_ORO", "ESMERALDAS", "GALAPAGOS",
+                    "GUAYAS", "IMBABURA", "LOJA", "LOS_RIOS", "MANABI", "MORONA_SANTIAGO", "NAPO", "ORELLANA", "PASTAZA",
+                    "PICHINCHA", "SANTA_ELENA", "SANTO_DOMINGO_DE_LOS_TSACHILAS", "SUCUMBIOS", "TUNGURAHUA", "ZAMORA_CHINCHIPE"));
+            if (Provincias.contains(posibleProvincia)) {
+                Provincia provinciaAnadir= Provincia.valueOf(posibleProvincia);
+                planProvincias.add(provinciaAnadir);
+            }
+            System.out.println("Desea ingresar otra provincia:");
+            repetir = sc.nextLine().toUpperCase();
+        } while (repetir.equals("SI"));
         System.out.println("Ingrese el cargo base");
         double cargoBase = sc.nextDouble();
-        System.out.println("Ingrese solo la hora del incicio de la hora pico"); // while se desea ingresar mas horas 
+        do{
+        System.out.println("Ingrese solo la hora de incicio de la hora pico"); // while se desea ingresar mas horas 
         int inicioHPico = sc.nextInt();
-        System.out.println("Ingrese el final de la hora pico");
-        int finHPico = sc.nextInt();
-        // agregar un if que confirme que todos los datos son validos 
-        LocalTime horaPicoI = LocalTime.of(inicioHPico, 00 , 00);
-        LocalTime horaPicoF = LocalTime.of(finHPico, 00 , 00);
-        ArrayList<LocalTime> horapico = new ArrayList<>();
+        if (inicioHPico >= 0 && inicioHPico <=24 ){
+        LocalTime horaPicoI = LocalTime.of(inicioHPico, 00, 00);
         horapico.add(horaPicoI);
-        horapico.add(horaPicoF);
-        planEnergia nuevoPlan = new planEnergia(nombrePlan, costoKw, cargoBase, horapico);
-        System.out.println("El plan ha sido creado");
-        if(planes.contains(nuevoPlan)){
-        System.out.println("Ese Plan ya existe");
-        return planes;
-        //}
         }
-        else
+        else{
+           System.out.println("La hora no es valida"); 
+        }
+        System.out.println("Desea ingresar otra hora:");
+            repetir = sc.nextLine().toUpperCase();
+            if (!(repetir.equals("SI") || repetir.equals("NO") ))
+                System.out.println("No es un comando valido, se seguira con el proceso");
+        }
+        while(repetir.equals("SI"));
+        planEnergia nuevoPlan = new planEnergia(nombrePlan, costoKw, cargoBase, horapico,planProvincias);
+        System.out.println("El plan ha sido creado");
+        if (planes.contains(nuevoPlan)) {
+            System.out.println("Ese Plan ya esta agregado");
+            return planes;
+            //}
+        } else {
             planes.add(nuevoPlan);
+        }
         return planes;
     }
     
@@ -85,8 +91,8 @@ Scanner sc = new Scanner(System.in);
         System.out.println("4. Realizar facturacion");
         System.out.println("5. Salir");
     }
-    // para el analogico al menos debes de asiganr el cosnumo y el cargo base y lectura actual 
-   public MedidoresUsuarios registrarMedidor(ArrayList<Medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){
+
+    public MedidoresUsuarios registrarMedidor(ArrayList<Medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){
        //MedidoresUsuarios meds = new MedidoresUsusarios();
         String repetir;
         System.out.println("Ingrese el numero de cedula del abonado");
@@ -133,7 +139,7 @@ Scanner sc = new Scanner(System.in);
                            Medidor med = (Medidor) medidorCreado;
                            correo.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString()); 
                            return retorno;
-                       }
+                       }//hacer un else si es que no te da ninguno de los dos tipos de medidor 
                        
                    }
                    else{
@@ -256,7 +262,7 @@ Scanner sc = new Scanner(System.in);
            double cargoPlan = plan.getCargo(); //Consumo fijo del plan
            double lecActual = m.getValor(); // Kw actuales
            double consumo = m.getConsumo(); //consumo en Kw
-           if(m.getFacturas().isEmpty()){  // si no hay ninguna factura   
+           if(m.getFacturas().isEmpty()){  // si no hay ninguna factura   //aqui esta el error 
                String fechaPasada = "Esta es la primera factura para este medidor"; // Fecha de lectura pasada
                int facturados = 0; // numero de dias facturados                 
                int kwPasados = 0; // kw pasados //creo que se deben eliminar por que al fin y al cabo estas poninedo los valores de una y nunca usas estas variables 
@@ -297,7 +303,7 @@ Scanner sc = new Scanner(System.in);
                int dias = actual.getDayOfYear() - fechaAnterior.getDayOfYear(); 
                if(m instanceof medidorAnalogico){ 
                    double total = cargoPlan + (plan.getcostoKW()*m.getConsumo()); // El costo por el consumo del medidor                        
-                   factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, "1231", total);
+                   factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, RandomStringUtils.randomNumeric(8), total);
                    m.agregarFactura(fac);
                    medidoresFacturasActualizadas.add(m);
 
@@ -322,7 +328,7 @@ Scanner sc = new Scanner(System.in);
                        }
                    }
                    double total = cargoPlan + totalPico + totalNP;
-                   factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, "1231", total);
+                   factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, RandomStringUtils.randomNumeric(8), total);
                    m.agregarFactura(fac);
                    medidoresFacturasActualizadas.add(m);
 
@@ -330,7 +336,7 @@ Scanner sc = new Scanner(System.in);
            }
            int posicion = m.getFacturas().size()-1;
            factura f = m.getFacturas().get(posicion);
-           correo.enviarCorreo(m.getAbonado().getCorreo(), "Facturas", f.toString());            
+           correo.enviarCorreo(m.getAbonado().getCorreo(), "Facturas","Codigo de factura: "+f.getCodigo()+"\n"+f.toString());            
        }
        return medidoresFacturasActualizadas;
    }
