@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import resultadosConjuntos.MedidoresUsuarios;
 import org.apache.commons.lang3.RandomStringUtils; // este para que sirve? es porque me sale en rojo como advertencia ¿es para que salga la contraseña en random?
@@ -42,6 +43,14 @@ Scanner sc = new Scanner(System.in);
         repetir = sc.nextLine().toUpperCase();
         if(repetir.equals("SI"))
          System.out.println("Ingrese el nombre de las provincias disponibles");
+        String posibleProvincia1 = sc.nextLine().toUpperCase();
+        String posibleProvincia = posibleProvincia1.replace(" ", "_");
+        ArrayList<String> Provincias = new ArrayList<>(Arrays.asList("AZUAY", "BOLIVAR", "CANIAR", "CARCHI", "CHIMBORAZO", "COTOPAXI", "EL_ORO", "ESMERALDAS", "GALAPAGOS", 
+        "GUAYAS", "IMBABURA", "LOJA", "LOS_RIOS", "MANABI", "MORONA_SANTIAGO", "NAPO","ORELLANA","PASTAZA",
+        "PICHINCHA", "SANTA_ELENA", "SANTO_DOMINGO_DE_LOS_TSACHILAS","SUCUMBIOS", "TUNGURAHUA", "ZAMORA_CHINCHIPE"));
+        if (Provincias.contains(posibleProvincia)){
+                        
+        }
         //hacer el sistema de toma de datos enum para las provincias
         }
         while(repetir.equals("SI"));
@@ -78,11 +87,11 @@ Scanner sc = new Scanner(System.in);
     }
     // para el analogico al menos debes de asiganr el cosnumo y el cargo base y lectura actual 
    public MedidoresUsuarios registrarMedidor(ArrayList<Medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){
+       //MedidoresUsuarios meds = new MedidoresUsusarios();
         String repetir;
         System.out.println("Ingrese el numero de cedula del abonado");
         String numCedula = sc.nextLine();
         user abonTest = new user(numCedula);
-        correo c = new correo();
         int posicionAbon = abonados.indexOf(abonTest);
                 if(posicionAbon != -1){
                    user clienteUser =abonados.get(posicionAbon);
@@ -108,7 +117,7 @@ Scanner sc = new Scanner(System.in);
                            abonados.set(posicionAbon,cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
                            Medidor med = (Medidor) medidorCreado;
-                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString());  
+                           correo.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString());  
                            return retorno;
                        }
                        else if(tipoMedidor.equals("INTELIGENTE")){
@@ -122,7 +131,7 @@ Scanner sc = new Scanner(System.in);
                            abonados.set(posicionAbon,cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
                            Medidor med = (Medidor) medidorCreado;
-                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString()); 
+                           correo.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString()); 
                            return retorno;
                        }
                        
@@ -136,9 +145,9 @@ Scanner sc = new Scanner(System.in);
                     System.out.println("Ingrese el nombre: ");
                     String nombre = sc.nextLine();
                     System.out.println("Ingrese el correo: ");
-                    String correo = sc.nextLine();
+                    String correoCliente = sc.nextLine();
                     String contrasena = RandomStringUtils.randomAlphanumeric(8).toUpperCase();
-                    abonado cliente = new abonado(numCedula,numCedula,contrasena,correo);
+                    abonado cliente = new abonado(numCedula,numCedula,contrasena,correoCliente);
                     System.out.println("Ingrese la dreccion:");
                     String direccion = sc.nextLine();
                     System.out.println("Ingrese el plan:");
@@ -161,7 +170,7 @@ Scanner sc = new Scanner(System.in);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
                            Medidor med = (Medidor) medidorCreado;
                            String contenido = med.toString() + "\nSu usuario es: " + numCedula + "\nSu contraseña es:" + contrasena ;
-                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", contenido); 
+                           correo.enviarCorreo(cliente.getCorreo(), "Registro de medidor", contenido); 
                            return retorno;
                            }
                        
@@ -176,10 +185,12 @@ Scanner sc = new Scanner(System.in);
                            abonados.set(posicionAbon,cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
                            Medidor med = (Medidor) medidorCreado;
-                           String contenido = med.toString() + "\nSu usuario es: " + numCedula + "\nSu contraseña es:" + contrasena ;
-                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", contenido); 
-                           
+                           String contenido = med.toString() + "\nSu usuario es: " + numCedula + "\nSu contraseña es:" + contrasena ;                           
+                           correo.enviarCorreo(cliente.getCorreo(), "Registro de medidor", contenido); 
                            return retorno;
+                       }
+                       else {
+                         System.out.println("No existe el medidor ");  
                        }
                     }
                     else{
@@ -196,6 +207,7 @@ Scanner sc = new Scanner(System.in);
        System.out.println("Fecha fin:" + fin);
        ArrayList<Medidor> med = ui.getMedidores();  
        for(int i=0;i<med.size();i++){
+           double consumoInventado = 0;
            Medidor n = med.get(i);
            if(n instanceof medidorInteligente){
               medidorInteligente m = (medidorInteligente)n;
@@ -206,22 +218,25 @@ Scanner sc = new Scanner(System.in);
                   inicio = inicio.plusMinutes(10);
                   int tamano = telem.size();
                   if (tamano == 0){
-                      double consumoInventado = Math.random() * 10;
+                      consumoInventado = Math.random() * 10;
                       telemetria telemNew = new telemetria(m.getCodigo(), inicio, consumoInventado);
                       System.out.println(m.getCodigo() + "," + inicio + "," + consumoInventado);
                       telem.add(telemNew);
+                      
                   }
                   else{
                   telemetria elemento = telem.get(tamano - 1);
                   double valorInicial = elemento.getconsumo();
-                  double consumoInventado = valorInicial + Math.random()*10;
+                  consumoInventado = valorInicial + Math.random()*10;
                   telemetria telemNew = new telemetria(m.getCodigo(),inicio,consumoInventado);
                   System.out.println(m.getCodigo() + "," + inicio + "," + consumoInventado);
                   telem.add(telemNew);
                   }
               }
               m.setTelemetria(telem);
+              m.registrarMedicion(consumoInventado);
               med.set(i,m);
+              
            }   
        }
        return med; 

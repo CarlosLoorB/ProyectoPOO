@@ -69,4 +69,12 @@ public class medidorInteligente extends Medidor{
         super.consumo= consumoActual;
         super.ultValor=ultValor;
     }
+    
+    public void registrarMedicion(double ultValor){
+        super.ultMedida=LocalDate.now();
+        double valorPasado = super.ultValor;
+        double consumoActual = ultValor - valorPasado;
+        super.consumo= consumoActual;
+        super.ultValor=ultValor;
+}
 }

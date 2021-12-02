@@ -3,6 +3,7 @@ package Datos;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -112,6 +113,13 @@ public class planEnergia {
             return false;
     }
     
+    public boolean esProvincia(String posibleProvincia){
+        ArrayList<String> Provincias = new ArrayList<>(Arrays.asList("AZUAY", "BOLIVAR", "CANIAR", "CARCHI", "CHIMBORAZO", "COTOPAXI", "EL_ORO", "ESMERALDAS", "GALAPAGOS", 
+        "GUAYAS", "IMBABURA", "LOJA", "LOS_RIOS", "MANABI", "MORONA_SANTIAGO", "NAPO","ORELLANA","PASTAZA",
+        "PICHINCHA", "SANTA_ELENA", "SANTO_DOMINGO_DE_LOS_TSACHILAS","SUCUMBIOS", "TUNGURAHUA", "ZAMORA_CHINCHIPE"));
+        return Provincias.contains(posibleProvincia);
+    }
+
     /**
      * Se creo un enum de provincias debido a que es un dato especial y no se repite ya que
      * las provincias ya estan definidas y no se podrán cambiar 
