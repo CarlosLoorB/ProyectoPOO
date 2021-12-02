@@ -7,7 +7,9 @@ package Personal;
 import Datos.Medidor;
 import Datos.medidorAnalogico;
 import Datos.medidorInteligente;
+import com.google.common.primitives.Doubles;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -27,6 +29,7 @@ public class operario extends user{
     }
     
     public ArrayList<Medidor> registrarMedicion(ArrayList<Medidor> medidoresPag){
+        ArrayList<Medidor> nosalio = new ArrayList<>();
         int posMedidor= -1;
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese el codigo del medidor");
@@ -41,20 +44,26 @@ public class operario extends user{
             if(medidor instanceof medidorAnalogico){
                 medidorAnalogico medidorReg = (medidorAnalogico)medidor;
                 System.out.println("Ingrese el valor del medidor");
-                double ultValor = sc.nextDouble();
-                sc.nextLine();
+                String ultValorTxt = sc.nextLine();
+                if (!(Objects.isNull(Doubles.tryParse(ultValorTxt)))){
+                double ultValor =Doubles.tryParse(ultValorTxt);          
                 medidorReg.registrarMedicion(ultValor);
                 medidoresPag.set(posMedidor,medidorReg);
                 return medidoresPag ;
+                }
+                else{
+                System.out.println("El valor ingresado no es valido");
+                return nosalio; 
+                }
             }
             else{
                 System.out.println("El medidor no es analogico");
-                return null;
+                return nosalio;
             }
         }
         else{
             System.out.println("No existe ese medidor");
-            return null;
+            return nosalio;
         }          
     }
     

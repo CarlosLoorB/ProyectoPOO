@@ -76,7 +76,7 @@ Scanner sc = new Scanner(System.in);
         System.out.println("4. Realizar facturacion");
         System.out.println("5. Salir");
     }
-    
+    // para el analogico al menos debes de asiganr el cosnumo y el cargo base y lectura actual 
    public MedidoresUsuarios registrarMedidor(ArrayList<Medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){
         String repetir;
         System.out.println("Ingrese el numero de cedula del abonado");
@@ -108,7 +108,7 @@ Scanner sc = new Scanner(System.in);
                            abonados.set(posicionAbon,cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
                            Medidor med = (Medidor) medidorCreado;
-                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString()); 
+                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString());  
                            return retorno;
                        }
                        else if(tipoMedidor.equals("INTELIGENTE")){
@@ -122,7 +122,7 @@ Scanner sc = new Scanner(System.in);
                            abonados.set(posicionAbon,cliente);
                            MedidoresUsuarios retorno = new MedidoresUsuarios(abonados,medidoresReg);
                            Medidor med = (Medidor) medidorCreado;
-                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString());
+                           c.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString()); 
                            return retorno;
                        }
                        
@@ -202,17 +202,26 @@ Scanner sc = new Scanner(System.in);
               System.out.println("Lecturas para medidor con codigo" + m.getCodigo() + "con valor actual" + m.getValor() );
               System.out.println(m.getCodigo() + "," + inicio + "," + m.getValor());
               telem = m.getTelemetria();
-              while(inicio != fin){
+              while(inicio.isBefore(fin)){
                   inicio = inicio.plusMinutes(10);
                   int tamano = telem.size();
+                  if (tamano == 0){
+                      double consumoInventado = Math.random() * 10;
+                      telemetria telemNew = new telemetria(m.getCodigo(), inicio, consumoInventado);
+                      System.out.println(m.getCodigo() + "," + inicio + "," + consumoInventado);
+                      telem.add(telemNew);
+                  }
+                  else{
                   telemetria elemento = telem.get(tamano - 1);
                   double valorInicial = elemento.getconsumo();
                   double consumoInventado = valorInicial + Math.random()*10;
                   telemetria telemNew = new telemetria(m.getCodigo(),inicio,consumoInventado);
                   System.out.println(m.getCodigo() + "," + inicio + "," + consumoInventado);
                   telem.add(telemNew);
+                  }
               }
               m.setTelemetria(telem);
+              med.set(i,m);
            }   
        }
        return med; 

@@ -58,8 +58,7 @@ public class factura {
     }
     
     public String getInicioString(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String fechaSt = fecInicioLectura.format(formatter);
+        String fechaSt = fecInicioLectura.format(DateTimeFormatter.ofPattern("dd-MMM-yy"));
         return fechaSt;
     }
     
@@ -73,8 +72,7 @@ public class factura {
     }
     
     public String getFinString(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String fechaSt = fecFinalLectura.format(formatter);
+        String fechaSt = fecFinalLectura.format(DateTimeFormatter.ofPattern("dd-MMM-yy"));
         return fechaSt;
     }
     

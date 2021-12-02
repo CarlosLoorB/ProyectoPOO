@@ -33,11 +33,24 @@ public class abonado extends user{
     medidores= new ArrayList<>();
     }
     
+    public void menuOpc(){
+        System.out.println("1. Consultar factura");
+        System.out.println("2. Consultar historico facturado");
+        System.out.println("3. Consultar consumos por hora");
+        System.out.println("4. Salir");
+    }
+    
     public abonado(String cedula,String usuario,String contrasena,String correo,Medidor medidorP){
     super(cedula,usuario,contrasena);
     this.correo= correo;
     medidores= new ArrayList<>();
     medidores.add(medidorP);
+    }
+    
+    public abonado(String cedula,String usuario,String contrasena,String correo,ArrayList<Medidor> medidores){
+    super(cedula,usuario,contrasena);
+    this.correo= correo;
+    this.medidores=medidores;
     }
     
     public ArrayList<Medidor> getMedidores(){
@@ -94,10 +107,13 @@ public class abonado extends user{
         System.out.println("Ingrese el codigo del medidor del cual desea ver sus facturas");
         String codigo = sc.nextLine();
         int impresiones = 0;
+        boolean exists = false;//hasta aqui revisado
         for ( int i=0;i<medidores.size();i++){
             Medidor n = medidores.get(i);
-            while (impresiones < 4) { //y si se le hace un do y while?  
-                if ((n.getCodigo()).equals(codigo)) {
+            if ((n.getCodigo()).equals(codigo)) {
+                System.out.println("Se buscara sus facturas");
+                exists = true;
+                while (impresiones < 4) { //y si se le hace un do y while?  
                     ArrayList<factura> listaFact = n.getFacturas();
                     final Object[][] table = new String[4][];
                     table[0] = new String[]{"Numero de factura", "Nombre del plan", "Codigo del medidor"};
@@ -110,7 +126,9 @@ public class abonado extends user{
                     }
                 }
             }
-            }
+        }
+        if (!exists)//revisado
+            System.out.println("Ingreso mal el codigo de medidor ");
         }
     
     /*

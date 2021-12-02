@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author CAELOS JR 2018
  */
-public class Medidor {
+public abstract class Medidor {
     private String codigo;
     private String direccion;
     private planEnergia plan;

@@ -8,6 +8,8 @@ package Interfaz;
  *
  * @author CAELOS JR 2018
  */
+import Datos.Medidor;
+import Datos.medidorInteligente;
 import Datos.planEnergia;
 import Datos.registro;
 import Personal.abonado;
@@ -18,6 +20,7 @@ import Personal.user;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Objects;
 import resultadosConjuntos.MedidoresUsuarios;
 /**
  *
@@ -120,6 +123,7 @@ public class Interfaz {
                         }
                         break;
                     case 3 :
+                        // validar para texto 
                         int d = 0;
                         int m = 0;
                         int df = 0;
@@ -152,11 +156,14 @@ public class Interfaz {
                         LocalDateTime horapicoF = LocalDateTime.of(anoF, mf, df,0,0);
                         dataBase.setMedidores(admin.simularMedicion(horapicoI, horapicoF,dataBase));
                         System.out.println("Se ha creado las medicions");
+                        medidorInteligente med = (medidorInteligente)(dataBase.getMedidores().get(2));
+                        System.out.println(med.getTelemetria().size());
                         System.out.println("Que desea hacer");
                         admin.menuOpc();
                         op =sc.nextInt();
                         break;
                     case 4:
+                        dataBase.setMedidores(admin.realizarFacturacion(dataBase.getMedidores()));
                         System.out.println("Se ha realizado la facturacion y se han enviado los correos");
                         System.out.println("Que desea hacer");
                         admin.menuOpc();
@@ -182,11 +189,20 @@ public class Interfaz {
             while(op != 2){
                 switch(op){
                     case 1:
-                        dataBase.setMedidores(oper.registrarMedicion(dataBase.getMedidores()));
+                        ArrayList<Medidor> MedidoresConMedicion = oper.registrarMedicion(dataBase.getMedidores());
+                        if(MedidoresConMedicion.size()!=0){
+                        dataBase.setMedidores(MedidoresConMedicion);
                         System.out.println("Se ha registrado una nueva medicion.");
                         System.out.println("Que desea hacer");
                         oper.menuOpc();
                         op = sc.nextInt();
+                        }
+                        else{
+                            System.out.println("Los valores son invalidos");
+                            System.out.println("Que desea hacer");
+                            oper.menuOpc();
+                            op = sc.nextInt();
+                        }
                         break;
                     case 2:
                         System.out.println("Saliendo");
@@ -200,7 +216,43 @@ public class Interfaz {
      }
      
      public void iniciarSesionAbon(int posicion){
-     System.out.println("sesion de abonado");
+        int index = posicion;
+        user nuevo = dataBase.getUsuarios().get(index);
+        abonado abon = (abonado)nuevo;
+        abon.menuOpc();
+        int op =sc.nextInt();
+        //creo que este while se debe de poner al incico del metodo, y en la linea de arriba debe ir un int op = 0
+            while(op != 4){
+                switch(op){
+                    case 1:
+                        abon.consultarFactura();
+                        System.out.println("Se ha mostrado sus facturas.");
+                        System.out.println("Que desea hacer");
+                        abon.menuOpc();
+                        op = sc.nextInt();
+                        break;
+                    case 2:
+                        abon.historicoFacturado();
+                        System.out.println("Se ha mostrado el historico.");
+                        System.out.println("Que desea hacer");
+                        abon.menuOpc();
+                        op = sc.nextInt();
+                        System.out.println("Saliendo");
+                        break;
+                        case 3:
+                        //abon.consumoHora(LocalDateTime.MIN, LocalDateTime.MIN);
+                        System.out.println("Se ha mostrado el historico.");
+                        System.out.println("Que desea hacer");
+                        abon.menuOpc();
+                        op = sc.nextInt();
+                        System.out.println("Saliendo");
+                        break;
+                    default:
+                        System.out.println("Opcion Invalida");
+                        break;
+                    
+                }}
+     System.out.println("Saliendo al menu");
      }
      
 

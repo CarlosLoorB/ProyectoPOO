@@ -43,9 +43,8 @@ public class registro {
         usuarios.add(new administrador("1302545984", "admin", "superadmin"));
         usuarios.add(new operario("0978451295", "operario1","clave1"));
         usuarios.add(new operario("0965221487", "operario2","clave2"));
-        abonado a = new abonado("1307069874", "abonado1","clave3", "penelope@gmail.com");
-        usuarios.add(a);
-        usuarios.add(new abonado("1485622369", "abonado2", "clave4", "calobo2001@gmail.com"));
+        abonado a = new abonado("1307069874", "abonado1","clave3", "gabrielclucio14@gmail.com");
+        abonado b = new abonado("1485622369", "abonado2", "clave4", "calobo2001@gmail.com");
         LocalTime horapico1 = LocalTime.of(18, 00, 00);
         LocalTime horapico2 = LocalTime.of(20, 00, 00);
         ArrayList<LocalTime> horaspico1 = new ArrayList<>();
@@ -58,7 +57,21 @@ public class registro {
         planEnergia plan2 = new planEnergia("mananero",18d,10d,horaspico2);
         planes.add(plan1);
         planes.add(plan2);
-        Medidor m = new Medidor("1234", "10 de agosto", plan1, a);
+        medidorAnalogico medA1 = new medidorAnalogico("12344567", "10 de agosto", plan1, b);
+        medidorAnalogico medA2 = new medidorAnalogico("12349485", "10 de agosto", plan2, a);
+        medidorInteligente medI1 = new medidorInteligente("12349486", "10 de agosto", plan2, b);
+        medidores.add(medA2);
+        medidores.add(medA1);
+        medidores.add(medI1);
+        ArrayList<Medidor> meds1 = new ArrayList<>();
+        meds1.add(medA1);
+        meds1.add(medI1);
+        b.setMedidores(meds1);
+        ArrayList<Medidor> meds2 = new ArrayList<>();
+        meds2.add(medA2);
+        a.setMedidores(meds2);
+        usuarios.add(b);
+        usuarios.add(a);
     }
     
     /**
@@ -136,7 +149,7 @@ public class registro {
             return 1;
         else if (revision instanceof operario)
             return 2;
-        else if (revision instanceof administrador)
+        else if (revision instanceof abonado)
             return 3;
         else 
             return 4;
