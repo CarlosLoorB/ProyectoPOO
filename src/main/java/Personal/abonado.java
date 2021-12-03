@@ -32,7 +32,9 @@ public class abonado extends user{
     this.correo= correo;
     medidores= new ArrayList<>();
     }
-    
+    /**
+     * Muestra las opciones disponibles para el abonado
+     */
     public void menuOpc(){
         System.out.println("1. Consultar factura");
         System.out.println("2. Consultar historico facturado");
@@ -46,25 +48,44 @@ public class abonado extends user{
     medidores= new ArrayList<>();
     medidores.add(medidorP);
     }
-    
+    /**
+     * Constructor de abonado.
+     * @param cedula cedula del abonado.
+     * @param usuario usuario del abonado.
+     * @param contrasena contrasena del abonado.
+     * @param correo correo del abonado.
+     * @param medidores lista de medidores del abonado.
+     */
     public abonado(String cedula,String usuario,String contrasena,String correo,ArrayList<Medidor> medidores){
     super(cedula,usuario,contrasena);
     this.correo= correo;
     this.medidores=medidores;
     }
-    
+    /**
+     * Obtiene la lista de medidores del abonado
+     * @return lista de medidores.
+     */
     public ArrayList<Medidor> getMedidores(){
         return medidores;
     } 
-    
+    /**
+     * establece la lista de los medidores
+     * @param a lista de mediores 
+     */
     public void setMedidores(ArrayList<Medidor> a){
         this.medidores= a;
     } 
-    
+    /**
+     * Obtiene el correo del abonado.
+     * @return un String con el correo del abonado.
+     */
     public String getCorreo(){
         return correo;
     }
-    
+    /**
+     * Este metodo es implementado para ver la lista de las facturas del usuario abonado que ha iniciado sesion.
+     * y que este seleccione una de sus facturas y muestre sus datos.
+     */
     public void consultarFactura(){
         Scanner sc = new Scanner(System.in);
         int cantTotalFacturas = 0;
@@ -102,7 +123,10 @@ public class abonado extends user{
         }
         
     }
-    
+    /**
+     * Este metodo muestra los medidores del abonado, luego permite escoger uno y 
+     * mostrar el codigo de las facturas, los kW consumidos y el valor a pagar.
+     */
     public void historicoFacturado(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Los medidores a su disposicion son");
@@ -124,7 +148,7 @@ public class abonado extends user{
                     table[0] = new String[]{"Numero de factura", "Nombre del plan", "Codigo del medidor"};
                     for (int o = 0; o<listaFact.size(); o++) {
                         factura fact = listaFact.get(o);
-                        table[o+1] = new String[]{fact.getCodigo(), n.getPlan().getNombrePlan(), fact.getMedidor().getCodigo()};
+                        table[o+1] = new String[]{fact.getCodigo(), fact.kWConsumidos(), String.valueOf(fact.getValorPagar())};
                         impresiones++;
                     }
                     if(impresiones != 4)
@@ -138,7 +162,11 @@ public class abonado extends user{
         if (!exists)
             System.out.println("Ingreso mal el codigo de medidor ");
         }
-    
+    /**
+     * Este metodo es implementado para calcular el promedio de consumo entre horas en el rango de fechas dadas.
+     * @param fechaInicio fecha de inicio del recorrido.
+     * @param fechaFin fecha de fin del recorrido.
+     */
     public void consumoHora(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         boolean medidorEncontrado = false;
         Scanner sc = new Scanner(System.in);
@@ -193,9 +221,7 @@ public class abonado extends user{
                fila++;
                }
            } 
-           } 
-
-           
+           }          
        }
                    if(medidorEncontrado == false){
                    System.out.println("Medidor no encontrado");

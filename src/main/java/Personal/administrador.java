@@ -24,11 +24,23 @@ import resultadosConjuntos.MedidoresUsuarios;
 import org.apache.commons.lang3.RandomStringUtils; 
 
 public class administrador extends user{
-Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
+    
+    /**
+     * Crea un nuevo objeto de tipo administrador
+     * @param cedula cedula del administrador.
+     * @param usuario usuario del administrador.
+     * @param contrasena constrasena del administrador.
+     */
     public administrador(String cedula,String usuario,String contrasena){
         super(cedula,usuario,contrasena);
     }
-    
+    /**
+     * Este metodo permite la creacion de un nuevo plan y lo devuelve.
+     * @param planes la lista de los planes presentes en el registro.
+     * @param admin el usuario de administrador.
+     * @return una lista actualizada de planes con los que han sido creados.
+     */
     public ArrayList<planEnergia> registrarPlan(ArrayList<planEnergia> planes,administrador admin){
         ArrayList<Provincia> planProvincias = new ArrayList<>();
         ArrayList<LocalTime> horapico = new ArrayList<>();
@@ -83,7 +95,9 @@ Scanner sc = new Scanner(System.in);
         }
         return planes;
     }
-    
+    /**
+     * Muestra las opciones disponibles para el administrador.
+     */
     public void menuOpc(){
         System.out.println("1. Registrar plan");
         System.out.println("2. Registra medidor");
@@ -91,7 +105,14 @@ Scanner sc = new Scanner(System.in);
         System.out.println("4. Realizar facturacion");
         System.out.println("5. Salir");
     }
-
+    /**
+     * Se implementa el metododo registrar Medidor el cual pide un ArrayList<Medidor>, administrador, ArrayList<user>, ArrayList<planEnergia>
+     * @param medidoresReg son los medidores presentes en el registro
+     * @param admin es el usuario de administrador
+     * @param abonados es la lista de los abonados en el registro
+     * @param planes la lista de los planes presentes en el registro
+     * @return retorna medidoresUsuarios que es un objeto con una lista de medidores y una lista de usuarios
+     */
     public MedidoresUsuarios registrarMedidor(ArrayList<Medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){       
         String repetir;
         System.out.println("Ingrese el numero de cedula del abonado");
@@ -200,7 +221,13 @@ Scanner sc = new Scanner(System.in);
                 }
           return null;
         }
-   
+   /**
+    * Este metodo simula mediciones para medidores inteligentes en el rango de fechas dado y las ingresa en el registro.
+    * @param inicio es la fecha inicial del rango
+    * @param fin es la fecha final del rango
+    * @param ui es el objeto tipo registro
+    * @return una lista de medidores con sus telemetrias actualizadas.
+    */
    public ArrayList<Medidor> simularMedicion(LocalDateTime inicio, LocalDateTime fin, registro ui){
        ArrayList<telemetria> telem; 
        System.out.println("Fecha inicio:" + inicio);
@@ -243,7 +270,11 @@ Scanner sc = new Scanner(System.in);
        }
        return med; 
    }
-
+/**
+ * Este metodo realiza las facturas para cada uno de los medidores en registro y envia un correo por factura.
+ * @param medidoresPag es la lista de medidores presente en el registro
+ * @return una lista de medidores actualizados con sus respectivas facturas.
+ */
    public ArrayList<Medidor> realizarFacturacion(ArrayList<Medidor> medidoresPag){
        ArrayList<Medidor> medidoresFacturasActualizadas = new ArrayList<>();
        for(Medidor m: medidoresPag){

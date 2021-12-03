@@ -18,16 +18,35 @@ import java.util.Scanner;
  */
 public class operario extends user{
     private Scanner sc;
-            
+    
+    /**
+     * Se crea un contructor que ingrese la cedula, usuario y contrasena
+     * @param cedula mediante un super que se deriva de la clase user se coloca la cedula
+     * @param usuario mediante un super que se deriva de la clase user se coloca el usuario
+     * @param contrasena mediante un super que se deriva de la clase user se coloca la contrasena 
+     * para que no haya ningun inconveniente al ser llamada 
+     */
     public operario(String cedula,String usuario,String contrasena){
         super(cedula,usuario,contrasena);
     }
-    
+    /**
+     * Se implementa un metodo que imprima las opciones al seleccionar operacion lo cuales son registrar medicion o salir del sistema.
+     */
     public void menuOpc(){
         System.out.println("1. Registrar medicion");
         System.out.println("2. Salir");
     }
     
+    /**
+     * Se crea un metodo que se registra la medicion y entra una lista de arreglos
+     * Se crea una nueva lista llamada nosalio para indicar el medidor esta o no esta en la lista de arreglos
+     * se crea una variable posMedidor con valor de -1
+     * Se pide por teclado que ingrese el codigo del medidor para verificar si esta en la lista de arreglod medidoresPag con el punto size
+     * Se llama la clase Medidor y se crea la variable n del cual me indicara la posicion en la lista de arreglo
+     * Mediante un if se verifica con el getCodigo es el mismo codigo que se pidio por teclado
+     * @param medidoresPag indica si el codigo ingresado se halla en el arreglo de Medidor
+     * @return me retorna si la variable nosalio esta o no en la lista de arreglos de medidorAnalogico 
+     */
     public ArrayList<Medidor> registrarMedicion(ArrayList<Medidor> medidoresPag){
         ArrayList<Medidor> nosalio = new ArrayList<>();
         int posMedidor= -1;
@@ -67,10 +86,5 @@ public class operario extends user{
         }          
     }
     
-    /*
-    String numCedula = sc.nextLine();
-        user abonTest = new user(numCedula);
-        int posicionAbon = abonados.indexOf(abonTest);
-                if(posicionAbon != -1){
-    */
+
 }

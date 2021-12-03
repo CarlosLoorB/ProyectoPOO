@@ -53,8 +53,6 @@ public class Interfaz {
      * y a su vez verificara si el usuario ingresado pertenece al administrador, abonado u operario, en caso de no existir el usuario se 
      * imprimira un mensaje como "La informacion no es correcta", en caso de seleccionar la opcion 2 se saldra del programa.
      */
-    
-    
     public void menu() {
         System.out.println("Hola, bienvenido.");
         String opm = "";
@@ -104,8 +102,7 @@ public class Interfaz {
      * Se implementa el metodo de iniciarSessionAdmin ingresa con una posicion e indica si esta en la base de datos, al ser un administrador
      * tiene 5 opciones 
      * @param posicion 
-     */
-    
+     */    
     public void iniciarSesionAdmin(int posicion){
         int index = posicion;
         user nuevo = dataBase.getUsuarios().get(index);
@@ -202,8 +199,8 @@ public class Interfaz {
     }
     
     /**
-     * se implementa 
-     * @param posicion 
+     * se implementa este metodo para iniciar sesion con el usuario de tipo operario.
+     * @param posicion posicion del usuario.
      */
     public void iniciarSesionOper(int posicion){
         int index = posicion;

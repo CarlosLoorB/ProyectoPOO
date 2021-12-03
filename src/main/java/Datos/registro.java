@@ -160,6 +160,13 @@ public class registro {
             return 4;
     }
     
+    /**
+     * Este metodo es usado para validar que dos fechas ingresadas sean correctas.
+     * @param diaI dia de inicio.
+     * @param mesI mes de inicio.
+     * @param anoI ano de inicio.
+     * @return retorna true si la fecha es valida y false si no lo es.
+     */
     public boolean validarFecha(int diaI,int mesI,int anoI){
         if (mesI == 1 || mesI == 3 || mesI == 5 || mesI == 7 || mesI == 8 || mesI == 10 || mesI == 12){
           if(diaI>0 && diaI<32)

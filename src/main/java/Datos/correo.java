@@ -17,6 +17,12 @@ import javax.mail.internet.MimeMessage;
  * @author gabri
  */
 public class correo {
+    /**
+     * El metodo enviar correo es implementado para recibir un correo de destino, y enviar un asunto y un contenido.
+     * @param destinatario String con el correo al cual se enviara el mensaje.
+     * @param asunto Asunto del correo.
+     * @param contenido Contenido del correo.
+     */
     public static void enviarCorreo(String destinatario, String asunto, String contenido){
         String emisor = "grupo4POO@gmail.com";
         String clave = "grupo4123";

@@ -12,19 +12,31 @@ public class user {
     protected String cedula;
     private String usuario;
     private String contrasena; 
-    
+    /**
+     * Se implementa el constructor user del cual recibe el numero de cedula, el usuario, y la contrasena
+     * @param cedula con un this la palabra se la asocia con la variable local.
+     * @param usuariocon un this la palabra se la asocia con la variable local.
+     * @param contrasena con un this la palabra se la asocia con la variable local.
+     */   
     public user(String cedula,String usuario,String contrasena){
         this.cedula=cedula;
         this.usuario=usuario;
         this.contrasena=contrasena;
     }
-    
+    /**
+     * Se crea un constructor del cual recibe el usuario y la contrasena
+     * @param usuario con un this la palabra se la asocia con la variable local.
+     * @param contrasena con un this la palabra se la asocia con la variable local.
+     */
     public user(String usuario,String contrasena){
         this.usuario=usuario;
         this.contrasena=contrasena;
         this.cedula="-1";
     }
-    
+    /**
+     * Se crea un constructos del cual solo recibe la cedula
+     * @param cedula con un this la palabra se la asocia con la variable local.
+     */
     public user(String cedula){
         this.usuario="nada";
         this.contrasena="nada";
