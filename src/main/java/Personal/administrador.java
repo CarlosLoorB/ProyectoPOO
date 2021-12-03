@@ -106,7 +106,7 @@ public class administrador extends user{
         System.out.println("5. Salir");
     }
     /**
-     * Se implementa el metododo registrar Medidor el cual pide un ArrayList<Medidor>, administrador, ArrayList<user>, ArrayList<planEnergia>
+     * Se implementa el metododo registrar Medidor el cual pide un ArrayList Medidor, administrador, ArrayList user, ArrayList lanEnergia
      * @param medidoresReg son los medidores presentes en el registro
      * @param admin es el usuario de administrador
      * @param abonados es la lista de los abonados en el registro

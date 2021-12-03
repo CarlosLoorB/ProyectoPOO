@@ -4,10 +4,7 @@
  */
 package Personal;
 
-/**
- *
- * @author gabri
- */
+
 public class user {
     protected String cedula;
     private String usuario;
@@ -15,7 +12,7 @@ public class user {
     /**
      * Se implementa el constructor user del cual recibe el numero de cedula, el usuario, y la contrasena
      * @param cedula con un this la palabra se la asocia con la variable local.
-     * @param usuariocon un this la palabra se la asocia con la variable local.
+     * @param usuario con un this la palabra se la asocia con la variable local.
      * @param contrasena con un this la palabra se la asocia con la variable local.
      */   
     public user(String cedula,String usuario,String contrasena){

@@ -101,7 +101,7 @@ public class Interfaz {
     /**
      * Se implementa el metodo de iniciarSessionAdmin ingresa con una posicion e indica si esta en la base de datos, al ser un administrador
      * tiene 5 opciones 
-     * @param posicion 
+     * @param posicion la posicion del user en la lista. 
      */    
     public void iniciarSesionAdmin(int posicion){
         int index = posicion;
@@ -242,7 +242,7 @@ public class Interfaz {
     
     /**
      * Se implementa el metodo de iniciarSesionAbon del cual ingresa la posicion e indica si esta en la base de datos, al ser un Abonado
-     * @param posicion 
+     * @param posicion posicion del user en la lista.
      */
      public void iniciarSesionAbon(int posicion){
         int index = posicion;
