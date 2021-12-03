@@ -148,6 +148,7 @@ public class abonado extends user{
     */
     public void consumoHora(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         Scanner sc = new Scanner(System.in);
+        int dias = fechaFin.getDayOfYear() - fechaInicio.getDayOfYear();
         System.out.println("Los medidores inteligentes asociados son:");
         int cantMedidoresI = 0;
         int nFila =1;
@@ -174,12 +175,11 @@ public class abonado extends user{
         for(Medidor m: medidores){
            if(m.getCodigo().equalsIgnoreCase(codigo)){
                medidorInteligente mi = (medidorInteligente) m;
+               for(int h=0; h<=23; h=h+1){
+                   int sumaHora = 0;
                for(telemetria t: mi.getTelemetria()){
-                   if((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin))){
-                       for(int h=0; h<=23; h=h+1){
-                           if(t.getFecha().getHour()==h){
-                               
-                           }
+                   if((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin)) && (t.getFecha().getHour() == h)){
+                       
                        }
                    }
                }
