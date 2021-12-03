@@ -156,6 +156,7 @@ public class abonado extends user{
                System.out.println("Nombre del plan: " + m.getPlan().getNombrePlan());
            }    
         }
+        ArrayList promedios = new ArrayList();
         System.out.println("Ingrese el codigo del medidor a consultar: ");
         String codigo = sc.nextLine();
         for(Medidor m: medidores){
@@ -163,7 +164,11 @@ public class abonado extends user{
                medidorInteligente mi = (medidorInteligente) m;
                for(telemetria t: mi.getTelemetria()){
                    if((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin))){
-                       
+                       for(int h=0; h<=23; h=h+1){
+                           if(t.getFecha().getHour()==h){
+                               
+                           }
+                       }
                    }
                }
            }
