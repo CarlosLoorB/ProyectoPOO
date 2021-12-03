@@ -147,6 +147,7 @@ public class abonado extends user{
     No te olvides de ver si esta puesto en el menu el metodo
     */
     public void consumoHora(LocalDateTime fechaInicio, LocalDateTime fechaFin){
+        boolean medidorEncontrado = false;
         Scanner sc = new Scanner(System.in);
         int dias = fechaFin.getDayOfYear() - fechaInicio.getDayOfYear();
         System.out.println("Los medidores inteligentes asociados son:");
@@ -178,30 +179,37 @@ public class abonado extends user{
         String codigo = sc.nextLine();
         for(Medidor m: medidores){
            if(m.getCodigo().equalsIgnoreCase(codigo)){
-               medidorInteligente mi = (medidorInteligente) m;
-               for(int h=0; h<=23; h=h+1){
-                   double sumaHora = 0;
-                   double consumoHoraAnterior = 0;
-               for(telemetria t: mi.getTelemetria()){
-                   if((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin)) && (t.getFecha().getHour()==h)){
-                       if(consumoHoraAnterior == 0){
-                           consumoHoraAnterior = t.getconsumo();
+               medidorEncontrado = true;
+               if(medidorEncontrado == true){                                 
+                   medidorInteligente mi = (medidorInteligente) m;
+                   for (int h = 0; h <= 23; h = h + 1) {
+                       double sumaHora = 0;
+                       double consumoHoraAnterior = 0;
+                       for (telemetria t : mi.getTelemetria()) {
+                           if ((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin)) && (t.getFecha().getHour() == h)) {
+                               if (consumoHoraAnterior == 0) {
+                                   consumoHoraAnterior = t.getconsumo();
+                               } else {
+                                   sumaHora = sumaHora + (t.getconsumo() - consumoHoraAnterior);
+                                   consumoHoraAnterior = t.getconsumo();
+                               }
+                           }
                        }
-                       else{
-                           sumaHora = sumaHora + (t.getconsumo() - consumoHoraAnterior);
-                           consumoHoraAnterior = t.getconsumo();
-                       }
-                       }
-                   
-                   }
                table2[fila] = new String[]{h+":00-"+h+":59","    "+ String.valueOf(sumaHora/dias)};
                fila++;
                }
-           }
+           } 
+           } 
+
            
        }
-      for (final Object[] row: table2) {
+                   if(medidorEncontrado == false){
+                   System.out.println("Medidor no encontrado");
+               } else {
+               for (final Object[] row: table2) {
           System.out.format("%15s%15s\n", row);
       }  
+           }
+      
     }
 }   
