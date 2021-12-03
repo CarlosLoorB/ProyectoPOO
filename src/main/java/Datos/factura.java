@@ -91,8 +91,12 @@ public class factura {
     public void setLecturaActual(double lectura){
         this.lecturaActual = lectura;
     }
-    public void setLecturaAnterior(){
-        this.lecturaAnterior = lecturaActual;
+    public void setLecturaAnterior(double lecturaAc){
+        this.lecturaAnterior = lecturaAc;
+    }
+    
+    public double getLecturaActual(){
+        return lecturaActual;
     }
     
     @Override

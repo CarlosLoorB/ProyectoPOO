@@ -46,7 +46,7 @@ public class medidorInteligente extends Medidor{
     public double calcularTotalInteligente(planEnergia plan, int dthora, int h, telemetria t, double consumoAnte, double totalPico, double totalNP){
         if(dthora == h){
             double consumoNuevo = t.getconsumo() - consumoAnte;
-            double consumoP = 2 * plan.getcostoKW() * consumoNuevo;  // esto deberia ser el metodo calcular valor 
+            double consumoP = 2 * plan.getcostoKW() * consumoNuevo; 
             consumoAnte = t.getconsumo();
             totalPico = totalPico + consumoP;
         } else {

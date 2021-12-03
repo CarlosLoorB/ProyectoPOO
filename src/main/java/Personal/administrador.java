@@ -256,7 +256,7 @@ Scanner sc = new Scanner(System.in);
    public ArrayList<Medidor> realizarFacturacion(ArrayList<Medidor> medidoresPag){
        ArrayList<Medidor> medidoresFacturasActualizadas = new ArrayList<>();
        for(Medidor m: medidoresPag){
-           int lfac = m.getFacturas().size();
+           
            planEnergia plan = m.getPlan();
            LocalDateTime femi = LocalDateTime.now(); //Fecha de emision
            LocalDate actual = m.getUltimaMedida(); // fecha de ultima lectura
@@ -268,7 +268,7 @@ Scanner sc = new Scanner(System.in);
                    double total = ((medidorAnalogico) m).calcularTotalAnalogico(plan, cargoPlan);
                    factura fac = new factura(femi, actual, actual, 0, m, plan,  RandomStringUtils.randomNumeric(8), total);
                    fac.setcargoBase(cargoPlan);
-                   fac.setLecturaAnterior();
+                   fac.setLecturaAnterior(0);
                    fac.setLecturaActual(lecActual);
                    m.agregarFactura(fac);
                    medidoresFacturasActualizadas.add(m);
@@ -293,7 +293,7 @@ Scanner sc = new Scanner(System.in);
                    int dias = fF.getDayOfYear() - fI.getDayOfYear();
                    factura fac = new factura(femi, fI, fF, dias, m, plan,  RandomStringUtils.randomNumeric(8), total); 
                    fac.setcargoBase(cargoPlan);
-                   fac.setLecturaAnterior();
+                   fac.setLecturaAnterior(0);
                    fac.setLecturaActual(lecActual);
                    m.agregarFactura(fac); 
                    medidoresFacturasActualizadas.add(m);
@@ -306,13 +306,13 @@ Scanner sc = new Scanner(System.in);
                    double total = cargoPlan + (plan.getcostoKW()*m.getConsumo()); // El costo por el consumo del medidor                        
                    factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, RandomStringUtils.randomNumeric(8), total);
                    fac.setcargoBase(cargoPlan);
-                   fac.setLecturaAnterior();
+                   fac.setLecturaAnterior(m.getFacturas().get(0).getLecturaActual());
                    fac.setLecturaActual(lecActual);
                    m.agregarFactura(fac);
                    medidoresFacturasActualizadas.add(m);
 
                } else {
-                   double totalPico = 0;
+                  double totalPico = 0;
                    double totalNP = 0;
                    medidorInteligente mi = (medidorInteligente) m;
                    for(telemetria t: mi.getTelemetria()){
@@ -334,7 +334,7 @@ Scanner sc = new Scanner(System.in);
                    double total = cargoPlan + totalPico + totalNP;
                    factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, RandomStringUtils.randomNumeric(8), total);
                    fac.setcargoBase(cargoPlan);
-                   fac.setLecturaAnterior();
+                   fac.setLecturaAnterior(m.getFacturas().get(0).getLecturaActual());
                    fac.setLecturaActual(lecActual);
                    m.agregarFactura(fac);
                    medidoresFacturasActualizadas.add(m);
