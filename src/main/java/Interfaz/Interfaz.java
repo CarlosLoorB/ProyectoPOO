@@ -86,9 +86,9 @@ public class Interfaz {
                     }
                 }
                 else{
-                   System.out.println("La infromacion no es correcta ");
+                   System.out.println("La informacion no es correcta ");
                 }
-            
+
                 break;
             case "2":
                 System.out.print("Saliendo...");
@@ -170,14 +170,22 @@ public class Interfaz {
                         }while(m<1 || m>12);
                         System.out.println("Ingrese el ano de fin");
                         int anoF = sc.nextInt();
-                        LocalDateTime horapicoI = LocalDateTime.of(anoI, m, d,0,0);
-                        LocalDateTime horapicoF = LocalDateTime.of(anoF, mf, df,0,0);
-                        dataBase.setMedidores(admin.simularMedicion(horapicoI, horapicoF,dataBase));
+                        LocalDateTime fechaI = LocalDateTime.of(anoI, m, d,0,0);
+                        LocalDateTime fechaF = LocalDateTime.of(anoF, mf, df,0,0);
+                        if (fechaI.isBefore(fechaF)){
+                        dataBase.setMedidores(admin.simularMedicion(fechaI, fechaF,dataBase));
                         System.out.println("Se ha creado las medicion");
                         medidorInteligente med = (medidorInteligente)(dataBase.getMedidores().get(2));
                         System.out.println("Que desea hacer");
                         admin.menuOpc();
                         op =sc.nextInt();
+                        }
+                        else{
+                            System.out.println("Se ingresado fechas incosistentes");
+                            System.out.println("Que desea hacer");
+                            admin.menuOpc();
+                            op = sc.nextInt();
+                        }
                         break;
                     case 4:
                         dataBase.setMedidores(admin.realizarFacturacion(dataBase.getMedidores()));
@@ -288,8 +296,6 @@ public class Interfaz {
                 }}
      System.out.println("Saliendo al menu");
      }
-     
-
 }
             
             

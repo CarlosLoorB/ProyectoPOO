@@ -148,13 +148,25 @@ public class abonado extends user{
     */
     public void consumoHora(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         Scanner sc = new Scanner(System.in);
+        System.out.println("Los medidores inteligentes asociados son:");
+        int cantMedidoresI = 0;
+        int nFila =1;
         for(Medidor m: medidores){
-           System.out.println("Los medidores inteligentes asociados son:"); 
            if(m instanceof medidorInteligente){
-               System.out.println("Codigo medidor: " + m.getCodigo()); 
-               System.out.println("Tipo de medidor: Inteligente");
-               System.out.println("Nombre del plan: " + m.getPlan().getNombrePlan());
+               cantMedidoresI++;
+           }
+        }
+        final Object[][] table = new String[cantMedidoresI + 1][];
+        table[0] = new String[]{"Codigo medidor", "Tipo de medidor", "Nombre del plan"};
+        for ( int i=0;i<medidores.size();i++){
+           Medidor m = medidores.get(i); 
+           if(m instanceof medidorInteligente){
+               table[nFila] = new String[]{m.getCodigo(), "inteligente", m.getPlan().getNombrePlan()};
+                nFila++;
            }    
+        }
+        for (final Object[] row : table) {
+            System.out.format("%15s%15s%15s\n", row);
         }
         ArrayList promedios = new ArrayList();
         System.out.println("Ingrese el codigo del medidor a consultar: ");

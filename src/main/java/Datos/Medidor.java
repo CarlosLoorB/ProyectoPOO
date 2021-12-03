@@ -154,4 +154,11 @@ public abstract class Medidor {
     public String toString(){
         return "codigo: " + codigo + " direccion: " + direccion + " plan: " + plan;
     }
+    
+    /*
+    public int validarFecha(int diaI,int mesI,int anoI,int diaF,int mesF,int anoF){
+        if( diaI < diaF ){
+            if (mesI < mesF && anoI == anoF || anoI < anoF)
+        }
+    }*/
 }
