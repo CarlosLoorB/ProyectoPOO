@@ -147,28 +147,28 @@ public class Interfaz {
                         int df = 0;
                         int mf = 0;
                         do{
-                        System.out.println("Ingrese el dia de inicio");
+                        System.out.println("Ingrese solo el dia de inicio como un numero:");
                         int diaI = sc.nextInt();
                         d = diaI;
                         }while(d<1 || d>31);
                         do{
-                        System.out.println("Ingrese el mes de inicio");
+                        System.out.println("Ingrese el mes de inicio como un numero: ");
                         int mesI = sc.nextInt();
                         m = mesI;
                         }while(m<1 || m>12);
-                        System.out.println("Ingrese el ano de inicio");
+                        System.out.println("Ingrese el ano de inicio como un numero:");
                         int anoI = sc.nextInt();
                         do{
-                        System.out.println("Ingrese el dia de fin");
+                        System.out.println("Ingrese solo el dia de fin como un numero:");
                         int diaF = sc.nextInt();
                         df = diaF;
                         }while(d<1 || d>31);
                         do{
-                        System.out.println("Ingrese el mes de fin");
+                        System.out.println("Ingrese el mes de fin como un numero: ");
                         int mesF = sc.nextInt();
                         mf = mesF;
                         }while(m<1 || m>12);
-                        System.out.println("Ingrese el ano de fin");
+                        System.out.println("Ingrese el ano de fin como un numero");
                         int anoF = sc.nextInt();
                         LocalDateTime fechaI = LocalDateTime.of(anoI, m, d,0,0);
                         LocalDateTime fechaF = LocalDateTime.of(anoF, mf, df,0,0);
@@ -259,7 +259,6 @@ public class Interfaz {
         user nuevo = dataBase.getUsuarios().get(index);
         abonado abon = (abonado)nuevo;
         abon.menuOpc();
-        
         int op =sc.nextInt();
             while(op != 4){
                 switch(op){

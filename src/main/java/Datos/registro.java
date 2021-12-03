@@ -55,11 +55,11 @@ public class registro {
         horaspico1.add(horapico1);
         horaspico1.add(horapico2);
         ArrayList<Provincia> Provincias1 = new ArrayList<>(Arrays.asList(AZUAY, BOLIVAR, CANIAR));
-        planEnergia plan1 = new planEnergia("baraton",20d,10d,horaspico1,Provincias1);
+        planEnergia plan1 = new planEnergia("Baraton",20d,10d,horaspico1,Provincias1);
         horaspico2.add(horapico1.plusHours(1));
         horaspico2.add(horapico2.plusHours(2));
         ArrayList<Provincia> Provincias2 = new ArrayList<>(Arrays.asList(CARCHI, CHIMBORAZO, COTOPAXI));
-        planEnergia plan2 = new planEnergia("mananero",18d,10d,horaspico2,Provincias2);
+        planEnergia plan2 = new planEnergia("Mananero",18d,10d,horaspico2,Provincias2);
         planes.add(plan1);
         planes.add(plan2);
         medidorAnalogico medA1 = new medidorAnalogico("12344567", "10 de agosto", plan1, b);

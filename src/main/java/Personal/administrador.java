@@ -35,6 +35,7 @@ Scanner sc = new Scanner(System.in);
         ArrayList<LocalTime> horapico = new ArrayList<>();
         String repetir;
         System.out.println("Ingrese el nombre del plan");
+        System.out.println("Recuerde que son importantes las mayusculas y minusculas");
         String nombrePlan = sc.nextLine();
         System.out.println("Ingrese el costo KwH");
         double costoKw = sc.nextDouble();
@@ -57,7 +58,8 @@ Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese el cargo base");
         double cargoBase = sc.nextDouble();
         do{
-        System.out.println("Ingrese solo la hora de incicio de la hora pico"); // while se desea ingresar mas horas 
+        System.out.println("Ingrese solo la hora de incicio de la hora pico:");
+        System.out.println("Formato 24Hrs");// while se desea ingresar mas horas 
         int inicioHPico = sc.nextInt();
         if (inicioHPico >= 0 && inicioHPico <=24 ){
         LocalTime horaPicoI = LocalTime.of(inicioHPico, 00, 00);
