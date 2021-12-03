@@ -49,7 +49,9 @@ public abstract class Medidor {
      * @param obj es de tipo objeto con el cual hace la comprobacion si el codigo que se ingreso es igual o diferente
      * @return retorna un booleano difiendo si la palabra es diferente o igual. 
      */
-   
+    public abstract double calcularTotalInteligente(planEnergia plan, int dthora, int h, telemetria t, double consumoAnte, double totalPico, double totalNP);
+    public abstract double calcularTotalAnalogico(planEnergia plan, double cargoPlan);
+    
     public boolean equals(Object obj){
         if (obj instanceof Medidor){
             Medidor a = (Medidor)obj;
@@ -112,7 +114,7 @@ public abstract class Medidor {
      * @param f es la factura que se va añadir en la lista de arreglos de facturas.
      */
     public void agregarFactura(factura f){
-        facturas.add(f);
+        facturas.add(0, f);
     }
     
     /**

@@ -41,6 +41,27 @@ public class medidorInteligente extends Medidor{
         telemetrias.add(t);
     }
     
+  
+    @Override
+    public double calcularTotalInteligente(planEnergia plan, int dthora, int h, telemetria t, double consumoAnte, double totalPico, double totalNP){
+        if(dthora == h){
+            double consumoNuevo = t.getconsumo() - consumoAnte;
+            double consumoP = 2 * plan.getcostoKW() * consumoNuevo;  // esto deberia ser el metodo calcular valor 
+            consumoAnte = t.getconsumo();
+            totalPico = totalPico + consumoP;
+        } else {
+            double consumoNuevo = t.getconsumo() - consumoAnte;
+            double consumoNP = plan.getcostoKW() * consumoNuevo;
+            consumoAnte = t.getconsumo();
+            totalNP = totalNP + consumoNP;
+        }
+        return totalPico + totalNP;  
+    }
+    
+    @Override
+    public double calcularTotalAnalogico(planEnergia plan, double cargoPlan){
+        return 0;
+    }
     /**
      * Se implementa un get de temetria para que pueda ser nombrada en otra clase
      * @return retornara la lista de arreglo telemetrias

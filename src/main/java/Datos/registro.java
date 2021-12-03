@@ -47,7 +47,7 @@ public class registro {
         usuarios.add(new operario("0978451295", "operario1","clave1"));
         usuarios.add(new operario("0965221487", "operario2","clave2"));
         abonado a = new abonado("1307069874", "abonado1","clave3", "gabrielclucio14@gmail.com");
-        abonado b = new abonado("1485622369", "abonado2", "clave4", "calobo2001@gmail.com");
+        abonado b = new abonado("1485622369", "abonado2", "clave4", "gabrielclucio14@gmail.com");
         LocalTime horapico1 = LocalTime.of(18, 00, 00);
         LocalTime horapico2 = LocalTime.of(20, 00, 00);
         ArrayList<LocalTime> horaspico1 = new ArrayList<>();

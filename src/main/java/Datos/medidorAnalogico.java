@@ -39,6 +39,14 @@ public class medidorAnalogico extends Medidor {
         super.ultValor=ultValor;
     }
     
+    public double calcularTotalAnalogico(planEnergia plan, double cargoPlan){
+        double total = cargoPlan + (plan.getcostoKW()*consumo);
+        return total;
+    }
+    
+    public double calcularTotalInteligente(planEnergia plan, int dthora, int h, telemetria t, double consumoAnte, double totalPico, double totalNP){
+        return 0;
+    }
     /**
      * Se implementa un get de telemetria debido a que esta de forma privada y pueda ser nombrado en otra clase 
      * @return me retorna la telemetrica.

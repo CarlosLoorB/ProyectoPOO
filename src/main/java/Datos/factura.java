@@ -11,17 +11,17 @@ import java.time.format.DateTimeFormatter;
  * @author kevaalci
  */
 public class factura {
-    private LocalDateTime fechaEmi;
-    private LocalDate fecInicioLectura; //nuevo 
-    private LocalDate fecFinalLectura; //nuevo
-    private int numDiasFact;
-    private Medidor Medidor;
-    private planEnergia planEnergia;
+    private LocalDateTime fechaEmi;//
+    private LocalDate fecInicioLectura; //
+    private LocalDate fecFinalLectura; //
+    private int numDiasFact;//
+    private Medidor Medidor;//
+    private planEnergia planEnergia;//
     private double lecturaAnterior;
     private double lecturaActual;
-    private String codigo; //nuevo
-    private double valorPagar; // nuevo 
-    private double cargoBase; //nuevo
+    private String codigo; //
+    private double valorPagar; // 
+    private double cargoBase;// 
 
      
     public factura(LocalDateTime fechasEmi,LocalDate fecIncicioLectura,LocalDate fecFinalLectura,int numDiasFact,
@@ -76,11 +76,11 @@ public class factura {
         return fechaSt;
     }
     
-    public void setValorPagarString(double Valor){
+    public void setValorPagar(double Valor){
         this.valorPagar=Valor;
     }
     
-    public void setcargoBaseString(double cargo){
+    public void setcargoBase(double cargo){
         this.cargoBase = cargo;
     }
     
@@ -97,7 +97,10 @@ public class factura {
     
     @Override
     public String toString(){
-        return ("Medidor: "+Medidor.getCodigo()+"\nNombre del Plan: "+planEnergia.getNombrePlan()+"\nDesde: "+getInicioString()+"\nHasta: "+getFinString()+"\nDias facturados: "+numDiasFact+"\nLectura Anterior: "+lecturaAnterior+"\nLectura Actual: "+lecturaActual+"\nConsumo: "+(lecturaActual-lecturaAnterior)+"\nCargo fijo: $"+cargoBase+"\nTotala a pagar: $"+valorPagar);
+        return ("Fecha Emision: "+ fechaEmi+"\nMedidor: "+Medidor.getCodigo()+"\nNombre del Plan: "+planEnergia.getNombrePlan()+
+                "\nDesde: "+getInicioString()+"\nHasta: "+getFinString()+"\nDias facturados: "+numDiasFact+"\nLectura Anterior: "+
+                lecturaAnterior+"\nLectura Actual: "+lecturaActual+"\nConsumo: "+(lecturaActual-lecturaAnterior)+"\nCargo fijo: $"
+                +cargoBase+"\nTotala a pagar: $"+valorPagar);
     }
 }
 
