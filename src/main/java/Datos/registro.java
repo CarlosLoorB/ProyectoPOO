@@ -159,32 +159,28 @@ public class registro {
         else 
             return 4;
     }
-    /*
-    public void addAdmin(administrador admin){
-        administradores.add(admin);
-    } // Este metodo debe ser llamado en la opcion 1 (iniciar sesion)
     
-    public void addOperario(operario operario){
-        operarios.add(operario);
+    public boolean validarFecha(int diaI,int mesI,int anoI){
+        if (mesI == 1 || mesI == 3 || mesI == 5 || mesI == 7 || mesI == 8 || mesI == 10 || mesI == 12){
+          if(diaI>0 && diaI<32)
+          return true;
+          else
+          return false;
+        }
+        else if (mesI == 4 || mesI == 6 || mesI == 9 || mesI == 11 ){
+            if(diaI>0 && diaI<31)
+            return true;
+            else
+          return false;
+        }
+        else if (mesI == 2){
+            if(diaI>0 && diaI<29)
+            return true;
+            else
+          return false;
+        }
+        else 
+        return false;
     }
     
-    public void addMedidorInt(medidorInteligente Smartmed){
-        medidorInteligentes.add(Smartmed);
-    }
-    
-    public void addMedidorAna(medidorAnalogico Anamed){
-        medidorAnalogicos.add(Anamed);
-    }
-    
-    public void addfactura(factura factura){
-        facturas.add(factura);
-    }
-    
-    public void addPlan(planEnergia plan){
-        planes.add(plan);
-    }
-    
-    public void addAbonado(abonado abonado){
-        abonados.add(abonado);
-    }*/
 }

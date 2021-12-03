@@ -43,28 +43,7 @@ public abstract class Medidor {
         this.ultMedida= LocalDate.now();
         this.facturas = new ArrayList();
    }
-   
-    /**
-     * Se implementa un metodo abstracto de tipo double del cual se ingresa el tipo de plan, el dthora, la hora, consumo anterior, total de hora pico y el total del nuevo precio
-     * @param plan es llamado de la clase de planEnergia 
-     * @param dthora es de tipo entero 
-     * @param h es la hora y de tipo entero
-     * @param t es la lista de arreglos del cual tiene el metodo de telemetria del cual se ingresa un codigo, fecha y consumo
-     * @param consumoAnte es el consumo anterior del cual se genero y se guardo
-     * @param totalPico es el total de las horas picos 
-     * @param totalNP es el total del nuevo precio que se generará.
-     * @return  retornara un valor de tipo double
-     */
-    public abstract double calcularTotalInteligente(planEnergia plan, int dthora, int h, telemetria t, double consumoAnte, double totalPico, double totalNP);
-    
-    /**
-     * Se implementa un metodo abstracto llamado calculatTotalAnalogico del cual se utilizara en el medidorAnalogico del cual ingres un tipo de plan y un consumo 
-     * @param plan es llamado de la clase de planEnergia
-     * @param cargoPlan es el cargo que recibio del plan solicitado 
-     * @return retornara un valor de tipo double.
-     */
-    public abstract double calcularTotalAnalogico(planEnergia plan, double cargoPlan);
-    
+      
     /**
      *Se Implementa el método equals debido que se quiere verificar que el codigo sea único
      * @param obj es de tipo objeto con el cual hace la comprobacion si el codigo que se ingreso es igual o diferente
@@ -152,13 +131,6 @@ public abstract class Medidor {
     
     @Override
     public String toString(){
-        return "codigo: " + codigo + " direccion: " + direccion + " plan: " + plan;
-    }
-    
-    /*
-    public int validarFecha(int diaI,int mesI,int anoI,int diaF,int mesF,int anoF){
-        if( diaI < diaF ){
-            if (mesI < mesF && anoI == anoF || anoI < anoF)
-        }
-    }*/
+        return "codigo: " + codigo + " \ndireccion: " + direccion + " \nplan: " + plan.getNombrePlan();
+    }  
 }

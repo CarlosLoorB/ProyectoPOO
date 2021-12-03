@@ -54,7 +54,7 @@ public class Interfaz {
      * imprimira un mensaje como "La informacion no es correcta", en caso de seleccionar la opcion 2 se saldra del programa.
      */
     
-    //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
+    
     public void menu() {
         System.out.println("Hola, bienvenido.");
         String opm = "";
@@ -105,7 +105,7 @@ public class Interfaz {
      * tiene 5 opciones 
      * @param posicion 
      */
-    //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
+    
     public void iniciarSesionAdmin(int posicion){
         int index = posicion;
         user nuevo = dataBase.getUsuarios().get(index);
@@ -114,11 +114,9 @@ public class Interfaz {
         int op =sc.nextInt();
             while(op != 5){
                 switch(op){
-                    case 1:
-                        System.out.println(dataBase.getPlanes().size()); // borrar comprobacion 
+                    case 1:                       
                         dataBase.setPlanes(admin.registrarPlan(dataBase.getPlanes(), admin));
-                        System.out.println("Se ha anadidio el plan");
-                        System.out.println(dataBase.getPlanes().size()); //borrar comprobacion
+                        System.out.println("Se ha anadidio el plan");                       
                         System.out.println("Que desea hacer");
                         admin.menuOpc();
                         op =sc.nextInt();
@@ -141,7 +139,6 @@ public class Interfaz {
                         }
                         break;
                     case 3 :
-                        // validar para texto 
                         int d = 0;
                         int m = 0;
                         int df = 0;
@@ -278,9 +275,37 @@ public class Interfaz {
                         System.out.println("Saliendo");
                         break;
                     case 3:
-                        LocalDateTime a = LocalDateTime.of(2021,11,12,00,00);
-                        LocalDateTime b = LocalDateTime.of(2021,11,14,00,00);
-                        abon.consumoHora(a,b);
+                        int d = 0;
+                        int m = 0;
+                        int df = 0;
+                        int mf = 0;
+                        do{
+                        System.out.println("Ingrese solo el dia de inicio como un numero:");
+                        int diaI = sc.nextInt();
+                        d = diaI;
+                        }while(d<1 || d>31);
+                        do{
+                        System.out.println("Ingrese el mes de inicio como un numero: ");
+                        int mesI = sc.nextInt();
+                        m = mesI;
+                        }while(m<1 || m>12);
+                        System.out.println("Ingrese el ano de inicio como un numero:");
+                        int anoI = sc.nextInt();
+                        do{
+                        System.out.println("Ingrese solo el dia de fin como un numero:");
+                        int diaF = sc.nextInt();
+                        df = diaF;
+                        }while(d<1 || d>31);
+                        do{
+                        System.out.println("Ingrese el mes de fin como un numero: ");
+                        int mesF = sc.nextInt();
+                        mf = mesF;
+                        }while(m<1 || m>12);
+                        System.out.println("Ingrese el ano de fin como un numero");
+                        int anoF = sc.nextInt();
+                        LocalDateTime fechaI = LocalDateTime.of(anoI, m, d,0,0);
+                        LocalDateTime fechaF = LocalDateTime.of(anoF, mf, df,0,0);
+                        abon.consumoHora(fechaI,fechaF);
                         System.out.println("Se ha mostrado el historico.");
                         System.out.println("Que desea hacer");
                         abon.menuOpc();

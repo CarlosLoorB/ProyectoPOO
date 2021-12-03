@@ -21,15 +21,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import resultadosConjuntos.MedidoresUsuarios;
-import org.apache.commons.lang3.RandomStringUtils; // este para que sirve? es porque me sale en rojo como advertencia ¿es para que salga la contraseña en random?
-//import Personal.abonado;
+import org.apache.commons.lang3.RandomStringUtils; 
 
 public class administrador extends user{
 Scanner sc = new Scanner(System.in);
     public administrador(String cedula,String usuario,String contrasena){
         super(cedula,usuario,contrasena);
     }
-    // adentro del metodo se pediran las provinciastodas las cosas 
+    
     public ArrayList<planEnergia> registrarPlan(ArrayList<planEnergia> planes,administrador admin){
         ArrayList<Provincia> planProvincias = new ArrayList<>();
         ArrayList<LocalTime> horapico = new ArrayList<>();
@@ -59,7 +58,7 @@ Scanner sc = new Scanner(System.in);
         double cargoBase = sc.nextDouble();
         do{
         System.out.println("Ingrese solo la hora de incicio de la hora pico:");
-        System.out.println("Formato 24Hrs");// while se desea ingresar mas horas 
+        System.out.println("Formato 24Hrs");
         int inicioHPico = sc.nextInt();
         if (inicioHPico >= 0 && inicioHPico <=24 ){
         LocalTime horaPicoI = LocalTime.of(inicioHPico, 00, 00);
@@ -78,8 +77,7 @@ Scanner sc = new Scanner(System.in);
         System.out.println("El plan ha sido creado");
         if (planes.contains(nuevoPlan)) {
             System.out.println("Ese Plan ya esta agregado");
-            return planes;
-            //}
+            return planes;          
         } else {
             planes.add(nuevoPlan);
         }
@@ -94,8 +92,7 @@ Scanner sc = new Scanner(System.in);
         System.out.println("5. Salir");
     }
 
-    public MedidoresUsuarios registrarMedidor(ArrayList<Medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){
-       //MedidoresUsuarios meds = new MedidoresUsusarios();
+    public MedidoresUsuarios registrarMedidor(ArrayList<Medidor> medidoresReg,administrador admin,ArrayList<user> abonados,ArrayList<planEnergia> planes){       
         String repetir;
         System.out.println("Ingrese el numero de cedula del abonado");
         String numCedula = sc.nextLine();
@@ -115,7 +112,6 @@ Scanner sc = new Scanner(System.in);
                        System.out.println("El tipo de Medidor es analogico o inteligente: ");
                        String tipoMedidor = sc.nextLine().toUpperCase();
                        if(tipoMedidor.equals("ANALOGICO")){
-                           //GENERA UN NUMERO ALEATORIO Y REVISA QUE YA NO ESTE EN LA LSITA DE MEDIDORES,PONLE DE NOMBRE codigo
                            String codigo = RandomStringUtils.randomAlphanumeric(6);
                            medidorAnalogico medidorCreado= new medidorAnalogico(codigo,direccion,planAdd,cliente);
                            ArrayList<Medidor> listaCliente= cliente.getMedidores();
@@ -128,8 +124,7 @@ Scanner sc = new Scanner(System.in);
                            correo.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString());  
                            return retorno;
                        }
-                       else if(tipoMedidor.equals("INTELIGENTE")){
-                           //GENERA UN NUMERO ALEATORIO Y REVISA QUE YA NO ESTE EN LA LSITA DE MEDIDORES,PONLE DE NOMBRE codigo
+                       else if(tipoMedidor.equals("INTELIGENTE")){                          
                            String codigo = RandomStringUtils.randomAlphanumeric(6);
                            medidorInteligente medidorCreado= new medidorInteligente(codigo,direccion,planAdd,cliente);
                            ArrayList<Medidor> listaCliente= cliente.getMedidores();
@@ -141,7 +136,7 @@ Scanner sc = new Scanner(System.in);
                            Medidor med = (Medidor) medidorCreado;
                            correo.enviarCorreo(cliente.getCorreo(), "Registro de medidor", med.toString()); 
                            return retorno;
-                       }//hacer un else si es que no te da ninguno de los dos tipos de medidor 
+                       }
                        
                    }
                    else{
@@ -167,7 +162,6 @@ Scanner sc = new Scanner(System.in);
                        System.out.println("El tipo de Medidor es analogico o inteligente: ");
                        String tipoMedidor = sc.nextLine().toUpperCase();
                        if(tipoMedidor.equals("ANALOGICO")){
-                           //GENERA UN NUMERO ALEATORIO Y REVISA QUE YA NO ESTE EN LA LSITA DE MEDIDORES,PONLE DE NOMBRE codigo
                            String codigo = RandomStringUtils.randomAlphanumeric(6);
                            medidorAnalogico medidorCreado= new medidorAnalogico(codigo,direccion,planAdd,cliente);
                            ArrayList<Medidor> listaCliente= cliente.getMedidores();
@@ -183,7 +177,6 @@ Scanner sc = new Scanner(System.in);
                            }
                        
                        else if(tipoMedidor.equals("INTELIGENTE")){
-                           //GENERA UN NUMERO ALEATORIO Y REVISA QUE YA NO ESTE EN LA LSITA DE MEDIDORES,PONLE DE NOMBRE codigo
                            String codigo = RandomStringUtils.randomAlphanumeric(6);
                            medidorInteligente medidorCreado= new medidorInteligente(codigo,direccion,planAdd,cliente);
                            ArrayList<Medidor> listaCliente= cliente.getMedidores();
@@ -208,10 +201,8 @@ Scanner sc = new Scanner(System.in);
           return null;
         }
    
-   //esto me debe devolver el array de medidores con las nuevas telemtrias credas y añadidas al medidor en cuestion 
    public ArrayList<Medidor> simularMedicion(LocalDateTime inicio, LocalDateTime fin, registro ui){
-       //LocalDateTime iniciocalculo
-       ArrayList<telemetria> telem; //= new ArrayList<>();
+       ArrayList<telemetria> telem; 
        System.out.println("Fecha inicio:" + inicio);
        System.out.println("Fecha fin:" + fin);
        ArrayList<Medidor> med = ui.getMedidores();  
@@ -231,8 +222,7 @@ Scanner sc = new Scanner(System.in);
                       consumoInventado = Math.random() * 10;
                       telemetria telemNew = new telemetria(m.getCodigo(), inicioCalculo, consumoInventado);
                       System.out.println(m.getCodigo() + "," + inicioCalculo + "," + consumoInventado);
-                      telem.add(telemNew);
-                      
+                      telem.add(telemNew);                    
                   }
                   else{
                   telemetria elemento = telem.get(tamano - 1);
@@ -253,18 +243,17 @@ Scanner sc = new Scanner(System.in);
        }
        return med; 
    }
-   // el nuevo contructor ya tiene la fecha de incicio agregada, la fecha de final agragada y el coido tambien, asi que no te olvides de agregarlas al constructor 
-   // para el cargo base y el costo ya estan creados los setters para que los agreges apenas lo tengas 
+
    public ArrayList<Medidor> realizarFacturacion(ArrayList<Medidor> medidoresPag){
        ArrayList<Medidor> medidoresFacturasActualizadas = new ArrayList<>();
        for(Medidor m: medidoresPag){
            
            planEnergia plan = m.getPlan();
-           LocalDateTime femi = LocalDateTime.now(); //Fecha de emision
-           LocalDate actual = m.getUltimaMedida(); // fecha de ultima lectura
-           double cargoPlan = plan.getCargo(); //Consumo fijo del plan
-           double lecActual = m.getValor(); // Kw actuales
-           double consumo = m.getConsumo(); //consumo en Kw
+           LocalDateTime femi = LocalDateTime.now(); 
+           LocalDate actual = m.getUltimaMedida(); 
+           double cargoPlan = plan.getCargo(); 
+           double lecActual = m.getValor(); 
+           double consumo = m.getConsumo(); 
            if(m.getFacturas().isEmpty()){                                      
                if(m instanceof medidorAnalogico){
                    double total = cargoPlan + (plan.getcostoKW()*consumo);
@@ -312,11 +301,11 @@ Scanner sc = new Scanner(System.in);
                    medidoresFacturasActualizadas.add(m);
                   }
            } else {                                 
-               LocalDate fechaAnterior = m.getFacturas().get(0).getfecFinalLectura();  // saca el primero 
+               LocalDate fechaAnterior = m.getFacturas().get(0).getfecFinalLectura();  
                LocalDateTime fechaAnteriorTime=  m.getFacturas().get(0).getfecFinalLecturaTime();
                int dias = actual.getDayOfYear() - fechaAnterior.getDayOfYear(); 
                if(m instanceof medidorAnalogico){ 
-                   double total = cargoPlan + (plan.getcostoKW()*m.getConsumo()); // El costo por el consumo del medidor                        
+                   double total = cargoPlan + (plan.getcostoKW()*m.getConsumo());                        
                    factura fac = new factura(femi, fechaAnterior, actual, dias, m, plan, RandomStringUtils.randomNumeric(8), total);
                    fac.setcargoBase(cargoPlan);
                    fac.setLecturaAnterior(m.getFacturas().get(0).getLecturaActual());

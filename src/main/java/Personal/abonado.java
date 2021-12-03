@@ -112,14 +112,14 @@ public class abonado extends user{
         System.out.println("Ingrese el codigo del medidor del cual desea ver sus facturas");
         String codigo = sc.nextLine();
         int impresiones = 0;
-        boolean exists = false;//hasta aqui revisado
+        boolean exists = false;
         for ( int i=0;i<medidores.size();i++){
             Medidor n = medidores.get(i);
             if ((n.getCodigo()).equals(codigo)) {
                 System.out.println("Se buscara sus facturas");
                 exists = true;
                 final Object[][] table = new String[4][];
-                while (impresiones < 4) { //y si se le hace un do y while?  
+                while (impresiones < 4) {   
                     ArrayList<factura> listaFact = n.getFacturas();
                     table[0] = new String[]{"Numero de factura", "Nombre del plan", "Codigo del medidor"};
                     for (int o = 0; o<listaFact.size(); o++) {
@@ -135,17 +135,10 @@ public class abonado extends user{
                     }
             }
         }
-        if (!exists)//revisado
+        if (!exists)
             System.out.println("Ingreso mal el codigo de medidor ");
         }
     
-    /*
-    Ya esta avanzado, ya esta lo de mostrar todos los medidores y lo de recibir el codigo para elegir el medidor
-    solo falta el calculo de los promedios.
-    Yo estaba pensando hacer primero un for para recorrer las 24 horas y usar ese for para ver las telemetrias de dicha hora
-    pero no se como creas conveniente hacerlo.
-    No te olvides de ver si esta puesto en el menu el metodo
-    */
     public void consumoHora(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         boolean medidorEncontrado = false;
         Scanner sc = new Scanner(System.in);
@@ -186,7 +179,8 @@ public class abonado extends user{
                        double sumaHora = 0;
                        double consumoHoraAnterior = 0;
                        for (telemetria t : mi.getTelemetria()) {
-                           if ((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin)) && (t.getFecha().getHour() == h)) {
+                           if ((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) 
+                                   || t.getFecha().isEqual(fechaFin)) && (t.getFecha().getHour() == h)) {
                                if (consumoHoraAnterior == 0) {
                                    consumoHoraAnterior = t.getconsumo();
                                } else {

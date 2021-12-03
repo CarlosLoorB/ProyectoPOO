@@ -41,45 +41,6 @@ public class medidorInteligente extends Medidor{
         telemetrias.add(t);
     }
     
-    
-    /**
-     * Se sobreescribe el metodo abstracto, calcularTotalInteligente del cual ingresa el tipo de plan, dthora, hora, la telemtria, el consumo anterior, el total de la hora pico (totalPico) y el total del nuevo precio
-     * @param plan
-     * @param dthora se verifica si es igual a la hora ingresada
-     * @param h se comprueba con dthora 
-     * @param t se llama el getconsumo del cual retorna el consumo
-     * @param consumoAnte es el consumo anterior que se guardo en el registro
-     * @param totalPico es el total de las horas  picos  mas el precio del consumo
-     * @param totalNP es el total del nuevo precio mas el consumo nuevo
-     * @return me retornara el total de las horas pico mas el total del nuevo precio 
-     */
-    
-    @Override
-    public double calcularTotalInteligente(planEnergia plan, int dthora, int h, telemetria t, double consumoAnte, double totalPico, double totalNP){
-        if(dthora == h){
-            double consumoNuevo = t.getconsumo() - consumoAnte;
-            double consumoP = 2 * plan.getcostoKW() * consumoNuevo; 
-            consumoAnte = t.getconsumo();
-            totalPico = totalPico + consumoP;
-        } else {
-            double consumoNuevo = t.getconsumo() - consumoAnte;
-            double consumoNP = plan.getcostoKW() * consumoNuevo;
-            consumoAnte = t.getconsumo();
-            totalNP = totalNP + consumoNP;
-        }
-        return totalPico + totalNP;  
-    }
-    
-    /**
-     * Se sobreescribe el metodo abstracto de calcularTotalAnalogico del cual recibe un tipo de plan y un cargo del Plan
-     * @param plan recibe un tipo de plan 
-     * @param cargoPlan y un cargo de plan del cual es de tipo double
-     * @return me retornara un double con valor 0 
-     */
-    @Override
-    public double calcularTotalAnalogico(planEnergia plan, double cargoPlan){
-        return 0;
-    }
     /**
      * Se implementa un get de temetria para que pueda ser nombrada en otra clase
      * @return retornara la lista de arreglo telemetrias
@@ -96,8 +57,7 @@ public class medidorInteligente extends Medidor{
     public void setTelemetria(ArrayList<telemetria> telemetrias){
         this.telemetrias=telemetrias;
     }
-    
-  
+     
     
     /**
      * Se crea el metodo registarMedicion del cual se ingresa el ultimo valor de tipo double
