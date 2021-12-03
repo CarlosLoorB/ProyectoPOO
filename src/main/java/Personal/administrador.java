@@ -244,7 +244,7 @@ Scanner sc = new Scanner(System.in);
               while(inicioCalculo.isBefore(fin));
               m.setTelemetria(telem);
               
-              m.registrarMedicion(consumoInventado);
+              m.registrarMedicion(consumoInventado,fin.toLocalDate());
               med.set(i,m);
               
            }   

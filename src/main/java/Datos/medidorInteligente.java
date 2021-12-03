@@ -107,8 +107,8 @@ public class medidorInteligente extends Medidor{
      * Se llama la variable consumo con super guardara el ultimo valor menos el valor pasado
      * @param ultValor es llamado con un super ya que se deriva de una clase que es el ultimo valor que se genera.
      */
-    public void registrarMedicion(double ultValor){
-        super.ultMedida=LocalDate.now();
+    public void registrarMedicion(double ultValor,LocalDate ultMedidaCalc){
+        super.ultMedida=ultMedidaCalc;
         double valorPasado = super.ultValor;
         double consumoActual = ultValor - valorPasado;
         super.consumo= consumoActual;
