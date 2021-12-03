@@ -143,32 +143,21 @@ public class Interfaz {
                         int m = 0;
                         int df = 0;
                         int mf = 0;
-                        do{
                         System.out.println("Ingrese solo el dia de inicio como un numero:");
                         int diaI = sc.nextInt();
-                        d = diaI;
-                        }while(d<1 || d>31);
-                        do{
                         System.out.println("Ingrese el mes de inicio como un numero: ");
                         int mesI = sc.nextInt();
-                        m = mesI;
-                        }while(m<1 || m>12);
                         System.out.println("Ingrese el ano de inicio como un numero:");
                         int anoI = sc.nextInt();
-                        do{
                         System.out.println("Ingrese solo el dia de fin como un numero:");
                         int diaF = sc.nextInt();
-                        df = diaF;
-                        }while(d<1 || d>31);
-                        do{
                         System.out.println("Ingrese el mes de fin como un numero: ");
                         int mesF = sc.nextInt();
-                        mf = mesF;
-                        }while(m<1 || m>12);
                         System.out.println("Ingrese el ano de fin como un numero");
                         int anoF = sc.nextInt();
-                        LocalDateTime fechaI = LocalDateTime.of(anoI, m, d,0,0);
-                        LocalDateTime fechaF = LocalDateTime.of(anoF, mf, df,0,0);
+                        if(dataBase.validarFecha(diaI, mesI, anoI) && dataBase.validarFecha(diaF, mesF, anoF) ){
+                        LocalDateTime fechaI = LocalDateTime.of(anoI, mesI, diaI,0,0);
+                        LocalDateTime fechaF = LocalDateTime.of(anoF, mesF, diaF,0,0);
                         if (fechaI.isBefore(fechaF)){
                         dataBase.setMedidores(admin.simularMedicion(fechaI, fechaF,dataBase));
                         System.out.println("Se ha creado las medicion");
@@ -176,6 +165,13 @@ public class Interfaz {
                         System.out.println("Que desea hacer");
                         admin.menuOpc();
                         op =sc.nextInt();
+                        }
+                        else{
+                            System.out.println("Se ingresado fechas incosistentes");
+                            System.out.println("Que desea hacer");
+                            admin.menuOpc();
+                            op = sc.nextInt();
+                        }
                         }
                         else{
                             System.out.println("Se ingresado fechas incosistentes");
@@ -279,38 +275,42 @@ public class Interfaz {
                         int m = 0;
                         int df = 0;
                         int mf = 0;
-                        do{
                         System.out.println("Ingrese solo el dia de inicio como un numero:");
                         int diaI = sc.nextInt();
-                        d = diaI;
-                        }while(d<1 || d>31);
-                        do{
                         System.out.println("Ingrese el mes de inicio como un numero: ");
                         int mesI = sc.nextInt();
-                        m = mesI;
-                        }while(m<1 || m>12);
                         System.out.println("Ingrese el ano de inicio como un numero:");
                         int anoI = sc.nextInt();
-                        do{
                         System.out.println("Ingrese solo el dia de fin como un numero:");
                         int diaF = sc.nextInt();
-                        df = diaF;
-                        }while(d<1 || d>31);
-                        do{
                         System.out.println("Ingrese el mes de fin como un numero: ");
                         int mesF = sc.nextInt();
-                        mf = mesF;
-                        }while(m<1 || m>12);
                         System.out.println("Ingrese el ano de fin como un numero");
                         int anoF = sc.nextInt();
-                        LocalDateTime fechaI = LocalDateTime.of(anoI, m, d,0,0);
-                        LocalDateTime fechaF = LocalDateTime.of(anoF, mf, df,0,0);
+                        if(dataBase.validarFecha(diaI, mesI, anoI) && dataBase.validarFecha(diaF, mesF, anoF) ){
+                        LocalDateTime fechaI = LocalDateTime.of(anoI, mesI, diaI,0,0);
+                        LocalDateTime fechaF = LocalDateTime.of(anoF, mesF, diaF,0,0);
+                        if (fechaI.isBefore(fechaF)){
                         abon.consumoHora(fechaI,fechaF);
                         System.out.println("Se ha mostrado el historico.");
                         System.out.println("Que desea hacer");
                         abon.menuOpc();
                         op = sc.nextInt();
                         System.out.println("Saliendo");
+                        }
+                        else{
+                            System.out.println("Se ingresado fechas incosistentes");
+                            System.out.println("Que desea hacer");
+                            abon.menuOpc();
+                            op = sc.nextInt();
+                        }
+                        }
+                        else{
+                            System.out.println("Se ingresado fechas incosistentes");
+                            System.out.println("Que desea hacer");
+                            abon.menuOpc();
+                            op = sc.nextInt();
+                        }
                         break;
                     default:
                         System.out.println("Opcion Invalida");
