@@ -32,7 +32,7 @@ public class Interfaz {
     private registro dataBase;
     
     /**
-     * 
+     * Se crea un constructor vacio del cual va a pedir por teclado en la base de datos.
      */
     public Interfaz(){
         sc = new Scanner(System.in);
@@ -40,15 +40,18 @@ public class Interfaz {
     }
     
     /**
-     * 
-     * @return 
+     * Se implementea un get de registro que se dereiva de la clase registro
+     * @return me retorna la base de datos de registro.
      */
     public registro getRegistro(){
         return dataBase;
     }
     
     /**
-     * 
+     * Se emplea el menu a mostrar donde se presentara un mensaje de bienvenida y las opciones que debe elegir entre entrar a sesion o salir
+     * al seleccionar la opcion 1 se debe ingresar el usuario y contrasena el cual se verificara si el usuario y la contrasena existe
+     * y a su vez verificara si el usuario ingresado pertenece al administrador, abonado u operario, en caso de no existir el usuario se 
+     * imprimira un mensaje como "La informacion no es correcta", en caso de seleccionar la opcion 2 se saldra del programa.
      */
     
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
@@ -98,7 +101,8 @@ public class Interfaz {
     }
         
     /**
-     * 
+     * Se implementa el metodo de iniciarSessionAdmin ingresa con una posicion e indica si esta en la base de datos, al ser un administrador
+     * tiene 5 opciones 
      * @param posicion 
      */
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
@@ -197,7 +201,7 @@ public class Interfaz {
     }
     
     /**
-     * 
+     * se implementa 
      * @param posicion 
      */
     public void iniciarSesionOper(int posicion){
@@ -239,7 +243,7 @@ public class Interfaz {
      }
     
     /**
-     * 
+     * Se implementa el metodo de iniciarSesionAbon del cual ingresa la posicion e indica si esta en la base de datos, al ser un Abonado
      * @param posicion 
      */
      public void iniciarSesionAbon(int posicion){

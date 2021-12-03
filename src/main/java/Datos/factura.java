@@ -23,7 +23,19 @@ public class factura {
     private double valorPagar; // 
     private double cargoBase;// 
 
-     
+    /**
+     * Se crea un constructor que ingresa la fecha de emision, la fecha de inicio de la lectrura del medidor, la fecha final de la lectura,
+     * el numero de dias que se facturara, Medidor, el planEnergia, el codigo y el valor que se pagara.
+     * @param fechasEmi mediante el this se llama la variable inicalizada y la variable local para que pueda ser llamada sin ningun inconveniente
+     * @param fecIncicioLectura  mediante el this se llama la variable inicalizada y la variable local para que pueda ser llamada sin ningun inconveniente
+     * @param fecFinalLectura  mediante el this se llama la variable inicalizada y la variable local para que pueda ser llamada sin ningun inconveniente
+     * @param numDiasFact  mediante el this se llama la variable inicalizada y la variable local para que pueda ser llamada sin ningun inconveniente
+     * @param Medidor  mediante el this se llama la variable inicalizada y la variable local para que pueda ser llamada sin ningun inconveniente
+     * @param planEnergia  mediante el this se llama la variable inicalizada y la variable local para que pueda ser llamada sin ningun inconveniente
+     * @param codigo  mediante el this se llama la variable inicalizada y la variable local para que pueda ser llamada sin ningun inconveniente
+     * @param valorPagar  mediante el this se llama la variable inicalizada y la variable local para que pueda ser llamada sin ningun inconveniente
+     */ 
+    
     public factura(LocalDateTime fechasEmi,LocalDate fecIncicioLectura,LocalDate fecFinalLectura,int numDiasFact,
             Medidor Medidor,planEnergia planEnergia,String codigo, double valorPagar){
         this.fechaEmi=fechasEmi;

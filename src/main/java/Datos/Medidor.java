@@ -45,12 +45,31 @@ public abstract class Medidor {
    }
    
     /**
+     * Se implementa un metodo abstracto de tipo double del cual se ingresa el tipo de plan, el dthora, la hora, consumo anterior, total de hora pico y el total del nuevo precio
+     * @param plan es llamado de la clase de planEnergia 
+     * @param dthora es de tipo entero 
+     * @param h es la hora y de tipo entero
+     * @param t es la lista de arreglos del cual tiene el metodo de telemetria del cual se ingresa un codigo, fecha y consumo
+     * @param consumoAnte es el consumo anterior del cual se genero y se guardo
+     * @param totalPico es el total de las horas picos 
+     * @param totalNP es el total del nuevo precio que se generará.
+     * @return  retornara un valor de tipo double
+     */
+    public abstract double calcularTotalInteligente(planEnergia plan, int dthora, int h, telemetria t, double consumoAnte, double totalPico, double totalNP);
+    
+    /**
+     * Se implementa un metodo abstracto llamado calculatTotalAnalogico del cual se utilizara en el medidorAnalogico del cual ingres un tipo de plan y un consumo 
+     * @param plan es llamado de la clase de planEnergia
+     * @param cargoPlan es el cargo que recibio del plan solicitado 
+     * @return retornara un valor de tipo double.
+     */
+    public abstract double calcularTotalAnalogico(planEnergia plan, double cargoPlan);
+    
+    /**
      *Se Implementa el método equals debido que se quiere verificar que el codigo sea único
      * @param obj es de tipo objeto con el cual hace la comprobacion si el codigo que se ingreso es igual o diferente
      * @return retorna un booleano difiendo si la palabra es diferente o igual. 
      */
-    public abstract double calcularTotalInteligente(planEnergia plan, int dthora, int h, telemetria t, double consumoAnte, double totalPico, double totalNP);
-    public abstract double calcularTotalAnalogico(planEnergia plan, double cargoPlan);
     
     public boolean equals(Object obj){
         if (obj instanceof Medidor){
@@ -103,15 +122,16 @@ public abstract class Medidor {
         return consumo;
     }
     /**
-     * Se implementa el get de facturas
+     * Se implementa el get de facturas mediante una liata de arreglos con el metodo de factura
      * @return las facturas
      */
     public ArrayList<factura> getFacturas() {
         return facturas;
     }
     /**
-     * Se implementa el metodo de agregar facturas del cual recibe la factura
-     * @param f es la factura que se va añadir en la lista de arreglos de facturas.
+     * Se implementa el metodo de agregar facturas recibe la factura
+     * @param f se va añadiendo a la lista de arreglos facturas. 
+     * En la lista de arreglos de facturas se añade el valor inicial cero y el la factura actual
      */
     public void agregarFactura(factura f){
         facturas.add(0, f);
@@ -124,6 +144,11 @@ public abstract class Medidor {
     public LocalDate getUltimaMedida() {
         return ultMedida;
     }
+    
+    /**
+     * Se implementa el metodo toString del cual podra ser llamado en otra clase 
+     * @return me retorna una cadena de String del cual sera el codigo, direccion y el plan solicitado.
+     */
     
     @Override
     public String toString(){

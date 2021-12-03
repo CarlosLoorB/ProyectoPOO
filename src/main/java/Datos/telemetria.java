@@ -35,8 +35,8 @@ public class telemetria {
         return consumo;
     }
     /**
-     * Se implementa un get fecha con formato LocalDateTime
-     * @return retorna la fecha
+     * Se implementa un get de fecha de formato LocalDateTime (anio-mes-dia-hora-minutos-segundos)
+     * @return retornara la fecha que se genera se genera en ese momento de la consulta o facturación.
      */
     public LocalDateTime getFecha(){
         return fecha;

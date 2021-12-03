@@ -41,7 +41,19 @@ public class medidorInteligente extends Medidor{
         telemetrias.add(t);
     }
     
-  
+    
+    /**
+     * Se sobreescribe el metodo abstracto, calcularTotalInteligente del cual ingresa el tipo de plan, dthora, hora, la telemtria, el consumo anterior, el total de la hora pico (totalPico) y el total del nuevo precio
+     * @param plan
+     * @param dthora se verifica si es igual a la hora ingresada
+     * @param h se comprueba con dthora 
+     * @param t se llama el getconsumo del cual retorna el consumo
+     * @param consumoAnte es el consumo anterior que se guardo en el registro
+     * @param totalPico es el total de las horas  picos  mas el precio del consumo
+     * @param totalNP es el total del nuevo precio mas el consumo nuevo
+     * @return me retornara el total de las horas pico mas el total del nuevo precio 
+     */
+    
     @Override
     public double calcularTotalInteligente(planEnergia plan, int dthora, int h, telemetria t, double consumoAnte, double totalPico, double totalNP){
         if(dthora == h){
@@ -58,6 +70,12 @@ public class medidorInteligente extends Medidor{
         return totalPico + totalNP;  
     }
     
+    /**
+     * Se sobreescribe el metodo abstracto de calcularTotalAnalogico del cual recibe un tipo de plan y un cargo del Plan
+     * @param plan recibe un tipo de plan 
+     * @param cargoPlan y un cargo de plan del cual es de tipo double
+     * @return me retornara un double con valor 0 
+     */
     @Override
     public double calcularTotalAnalogico(planEnergia plan, double cargoPlan){
         return 0;
@@ -80,8 +98,12 @@ public class medidorInteligente extends Medidor{
     }
     
     /**
-     * Se crea un constructor que registra la medicion llamada registrarMedi del cual recibe el ultimo valor 
-     * @param ultValor 
+     * Se crea el metodo registarMedi del cual se ingresa el ultimo valor de tipo double
+     * Se llama por medio de un super a la variable ultMedida que dara la hora actual con formato LocalDate
+     * Se crea una variable valorPasado del cual guardara el ultimo valor que fue agregado.
+     * Se crea la variable consumo Actual guardara el ultimo valor que fue ingresado menos el valor pasado.
+     * Se llama la variable consumo con super guardara el ultimo valor menos el valor pasado
+     * @param ultValor es llamado con un super ya que se deriva de una clase que es el ultimo valor que se genera.
      */
     public void registrarMedi(double ultValor){
         super.ultMedida=LocalDate.now();
@@ -91,6 +113,14 @@ public class medidorInteligente extends Medidor{
         super.ultValor=ultValor;
     }
     
+    /**
+     * Se crea el metodo registarMedicion del cual se ingresa el ultimo valor de tipo double
+     * Se llama por medio de un super a la variable ultMedida que dara la hora actual con formato LocalDate
+     * Se crea una variable valorPasado del cual guardara el ultimo valor que fue agregado.
+     * Se crea la variable consumo Actual guardara el ultimo valor que fue ingresado menos el valor pasado.
+     * Se llama la variable consumo con super guardara el ultimo valor menos el valor pasado
+     * @param ultValor es llamado con un super ya que se deriva de una clase que es el ultimo valor que se genera.
+     */
     public void registrarMedicion(double ultValor){
         super.ultMedida=LocalDate.now();
         double valorPasado = super.ultValor;
