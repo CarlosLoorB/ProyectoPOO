@@ -265,7 +265,7 @@ Scanner sc = new Scanner(System.in);
            double consumo = m.getConsumo(); //consumo en Kw
            if(m.getFacturas().isEmpty()){                                      
                if(m instanceof medidorAnalogico){
-                   double total = ((medidorAnalogico) m).calcularTotalAnalogico(plan, cargoPlan);
+                   double total = cargoPlan + (plan.getcostoKW()*consumo);
                    factura fac = new factura(femi, actual, actual, 0, m, plan,  RandomStringUtils.randomNumeric(8), total);
                    fac.setcargoBase(cargoPlan);
                    fac.setLecturaAnterior(0);
@@ -283,9 +283,20 @@ Scanner sc = new Scanner(System.in);
                        ArrayList<LocalTime> horasP = plan.getHoras(); 
                        for(LocalTime hora: horasP){
                            int h = hora.getHour();
-                           totalParcial = mi.calcularTotalInteligente(plan, dthora, h, t, consumoAnte, totalPico, totalNP);
+                           if(dthora == h){
+                              double consumoNuevo = t.getconsumo() - consumoAnte;
+                              double consumoP = 2 * plan.getcostoKW() * consumoNuevo; 
+                              consumoAnte = t.getconsumo();
+                              totalPico = totalPico + consumoP;
+                           } else {
+                              double consumoNuevo = t.getconsumo() - consumoAnte;
+                              double consumoNP = plan.getcostoKW() * consumoNuevo;
+                              consumoAnte = t.getconsumo();
+                              totalNP = totalNP + consumoNP;
+                           } 
+                       totalParcial = totalPico + totalNP;
                        }
-                   }
+                   }   
                    double total = cargoPlan + totalParcial;
                    int pos = mi.getTelemetria().size()-1;
                    LocalDate fI = (mi.getTelemetria().get(0).getFecha()).toLocalDate();
@@ -312,8 +323,9 @@ Scanner sc = new Scanner(System.in);
                    medidoresFacturasActualizadas.add(m);
 
                } else {
-                  double totalPico = 0;
+                   double totalPico = 0;
                    double totalNP = 0;
+                   double consumoAnte = 0;
                    medidorInteligente mi = (medidorInteligente) m;
                    for(telemetria t: mi.getTelemetria()){
                        if(t.getFecha().isAfter(fechaAnteriorTime)){                                               
@@ -322,10 +334,14 @@ Scanner sc = new Scanner(System.in);
                            for(LocalTime hora: horasP){
                               int h = hora.getHour();
                               if(dthora == h){
-                                double consumoP = 2 * plan.getcostoKW() * mi.getConsumo();
+                                double consumoNuevo = t.getconsumo() - consumoAnte;
+                                double consumoP = 2 * plan.getcostoKW() * consumoNuevo; 
+                                consumoAnte = t.getconsumo();
                                 totalPico = totalPico + consumoP;
                               } else {
-                                double consumoNP = plan.getcostoKW() * mi.getConsumo();
+                                double consumoNuevo = t.getconsumo() - consumoAnte;
+                                double consumoNP = plan.getcostoKW() * consumoNuevo;
+                                consumoAnte = t.getconsumo();
                                 totalNP = totalNP + consumoNP;
                               }  
                            }

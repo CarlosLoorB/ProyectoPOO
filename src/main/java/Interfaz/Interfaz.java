@@ -57,13 +57,13 @@ public class Interfaz {
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
     public void menu() {
         System.out.println("Hola, bienvenido.");
-        String op = "";
-        while(!op.equals("2")){
+        String opm = "";
+        while(!opm.equals("2")){
         System.out.println("Ingrese su opcion");
         System.out.println("1: Iniciar sesion");
         System.out.println("2: Salir");
-        op = sc.nextLine();
-        switch(op){
+        opm = sc.nextLine();
+        switch(opm){
             case "1":
                 System.out.println("Ingrese su usuario:");
                 String nombre = sc.nextLine();
@@ -278,8 +278,10 @@ public class Interfaz {
                         op = sc.nextInt();
                         System.out.println("Saliendo");
                         break;
-                        case 3:
-                        //abon.consumoHora(LocalDateTime.MIN, LocalDateTime.MIN);
+                    case 3:
+                        LocalDateTime a = LocalDateTime.of(2021,11,12,00,00);
+                        LocalDateTime b = LocalDateTime.of(2021,11,14,00,00);
+                        abon.consumoHora(a,b);
                         System.out.println("Se ha mostrado el historico.");
                         System.out.println("Que desea hacer");
                         abon.menuOpc();
@@ -297,7 +299,3 @@ public class Interfaz {
      System.out.println("Saliendo al menu");
      }
 }
-            
-            
-
-

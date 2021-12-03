@@ -82,7 +82,7 @@ public class abonado extends user{
             ArrayList<factura> facturas = m.getFacturas();
             for ( int i=0;i<facturas.size();i++){
                 factura f = facturas.get(i);
-                table[numerocolumna] = new String[]{f.getCodigo(), f.getEmisionString(), f.getMedidor().getCodigo()};
+                table[numerocolumna] = new String[]{f.getCodigo(),"  "+ f.getEmisionString(), "   "+ f.getMedidor().getCodigo()};
                 numerocolumna++; 
             }
         }
@@ -155,6 +155,7 @@ public class abonado extends user{
         for(Medidor m: medidores){
            if(m instanceof medidorInteligente){
                cantMedidoresI++;
+               
            }
         }
         final Object[][] table = new String[cantMedidoresI + 1][];
@@ -170,23 +171,37 @@ public class abonado extends user{
             System.out.format("%15s%15s%15s\n", row);
         }
         ArrayList promedios = new ArrayList();
+        final Object[][] table2 = new String[25][];
+        int fila = 1;
+        table2[0] = new String[]{"hora","promedio consumo"};
         System.out.println("Ingrese el codigo del medidor a consultar: ");
         String codigo = sc.nextLine();
         for(Medidor m: medidores){
            if(m.getCodigo().equalsIgnoreCase(codigo)){
                medidorInteligente mi = (medidorInteligente) m;
                for(int h=0; h<=23; h=h+1){
-                   int sumaHora = 0;
+                   double sumaHora = 0;
+                   double consumoHoraAnterior = 0;
                for(telemetria t: mi.getTelemetria()){
-                   if((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin)) && (t.getFecha().getHour() == h)){
-                       
+                   if((t.getFecha().isEqual(fechaInicio) || t.getFecha().isAfter(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin)) && (t.getFecha().getHour()==h)){
+                       if(consumoHoraAnterior == 0){
+                           consumoHoraAnterior = t.getconsumo();
                        }
+                       else{
+                           sumaHora = sumaHora + (t.getconsumo() - consumoHoraAnterior);
+                           consumoHoraAnterior = t.getconsumo();
+                       }
+                       }
+                   
                    }
+               table2[fila] = new String[]{h+":00-"+h+":59","    "+ String.valueOf(sumaHora/dias)};
+               fila++;
                }
            }
            
-        }
-        
+       }
+      for (final Object[] row: table2) {
+          System.out.format("%15s%15s\n", row);
+      }  
     }
 }   
-    

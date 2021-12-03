@@ -97,21 +97,7 @@ public class medidorInteligente extends Medidor{
         this.telemetrias=telemetrias;
     }
     
-    /**
-     * Se crea el metodo registarMedi del cual se ingresa el ultimo valor de tipo double
-     * Se llama por medio de un super a la variable ultMedida que dara la hora actual con formato LocalDate
-     * Se crea una variable valorPasado del cual guardara el ultimo valor que fue agregado.
-     * Se crea la variable consumo Actual guardara el ultimo valor que fue ingresado menos el valor pasado.
-     * Se llama la variable consumo con super guardara el ultimo valor menos el valor pasado
-     * @param ultValor es llamado con un super ya que se deriva de una clase que es el ultimo valor que se genera.
-     */
-    public void registrarMedi(double ultValor){
-        super.ultMedida=LocalDate.now();
-        double valorPasado = super.ultValor;
-        double consumoActual = ultValor - valorPasado;
-        super.consumo= consumoActual;
-        super.ultValor=ultValor;
-    }
+  
     
     /**
      * Se crea el metodo registarMedicion del cual se ingresa el ultimo valor de tipo double
