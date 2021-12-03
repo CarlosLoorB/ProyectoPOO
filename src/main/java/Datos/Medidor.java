@@ -22,7 +22,18 @@ public abstract class Medidor {
     protected LocalDate ultMedida;
     private ArrayList<factura> facturas;
     
-  public Medidor(String codigo, String direccion, planEnergia plan, abonado abonado){
+    /**
+     * Se crea un constructor donde ingresa un abonado, una direccion, un tipo de plan y codigo
+     * @param codigo se utiliza el this para llamar la variable inicial que esta de forma privada y la local es para que no pueda tener ningun inconveniente al llamarla en otra clase
+     * @param direccion se utiliza el this para llamar la variable inicial que esta de forma privada y la local es para que no pueda tener ningun inconveniente al llamarla en otra clase
+     * @param plan se utiliza el this para llamar la variable inicial que esta de forma privada y la local es para que no pueda tener ningun inconveniente al llamarla en otra clase
+     * @param abonado se utiliza el this para la inicializacion de la variable y de la local  llamade abonado y que se deriva de la clase abonado.
+     * Se llama la variable consumo que esta de forma privada y se le da un valor predeterminado de cero.
+     * Se llama la variable ultValor con un this ya que esta de forma privada y se le da un valor de cero.
+     * Se llama la variable ultMedida con this  del cual indica la hora , dia actual.
+     * Se llama la variable facturas con un this y se crea un nueva lista de arreglos vacia.
+     */
+    public Medidor(String codigo, String direccion, planEnergia plan, abonado abonado){
         this.codigo= codigo;
         this.direccion= direccion;
         this.plan= plan;
@@ -104,6 +115,10 @@ public abstract class Medidor {
         facturas.add(f);
     }
     
+    /**
+     * Se implementa un get de ultimaMedida que es de tipo LocalDate
+     * @return  retorna un ultMedida
+     */
     public LocalDate getUltimaMedida() {
         return ultMedida;
     }

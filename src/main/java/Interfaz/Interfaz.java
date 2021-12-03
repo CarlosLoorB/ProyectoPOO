@@ -31,14 +31,25 @@ public class Interfaz {
     private Scanner sc;
     private registro dataBase;
     
+    /**
+     * 
+     */
     public Interfaz(){
         sc = new Scanner(System.in);
         dataBase = new registro();
     }
     
+    /**
+     * 
+     * @return 
+     */
     public registro getRegistro(){
         return dataBase;
     }
+    
+    /**
+     * 
+     */
     
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
     public void menu() {
@@ -86,7 +97,10 @@ public class Interfaz {
         }
     }
         
-    
+    /**
+     * 
+     * @param posicion 
+     */
     //no creo que la estructura del while esta bien hecha por eso lo comente pero eso lo dejaremos para cuando probemos el codigo
     public void iniciarSesionAdmin(int posicion){
         int index = posicion;
@@ -182,7 +196,11 @@ public class Interfaz {
             }
     }
     
-     public void iniciarSesionOper(int posicion){
+    /**
+     * 
+     * @param posicion 
+     */
+    public void iniciarSesionOper(int posicion){
         int index = posicion;
         user nuevo = dataBase.getUsuarios().get(index);
         operario oper = (operario)nuevo;
@@ -219,12 +237,17 @@ public class Interfaz {
             }
         System.out.println("Saliendo");
      }
-     
+    
+    /**
+     * 
+     * @param posicion 
+     */
      public void iniciarSesionAbon(int posicion){
         int index = posicion;
         user nuevo = dataBase.getUsuarios().get(index);
         abonado abon = (abonado)nuevo;
         abon.menuOpc();
+        
         int op =sc.nextInt();
             while(op != 4){
                 switch(op){
