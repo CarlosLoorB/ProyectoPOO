@@ -4,6 +4,8 @@
  */
 package Personal;
 
+import Datos.registro;
+
 
 public class user {
     protected String cedula;
@@ -61,6 +63,10 @@ public class user {
         }
         else
             return false;
+    }
+
+    public void inciarSesionAdmin(registro dataBase) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

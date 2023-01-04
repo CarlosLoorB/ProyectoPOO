@@ -50,22 +50,22 @@ public class operario extends user{
     public ArrayList<Medidor> registrarMedicion(ArrayList<Medidor> medidoresPag){
         ArrayList<Medidor> nosalio = new ArrayList<>();
         int posMedidor= -1;
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);  //redundante
         System.out.println("Ingrese el codigo del medidor");
         String codigo = sc.nextLine();
         for(int i=0;i<medidoresPag.size();i++){
         Medidor n = medidoresPag.get(i);
-        if (n.getCodigo().equals(codigo))
+        if (n.getCodigo().equals(codigo))  //se usaria el index of y ya se tiene el medidor
             posMedidor= i;
         }     
         if(posMedidor != -1){
             Medidor medidor = medidoresPag.get(posMedidor);
             if(medidor instanceof medidorAnalogico){
                 medidorAnalogico medidorReg = (medidorAnalogico)medidor;
-                System.out.println("Ingrese el valor del medidor");
+                System.out.println("Ingrese el valor del medidor");  ///hacer esto una funcion aparte 
                 String ultValorTxt = sc.nextLine();
                 if (!(Objects.isNull(Doubles.tryParse(ultValorTxt)))){
-                double ultValor =Doubles.tryParse(ultValorTxt);          
+                double ultValor =Doubles.tryParse(ultValorTxt);  // que retorne este valor         
                 medidorReg.registrarMedicion(ultValor);
                 medidoresPag.set(posMedidor,medidorReg);
                 return medidoresPag ;
